@@ -214,6 +214,10 @@ DOMAIN_COLORS = {
     "ESG":                "#34d399",
     "Asset Allocation":   "#fb923c",
     "Trading Strategy":   "#f87171",
+    "Derivatives":        "#e879f9",
+    "Real Assets":        "#4ade80",
+    "Risk Management":    "#fb7185",
+    "Macroeconomics":     "#fde68a",
 }
 DIFF_COLORS = {
     "Foundational":  "#34d399",
