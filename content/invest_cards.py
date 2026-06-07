@@ -2748,6 +2748,405 @@ print(f"Coeficientes: {lasso.coef_[selected].round(4)}")
     "connections": ["ZODA — sistema de scoring RVL en AFP Integra", "Bloomberg PORT / Barra optimizer", "Information Ratio vs. Sharpe Ratio", "Active risk budget — TEV en portafolios AFP"],
 },
 
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Brunick & Harlow (2025) T. Rowe Price
+# Subjective Distributions for Tactical Asset Allocation
+# Journal of Portfolio Management, Multi-Asset Special Issue 2025
+# Volume 51, Number 5
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_taa_001",
+    "domain": "Asset Allocation",
+    "topic": "TAA con Derivados — Del Mundo Risk-Neutral al Real-World",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Brunick, G. & Harlow, R. (2025) — 'Subjective Distributions for Tactical Asset Allocation', T. Rowe Price / Journal of Portfolio Management, Vol. 51 No. 5, Multi-Asset Special Issue 2025",
+    "front": "¿Por qué la distribución risk-neutral implícita en precios de opciones NO puede usarse directamente como distribución de retornos reales para construir un portafolio TAA óptimo, y qué ajuste proponen Brunick & Harlow?",
+    "back": "La distribución risk-neutral (Q) extrae probabilidades implícitas de los precios de opciones via Breeden-Litzenberger (1978). Sin embargo, Q incluye las preferencias de riesgo agregadas del mercado: los activos de cobertura (los que pagan en estados malos) tienen precio más alto que sus probabilidades 'verdaderas' justificarían. Consecuencia: la media de los retornos bajo Q es el risk-free rate — los retornos esperados son 'demasiado bajos' comparados con la realidad histórica. La solución de Brunick & Harlow: asumir que el agente representativo tiene utilidad CRRA con coeficiente γ, y calibrar γ de manera que el equity risk premium implícito coincida con el ERP histórico realizado (≈3.8% en su muestra 2000-2024). Aplicando esta transformación, la distribución real-world (P) tiene: mayor retorno esperado, menor varianza (variance risk premium), y menor sesgo negativo que Q.",
+    "latex": r"\frac{dP}{dQ}\bigg|_{S_T=s_i} = \frac{p_i}{q_i} = \frac{U'(\theta_i^* \cdot e)}{e^{rT} U_0'(\theta^* \cdot e)} \quad \text{(Radon-Nikodym derivada)}",
+    "intuition": "Las opciones son como seguros de incendio: la gente paga primas que exceden la probabilidad real del fuego porque temen esa pérdida. La distribución risk-neutral está 'inflada' en las colas malas porque el mercado las sobre-precia por miedo. El ajuste CRRA 'des-infla' esas colas y eleva el retorno medio hasta el nivel que el mercado históricamente ha entregado. Es como pasar del precio del seguro a la probabilidad real del siniestro.",
+    "mcq": {
+        "question": "Brunick & Harlow calibran el coeficiente de aversión relativa al riesgo γ comparando el ERP implícito del modelo con el ERP histórico realizado. ¿Qué valor de γ encuentran para opciones SPX de 3, 6 y 12 meses, y qué implica para la aversión al riesgo del agente representativo?",
+        "options": [
+            "A) γ ≈ 5.0 — alta aversión al riesgo, consistente con la literatura de equity premium puzzle",
+            "B) γ ≈ 1.6 — baja aversión al riesgo relativa al ERP histórico, y el resultado es robusto al horizonte temporal considerado",
+            "C) γ ≈ 3.5 — aversión al riesgo moderada, que varía significativamente con el horizonte",
+            "D) γ ≈ 8.0 — muy alta aversión al riesgo, resolviendo el equity premium puzzle de Mehra-Prescott",
+        ],
+        "answer": "B",
+        "explanation": "El paper calibra γ ≈ 1.6 usando datos OptionMetrics + S&P 500 total returns de 2000-2024, y el resultado es 'not particularly sensitive to the forward return period used' (3M, 6M o 12M dan γ similar). Este valor es notablemente bajo — el equity premium puzzle sugería γ necesitaría ser 30-50 para explicar el ERP histórico con modelos de consumo estándar. Pero en el modelo de Brunick & Harlow, γ no necesita explicar el ERP históricamente; solo se calibra para que el modelo sea internamente consistente con el ERP observado.",
+    },
+    "true_false": {
+        "statement": "En el framework de Brunick & Harlow, si el inversor tiene la misma función de utilidad que el agente representativo y su visión subjetiva (P̃) coincide con la distribución real-world calibrada (P), la solución óptima al problema de inversión es mantener el 100% en el mercado (sin posiciones en derivados).",
+        "answer": True,
+        "explanation": "Esta es la propiedad de 'market equilibrium' del modelo: si el inversor tiene la misma γ que el representativo y comparte su distribución P, no hay razón para desviarse del mercado. Es el análogo al Black-Litterman: cuando el inversor no tiene views distintos al prior, el portafolio óptimo es el de mercado. Solo cuando la distribución subjetiva P̃ difiere de P en retorno, riesgo o skewness, surgen posiciones activas en opciones.",
+    },
+    "fill_blank": {
+        "template": "Brunick & Harlow muestran que la distribución real-world (P) derivada de la risk-neutral (Q) tiene menor _______ que Q, lo cual refleja el 'variance risk premium' — los agentes pagan por protección contra la volatilidad, inflando la varianza bajo Q relativa a la real.",
+        "answers": ["varianza", "variance", "volatilidad", "desviación estándar"],
+    },
+    "connections": ["Breeden-Litzenberger (1978) — densidad risk-neutral desde opciones", "Black-Litterman (1992) — analogía estructural", "CRRA utility — portfolio weights independientes del nivel de riqueza", "Bliss & Panigirtzoglou (2004) — ajuste risk aversion en opciones"],
+},
+
+{
+    "id": "aa_taa_002",
+    "domain": "Asset Allocation",
+    "topic": "TAA con Derivados — 3 Tipos de Views Subjetivos y sus Posiciones Óptimas",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Brunick, G. & Harlow, R. (2025) — T. Rowe Price / Journal of Portfolio Management, Multi-Asset Special Issue 2025",
+    "front": "¿Cómo traducen Brunick & Harlow cada uno de los 3 tipos de views tácticos (ERP, volatilidad, skewness) en modificaciones a la distribución subjetiva, y cuál es el posicionamiento óptimo en derivados resultante para cada caso?",
+    "back": "Los 3 tipos de views como perturbaciones a la distribución log-normal real-world P: (1) VIEW sobre ERP (Ejemplo 1): Translación de la distribución en espacio de log-returns. Bullish (ERP > 4%): apalancamiento del SPX + compra de convexidad ATM — el inversor levera pero cubre las colas del apalancamiento con straddles comprados. Bearish (ERP < 3.8%): reduce exposición SPX + vende convexidad ATM. (2) VIEW sobre VOLATILIDAD (Ejemplo 2): Dilatación de la distribución sin cambiar el ERP ni la media. Si cree vol > mercado: reduce SPX, compra straddle ATM y calls OTM. Si cree vol < mercado: añade SPX, vende straddles ATM y puts. (3) VIEW sobre SKEWNESS (Ejemplo 3): Transformación g_α(x) = x + sgn(α)·exp(α·x) de los log-returns. Si cree retorno más negativamente sesgado que mercado (α < 0): compra puts OTM, vende calls OTM + apalancamiento (porque mayor negative skew eleva la mediana). Si cree distribución menos sesgada: al revés.",
+    "latex": r"g_\alpha(x) = x + \text{sgn}(\alpha)\,e^{\alpha x} \quad \text{(transformación de skew)}",
+    "mcq": {
+        "question": "En el Ejemplo 1 de Brunick & Harlow: si el ERP implícito del mercado es 3.8% y el inversor cree que el ERP es 4.2%, ¿qué posición en straddles ATM toma el portafolio óptimo y por qué?",
+        "options": [
+            "A) Vende straddles ATM — reduce costo del apalancamiento al renunciar a convexidad en ambas colas",
+            "B) Compra straddles ATM — al apalancarse en SPX introduce riesgo de cola asimétrico que el straddle largo mitiga comprando convexidad alrededor de la media",
+            "C) No toma posición en straddles — el view alcista solo requiere futures/SPX forward más largo",
+            "D) Compra straddles solo en put side — protección asimétrica del apalancamiento",
+        ],
+        "answer": "B",
+        "explanation": "El portafolio óptimo (Exhibit 4) para ERP=4.2% muestra: +119.2% SPX notional, +1.4% straddle notional, y −0.2% call notional. Al apalancarse en SPX, el inversor acepta tail risk bilateral. El straddle comprado provee convexidad que (1) limita la pérdida si el mercado cae más de lo esperado, y (2) captura ganancia si el mercado sube más de lo esperado. El call vendido reduce levemente el costo del straddle renunciando a parte del upside más extremo. El resultado es un perfil de payoff activo convexo: performa mejor que el mercado en extremos y acepta leve underperformance en retornos moderados.",
+    },
+    "true_false": {
+        "statement": "Brunick & Harlow muestran que cuando el inversor cree que el mercado está subpreciando la volatilidad (volatilidad real > vol implícita), el portafolio óptimo vende puts OTM para financiar la compra de volatilidad ATM, resultando en un payoff que domina el mercado en el right tail pero no en el left tail.",
+        "answer": False,
+        "explanation": "Al contrario, en el Ejemplo 2 (Exhibit 7): cuando el inversor cree que la vol real > vol mercado, el portafolio óptimo compra straddles ATM Y vende algo de puts OTM (exposure negativa a put notional = −11.2% a 14.5% de vol). Sin embargo, el portafolio SIGUE dominando al mercado en el left tail a pesar de vender puts OTM. La razón: la reducción de SPX exposure (88.5% vs. 100% en baseline) más que compensa el riesgo de la venta de puts. El análisis de Exhibit 7 muestra que el portafolio óptimo con view de alta volatilidad domina al mercado tanto en la cola izquierda como en la derecha.",
+    },
+    "fill_blank": {
+        "template": "En el Ejemplo 3 (view sobre skewness), aumentar la skewness negativa del log-return sin cambiar ERP ni volatilidad tiene el efecto colateral de elevar la _______ de la distribución — por lo que el portafolio óptimo se posiciona para capturar esa diferencia de mediana comprando apalancamiento alrededor del dinero.",
+        "answers": ["mediana", "median", "median return", "retorno mediano"],
+    },
+    "graph_type": "price_yield_convexity",
+    "connections": ["Black-Litterman — views como perturbaciones al prior", "SABR model — calibración de vol superficie", "Carr & Madan (2001) — optimal positioning in derivatives", "Arrow-Debreu securities — complete markets payoff replication"],
+},
+
+{
+    "id": "aa_taa_003",
+    "domain": "Asset Allocation",
+    "topic": "TAA con Derivados — Framework Matemático Completo y Analogía BL",
+    "difficulty": "Expert",
+    "mode_tags": ["home"],
+    "source": "Brunick, G. & Harlow, R. (2025) — T. Rowe Price / Journal of Portfolio Management, Multi-Asset Special Issue 2025",
+    "front": "¿Cuál es el problema de optimización central que resuelven Brunick & Harlow, qué son los Arrow-Debreu state-price securities en este contexto, y por qué el modelo es análogo al Black-Litterman?",
+    "back": "Problema central: max_θ E^P̃[U(θ·X)] sujeto a θ·x ≤ w, donde X son los payoffs de {T-Bill, SPX, put OTM, straddle ATM, call OTM} y P̃ es la distribución subjetiva del inversor. La solución con todas las strikes es cerrada (Carr-Madan 2001); con subset de instrumentos se resuelve numéricamente (problema cóncavo de baja dimensión). Arrow-Debreu securities Eᵢ: pagan 1 cuando Sₜ=sᵢ y 0 en cualquier otro estado — cada opción es combinación lineal de estas. El precio eᵢ = e^{-rT}·qᵢ. Analogía con Black-Litterman: BL requiere estimar Σ empíricamente y elegir retornos esperados para que el portafolio óptimo sin views sea el mercado. Aquí, se construye utilidad U y distribución P de forma que sin views la solución sea el mercado. Los views se implementan en BL como perturbaciones a los expected returns; aquí como perturbaciones a la distribución entera (media, varianza, skewness). La diferencia clave: este framework captura la no-linealidad de los derivados correctamente — BL solo puede expresar views lineales (sobre retornos esperados).",
+    "latex": r"\max_{\hat{\theta} \in A(w)} E^{\tilde{P}}\left[U(\hat{\theta} \cdot X)\right] \quad \text{donde} \quad p_i = \frac{U'(\theta_i^* \cdot e)}{e^{rT} U_0'(\theta^* \cdot e)} \cdot q_i",
+    "fill_blank": {
+        "template": "En el framework de Brunick & Harlow, si se permite al inversor operar en TODAS las strikes del universo K (no solo el subconjunto K̂), la solución al problema de optimización tiene forma _______ — los pesos óptimos en cada Arrow-Debreu state-price security son directamente proporcionales a la razón P̃(Sₜ=sᵢ)/Q(Sₜ=sᵢ).",
+        "answers": ["cerrada", "closed form", "analítica", "explícita"],
+    },
+    "true_false": {
+        "statement": "El framework de Brunick & Harlow solo puede aplicarse a gestores con un portafolio 100% en el índice de mercado como posición estratégica — un gestor activo con tracking error vs. benchmark no puede usarlo.",
+        "answer": False,
+        "explanation": "El paper explícitamente describe la aplicación práctica: 'we imagine a manager whose strategic allocation is 100% long an active equity portfolio with some tracking error constraint to an equity index. That manager may then have a tactical view on the underlying equity market.' La overlay de derivados se implementa sobre la posición estratégica activa. El overlay ajusta la exposición neta al mercado (delta) sin alterar la selección activa subyacente, usando futures del índice para ajustar exposición agregada y opciones para dar shape al payoff de mercado.",
+    },
+    "derivation": "Transformación risk-neutral → real-world: de la condición de primer orden del agente representativo: eᵢ = eʳᵀ·U'(θᵢ*)/U₀'(θ*·e)·pᵢ. Sustituyendo eᵢ = e^{-rT}·qᵢ: qᵢ = U'(θᵢ*·e)/U₀'(θ*·e)·pᵢ. Con CRRA U(c)=c^{1-γ}/(1-γ) y θᵢ*=(1+y)·sᵢ (agente representativo sostiene el mercado): pᵢ = qᵢ·[(1+y)·sᵢ]^{-γ} / Σⱼqⱼ·[(1+y)·sⱼ]^{-γ}. Esto down-pesa los estados malos (baja sᵢ) bajo P vs. Q — el mercado sobreprecia esos estados por aversión al riesgo.",
+    "connections": ["Black-Litterman (1992) — analogía formal completa", "Carr & Wu (2008) — variance risk premium", "CRRA utility — scale invariance de weights", "Equilibrium asset pricing — SDF y Radon-Nikodym"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Dynamic Dragon (Machine Translated from ES)
+# Integrating Regime Detection into Strategic Asset Allocation
+# (Based on cited literature: Hamilton 1989, Ang & Bekaert 2002,
+# Tu 2010, Two Sigma 2021, Artemis Capital 2020)
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_reg_001",
+    "domain": "Asset Allocation",
+    "topic": "Regímenes de Mercado — Hidden Markov Models y Detección",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Dynamic Dragon — 'Integrating Regime Detection into Strategic Asset Allocation' (referencing Hamilton 1989; Ang & Bekaert 2002 — Review of Financial Studies Vol.15 No.4; Tu 2010 — Management Science; Two Sigma 2021)",
+    "front": "¿Qué es un Hidden Markov Model (HMM) aplicado a la detección de regímenes financieros, cuál es su formulación de Hamilton (1989), y por qué los retornos de activos son fundamentalmente distintos entre regímenes?",
+    "back": "Un HMM asume que los retornos observados Rₜ son generados por un proceso latente (no observable) sₜ ∈ {1,...,K} que sigue una cadena de Markov. La formulación de Hamilton (1989): Rₜ | sₜ=k ~ N(μₖ, σ²ₖ). La matriz de transición P tiene elementos pᵢⱼ = Pr(sₜ₊₁=j | sₜ=i). Típicamente K=2: régimen 'bull' (μhigh, σlow) y 'bear' (μlow, σhigh). Por qué son fundamentalmente distintos: Ang & Bekaert (2002) documentan que las correlaciones entre activos se disparan durante regímenes de bear market — lo que parecía diversificación en bull colapsa precisamente cuando más se necesita. Las volatilidades de equity se duplican o triplican en crisis. Los bonos cambian de correlación negativa con equity (bull) a positiva (en algunos regímenes inflacionarios). Ignorar regímenes lleva a una matriz de covarianza 'promedio' que subestima el riesgo en las peores circunstancias.",
+    "latex": r"R_t | s_t = k \sim \mathcal{N}(\mu_k, \sigma_k^2), \quad P(s_{t+1}=j | s_t=i) = p_{ij}",
+    "intuition": "Los mercados son como el clima: hay estaciones (regímenes) con dinámicas radicalmente distintas. Una distribución normal única es como promediar el clima de verano e invierno en un solo número — técnicamente correcto como promedio pero inútil para vestirse hoy. El HMM detecta en qué 'estación' estamos y ajusta las estimaciones de riesgo y retorno en consecuencia.",
+    "mcq": {
+        "question": "Ang & Bekaert (2002) documentan que durante regímenes de bear market, las correlaciones entre activos internacionales tienden a subir abruptamente. ¿Cuál es la consecuencia más importante para la gestión de portafolios multi-asset de una AFP?",
+        "options": [
+            "A) Los portfolios más diversificados geográficamente son más seguros en regímenes de crisis porque tienen más activos descorrelacionados",
+            "B) La diversificación geográfica colapsa precisamente en crisis — los beneficios de diversificación calculados en un régimen normal se materializan en el peor momento posible, requiriendo activos genuinamente no correlacionados como bonos soberanos de alta calidad o estrategias de protección explícita",
+            "C) La correlación perfecta entre activos durante crisis no afecta la varianza del portafolio porque las medias también se igualan",
+            "D) Los modelos de covarianza condicional al régimen producen portfolios óptimos similares a los modelos incondicionales en práctica",
+        ],
+        "answer": "B",
+        "explanation": "Este es el hallazgo más crítico de Ang & Bekaert (2002): las correlaciones internacionales son bajas en regímenes buenos (diversificación aparente) y saltan en regímenes malos (cuando el inversor más la necesita). Para una AFP peruana con exposición a renta variable local (BVL) y global, esto implica que en una crisis global el 'portafolio diversificado' puede comportarse como una posición concentrada. La protección real requiere activos con correlación genuinamente negativa condicional al régimen — treasuries US en flight-to-quality, oro, puts explícitas — no solo más acciones de distintos países.",
+    },
+    "true_false": {
+        "statement": "Hamilton (1989) demostró que el estado del régimen sₜ puede observarse directamente de los datos de mercado, permitiendo rebalanceo exacto en el momento del cambio de régimen.",
+        "answer": False,
+        "explanation": "El estado del régimen es LATENTE — no se observa directamente. Solo se puede estimar la probabilidad Pr(sₜ=k | Información hasta t) usando el filtro de Hamilton (similar al filtro de Kalman para estados discretos). Esta incertidumbre sobre el régimen actual es una limitación fundamental: el modelo puede confirmar un cambio de régimen solo DESPUÉS de que ha ocurrido, con un lag que depende de la persistencia del régimen y la señal de los datos. En práctica, Two Sigma (2021) y otros usan ML para mejorar la detección en tiempo real, pero el problema de latencia es inherente.",
+    },
+    "fill_blank": {
+        "template": "En el modelo HMM de Hamilton (1989), la probabilidad de permanecer en el régimen actual en el siguiente período (pᵢᵢ) determina la _______ esperada del régimen. Regímenes con pᵢᵢ alto son más persistentes y permiten estrategias de rotación táctica; regímenes con pᵢᵢ bajo requieren protección estructural.",
+        "answers": ["duración", "persistencia", "vida media", "expected duration"],
+    },
+    "connections": ["Ang & Bekaert (2002) — international asset allocation con regímenes", "Tu (2010) — importancia de cambios de régimen en decisiones de portafolio", "Two Sigma (2021) — ML para modelado de regímenes", "Correlación acciones-bonos — cambio de régimen inflacionario"],
+},
+
+{
+    "id": "aa_reg_002",
+    "domain": "Asset Allocation",
+    "topic": "Regímenes e Inflación — Ruptura de la Correlación Acciones-Bonos",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Dynamic Dragon — SAA con Regímenes; Markowicz, Schroder (2022); Artemis Capital Management (2020)",
+    "front": "¿Por qué la correlación negativa acciones-bonos — fundamento del portafolio 60/40 — es un fenómeno específico de un régimen, y qué condiciones hacen que se invierta a positiva?",
+    "back": "La correlación negativa acciones-bonos requiere un régimen donde: (1) La inflación es baja y estable, (2) El banco central reacciona a shocks de crecimiento bajando tasas (cuando la economía se debilita → tasas caen → bonos suben → equities también rebotan al descontar más bajo). En ese régimen, las tasas son la herramienta de estabilización y los bonos son refugio real en recesiones. El régimen cambia a correlación POSITIVA cuando: (1) La inflación es alta o incierta — shocks de inflación dañan tanto acciones (márgenes, descuento) como bonos (valor real de cupones). (2) La credibilidad del banco central está en duda — el mercado no espera que el BC responda a recesiones con bajadas de tasas porque prioriza controlar inflación. Markowicz (2022) documenta que en la era pre-1998 y en 2022, la correlación fue positiva. Implicación crítica: el 60/40 no es una estrategia universalmente balanceada — es una apuesta implícita al régimen de inflación baja.",
+    "mcq": {
+        "question": "En 2022, la Fed subió tasas agresivamente para combatir inflación del 9%. ¿Cuál fue el impacto sobre la correlación acciones-bonos y el portafolio 60/40?",
+        "options": [
+            "A) La correlación se volvió más negativa — los bonos actuaron como refugio durante la caída de acciones",
+            "B) La correlación se volvió positiva — tanto acciones como bonos cayeron simultáneamente, haciendo que el 60/40 tuviera las peores pérdidas desde 1931",
+            "C) La correlación fue cero — las dos clases de activos actuaron independientemente",
+            "D) La correlación fue positiva solo en el Q1, volviendo a negativa cuando la Fed pausó las subidas",
+        ],
+        "answer": "B",
+        "explanation": "En 2022: S&P 500 cayó ~19% y el Bloomberg US Aggregate Bond Index cayó ~13% simultáneamente — uno de los peores años para el 60/40 en décadas. La razón: el shock inflacionario (IPC pico 9.1% en junio) combinado con agresivas subidas de Fed Funds (0%→4.5%) dañó ambas clases. Acciones sufrieron por: altas tasas de descuento + compresión de múltiplos + recesión temida. Bonos sufrieron por: tasas subiendo = precios cayendo (duración negativa de precio vs. tasas). Es el régimen exacto donde el supuesto de correlación negativa del 60/40 colapsa.",
+    },
+    "true_false": {
+        "statement": "Artemis Capital (2020) argumenta que un portafolio verdaderamente resistente a través de 100 años de cualquier régimen (deflación, inflación, crisis financieras) puede construirse con solo dos activos: acciones y bonos en proporción 60/40.",
+        "answer": False,
+        "explanation": "Artemis Capital (2020) en 'The Allegory of the Hawk and the Serpent' argumenta exactamente lo contrario: que preservar y hacer crecer riqueza durante 100 años (que incluye la Gran Depresión, las guerras mundiales, el régimen inflacionario de los 70s y la crisis de 2008) requiere diversificación entre al menos 5 clases de activos que funcionan en distintos regímenes: acciones (growth y baja inflación), bonos (deflación y recesión con inflación baja), commodities/activos reales (inflación), trend following/momentum (crisis severas), y vol explícita/opciones (crashes sudden). Ningún par de activos cubre todos los regímenes posibles.",
+    },
+    "fill_blank": {
+        "template": "La correlación negativa entre acciones y bonos del período 1998-2020 fue un _______ específico de régimen — inflación baja + bancos centrales con margen de maniobra para bajar tasas — no una ley económica permanente.",
+        "answers": ["fenómeno", "hecho estilizado", "resultado", "dato empírico"],
+    },
+    "graph_type": "correlation_matrix_regimes",
+    "connections": ["60/40 portfolio — limitaciones de régimen", "TIPS vs. nominal bonds en inflación", "Brunick & Harlow (2025) — distribución condicional al régimen", "Ang & Bekaert (2002) — correlaciones condicionales"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Albert & Guillemet (2025) HSBC
+# Designing Tactical Asset Allocations in a Strategic Way
+# HSBC Asset Management — September 2025
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_taa_004",
+    "domain": "Asset Allocation",
+    "topic": "Active Risk Budgeting — Risk Units y la Ley Fundamental de Gestión Activa",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Albert, B. & Guillemet, M. (2025) — 'Designing Tactical Asset Allocations in a Strategic Way', HSBC Asset Management, September 2025",
+    "front": "¿Qué es un 'Risk Unit' en el framework de Albert & Guillemet (2025), cómo se calcula, y por qué es el concepto central para reconciliar la visión cuantitativa del risk budgeting con las preferencias intuitivas del comité de inversión?",
+    "back": "Un Risk Unit (RU) es la posición activa nominal promedio que corresponde a un view de intensidad 'standard' (|señal| = 1). Fórmula: RU = TargetActiveRisk / UnderlyingVolatility. El Active Weight en cualquier momento es: AW = Signal × RU (con señal entre −2 y +2). Por qué es central: traduce una abstracción (presupuesto de riesgo activo en %) a una cantidad concreta que el PM puede visualizar e internalizar. Ejemplos del paper: equity volatilidad 15% + budget activo 1.3% → RU = 8.3%, rango de posición activa −16.6% a +16.6%. Para bonos soberanos: volatilidad 5% + budget 1.3% → RU = 25%, rango −50% a +50%. El comité puede entonces preguntarse: ¿es razonable sobreponderar equity hasta 16.6%? ¿Puedo estar cómodo con −50% de bonos? Si la respuesta es 'no', ajustan el presupuesto de riesgo iterativamente.",
+    "latex": r"RU_i = \frac{\text{TargetActiveRisk}_i}{\sigma_i}, \quad AW_t^i = S_t^i \times RU_i",
+    "intuition": "El Risk Unit es como el tamaño de apuesta por 'punto de convicción'. Si un analista de fútbol tiene IR=0.5 en sus predicciones, el risk unit es la apuesta que hace cuando cree 'un poco' en su pronóstico. Señal=2 (máxima convicción) implica el doble de esa apuesta. Señal=0 (sin view) implica no apostar. El comité de inversión entiende apuestas concretas — no presupuestos de riesgo abstractos.",
+    "mcq": {
+        "question": "Usando el framework de Albert & Guillemet, si el target TE total del portafolio es 2%, la equity directional IR=0.20 y representa el 20% del presupuesto de riesgo, y la vol de equity es 15%, ¿cuál es el Risk Unit y el máximo active weight en equity?",
+        "options": [
+            "A) RU = 2.7%, Max Active Weight = 5.3%",
+            "B) RU = 5.0%, Max Active Weight = 10.0%",
+            "C) RU = 8.3%, Max Active Weight = 16.7%",
+            "D) RU = 1.3%, Max Active Weight = 2.7%",
+        ],
+        "answer": "B",
+        "explanation": "Target active risk para equity = 20% × 2% TE = 0.40% (pero el paper usa 0.8% para equity en su ejemplo bottom-up). Usemos los datos del paper: con presupuesto 0.8% y vol equity 15%: RU = 0.8%/15% = 5.0%. Max AW = 2×RU = 10.0% (señal máxima de +2). Esto significa el portafolio puede estar entre 40% y 60% en equity (SAA 50% ± 10%). Nota: el ejercicio top-down da RU=3.9% pero el bottom-up ajustado prefiere RU=5.0% por preferencias del comité.",
+    },
+    "true_false": {
+        "statement": "Albert & Guillemet demuestran que el portafolio TAA óptimo no constrained es simplemente el producto de los risk units y las señales — y que en ausencia de restricciones (leverage, short, TE max), este portafolio siempre puede implementarse directamente sin optimización adicional.",
+        "answer": True,
+        "explanation": "Correcto: la fórmula del unconstrained optimal TAA es AW = Σᵢ (RBᵢ/σᵢ) × Sᵢ = Σᵢ RUᵢ × Sᵢ. Esta es la solución óptima en el sentido de maximizar el IR esperado en ausencia de cualquier constraint. El paper la usa como punto de partida y luego aplica el optimizador MV solo para satisfacer los constraints del portafolio real (no net short, max TE, no leverage, etc.). Cuando hay constraints, el portafolio constrained puede diferir del unconstrained — pero el unconstrained sirve como 'North Star' del proceso.",
+    },
+    "numerical_problem": {
+        "question": "Un portafolio tiene SAA 50% equity / 50% bonos, TE target 2%, equity vol=15%, bond vol=5%. Los budgets de riesgo son: equity directional 20% del TE, bond directional 13% del TE. Las señales actuales son: equity=−0.5 (leve negativo), bond=+0.75 (positivo). Calcular los active weights en equity y bonos.",
+        "steps": [
+            "RU_equity = (20%×2%) / 15% = 0.40%/15% = 2.67%",
+            "RU_bond = (13%×2%) / 5% = 0.26%/5% = 5.2%",
+            "AW_equity = −0.5 × 2.67% = −1.33% → Peso en equity = 50% − 1.33% = 48.67%",
+            "AW_bond = +0.75 × 5.2% = +3.9% → Peso en bonos = 50% + 3.9% = 53.9%",
+        ],
+        "answer": "Equity: 48.67% | Bonos: 53.9% | Suma activa total: 11.3% → portafolio levered sin constraints",
+        "bus_hint": "RU_eq=0.4/15≈2.7% | RU_bd=0.26/5≈5.2% | AW_eq=−0.5×2.7=−1.35% | AW_bd=0.75×5.2=+3.9%",
+    },
+    "connections": ["Grinold (1989) — Fundamental Law of Active Management", "HSBC TAA framework — 3 tipos de decisiones tácticas", "Black-Litterman — equilibrium returns como inputs a MV", "Information Ratio = IC × √Breadth"],
+},
+
+{
+    "id": "aa_taa_005",
+    "domain": "Asset Allocation",
+    "topic": "Ley Fundamental de Gestión Activa — IC, Breadth, TC e IR",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Albert, B. & Guillemet, M. (2025) — HSBC AM; Grinold, R. (1989) — Journal of Portfolio Management; Clarke, de Silva & Thorley (2002) — FAJ",
+    "front": "¿Cuáles son los 3 componentes de la Ley Fundamental de Gestión Activa extendida (Grinold 1989 + Clarke et al. 2002), cómo se calibra el IR esperado de un driver táctico, y cuál es el mayor riesgo de calibración?",
+    "back": "Ley extendida: IR = TC × IC × √Breadth. (1) IC (Information Coefficient): correlación entre la señal/view y el retorno realizado. Mide la 'calidad' de la predicción. IC = 2 × ExpSuccessRate − 1. Para un IC de 0.10, el gestor acierta el 55% de las veces. (2) Breadth: número de apuestas independientes por año = NbActivePositions / InvestmentHorizon. Un driver con 4 activos y horizonte 6 meses tiene Breadth = 4/0.5 = 8. (3) TC (Transfer Coefficient): correlación entre el view/señal y la posición activa realmente implementada (0-1). Refleja el impacto de restricciones. Long-only TC ≈ 0.5 (solo aprovecha la mitad positiva de las señales). Calibración: Albert & Guillemet usan IC histórico de backtests, breadth del universo de inversión y el horizonte, y TC basado en restricciones del mandato. Mayor riesgo: sobreestimar el IC — una pequeña sobreestimación se amplifica en el IR al cuadrado (IR² = TC²×IC²×Breadth), llevando a under-shooting del alpha target.",
+    "latex": r"IR = TC \times IC \times \sqrt{Breadth}, \quad IC = 2 \times \text{ExpSuccessRate} - 1",
+    "mcq": {
+        "question": "Un driver táctico tiene: IC=0.15 (55% success rate + ajuste), TC=0.85 (portafolio casi sin restricciones), Breadth=12 (12 apuestas independientes por año). ¿Cuál es el IR esperado anualizado?",
+        "options": [
+            "A) IR = 0.15 × 12 × 0.85 = 1.53 (extraordinariamente alto)",
+            "B) IR = 0.85 × 0.15 × √12 = 0.85 × 0.15 × 3.46 ≈ 0.44",
+            "C) IR = 0.15 / √12 = 0.043 (muy bajo)",
+            "D) IR = 0.85 × 0.15 = 0.13 (sin contar breadth)",
+        ],
+        "answer": "B",
+        "explanation": "IR = TC × IC × √Breadth = 0.85 × 0.15 × √12 = 0.85 × 0.15 × 3.464 = 0.44. Este es un buen IR para una estrategia TAA. En la tabla de Albert & Guillemet (Table 11), los drivers individuales tienen IR entre 0.11 y 0.25, y el IR del portafolio total (con correlaciones) alcanza ~0.50. El √Breadth refleja que breadth diversifica el error de predicción: más apuestas independientes → mejor relación señal-ruido → mayor IR.",
+    },
+    "true_false": {
+        "statement": "Según la Ley Fundamental de Gestión Activa, una estrategia con IC muy bajo (say IC=0.05) pero breadth muy alto (say 500 apuestas por año) puede generar un IR superior a una estrategia con IC alto (IC=0.3) y breadth bajo (4 apuestas por año).",
+        "answer": True,
+        "explanation": "Comparación: Strategy A: IR = 0.05 × √500 = 0.05 × 22.4 = 1.12. Strategy B: IR = 0.30 × √4 = 0.30 × 2 = 0.60. Strategy A gana a pesar de tener IC 6x inferior. Implicación práctica para una AFP: estrategias sistemáticas con muchas señales (factor investing, arbitraje estadístico) pueden superar estrategias discrecionales con alta convicción pero pocas apuestas — incluso si cada señal individual es menos precisa. Caveats: (1) TC puede ser menor para estrategias con muchas posiciones si hay restricciones. (2) Costos de transacción crecen con el breadth.",
+    },
+    "fill_blank": {
+        "template": "Albert & Guillemet (2025) calibran los IRs esperados de sus drivers usando track-records históricos pero advierten que la calibración tiene sesgo importante hacia la sobreestimación. La propuesta del Fundamental Law es usar en cambio la combinación de _______ (habilidad fundamental), _______ (escala de apuestas) y _______ (implementación real).",
+        "answers": ["IC, Breadth, TC", "Information Coefficient, Breadth, Transfer Coefficient", "IC, √Breadth, TC"],
+    },
+    "connections": ["Grinold (1989) — Fundamental Law original", "Clarke, de Silva & Thorley (2002) — Transfer Coefficient", "HSBC — calibración de expected IR para TAA", "Active Share — relación con Transfer Coefficient"],
+},
+
+{
+    "id": "aa_taa_006",
+    "domain": "Asset Allocation",
+    "topic": "TAA Framework Completo — Señales Direccionales y Relative-Value Combinadas",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Albert, B. & Guillemet, M. (2025) — 'Designing Tactical Asset Allocations in a Strategic Way', HSBC Asset Management, September 2025",
+    "front": "¿Cuál es la diferencia matemática en la construcción de señales entre decisiones 'directional' y 'relative-value' en el framework HSBC, y por qué es necesario rescalar las señales agregadas?",
+    "back": "Decisiones DIRECTIONAL: La señal agregada es combinación lineal de n scores individuales (value, momentum, risk, macro): Score_agg = Σwⱼ·scoreⱼ. Si los scores individuales tienen distribución normal estándar y correlación promedio ρ, la varianza del score agregado es: σ²s = [1 + (n-1)ρ]/n. Con n=4 scores y ρ=0.25, σs=0.66 — más bajo que el target de 1. Se rescala multiplicando por 1/σs = 1/0.66 = 1.52. Decisiones RELATIVE-VALUE: Los activos se rankean en cada factor (1 a N). El ranking i-ésimo sobre N activos se convierte a score usando la distribución normal: scoreᵢⱼ = Φ⁻¹(i/(N+1)). Esto garantiza que los scores reflejen la distribución relativa dentro del universo. Se suman los scores de los factores y se rescala. La diferencia clave: el directional expresa una view absoluta (el mercado en su conjunto está barato/caro), mientras que el relative-value expresa una view relativa (A es más atractivo que B).",
+    "latex": r"\sigma_s^2 = \frac{1 + (n-1)\bar{\rho}}{n}, \quad \text{score}_{i,j} = \Phi^{-1}\!\left(\frac{i}{N+1}\right)",
+    "mcq": {
+        "question": "El factor de rescaling (1/σs) para los scores directionales aumenta cuando hay más factores correlacionados entre sí. ¿Por qué es necesario este rescaling y qué problema resuelve?",
+        "options": [
+            "A) Evita que la señal agregada tenga varianza mayor que 1, previniendo que los Risk Units se sobrepasen",
+            "B) La diversificación entre scores reduce la varianza del agregado — sin rescaling, el portafolio tomaría posiciones demasiado pequeñas para alcanzar el riesgo activo objetivo",
+            "C) El rescaling convierte los scores de una distribución log-normal a normal",
+            "D) Evita que factores correlacionados cuenten doble en la señal final",
+        ],
+        "answer": "B",
+        "explanation": "El efecto de diversificación reduce la varianza del score combinado por debajo de 1. Si la señal tiene σs=0.66 (en lugar de 1.0), los active weights serán 0.66x menores de lo esperado — el portafolio tomará posiciones 34% más pequeñas que los risk units calibrados. Resultado: el portafolio no alcanzará el risk budget ni el alpha target. El rescaling por 1/σs corrige esto, asegurando que el score agregado tenga la misma distribución esperada (σ=1) que el score individual, manteniendo consistencia con los risk units calibrados.",
+    },
+    "true_false": {
+        "statement": "En el framework de Albert & Guillemet, si todos los factores de un driver directional tienen correlación perfecta (ρ=1), el rescaling no cambia nada — el score agregado ya tiene varianza 1 independientemente del número de factores.",
+        "answer": True,
+        "explanation": "Con ρ=1: σ²s = [1+(n-1)×1]/n = n/n = 1, por lo que σs=1 y el factor de rescaling es 1/1=1 — no hay efecto. Intuitivamente, si todos los factores son perfectamente correlacionados, combinarlos es como tener un solo factor repetido — no hay diversificación y la varianza no se reduce. La Tabla 5 del paper confirma: para cualquier n, si ρ=1, σs=1. El efecto de rescaling es mayor cuando ρ es bajo — hay beneficio de diversificación real entre factores que debe compensarse para mantener el nivel de riesgo activo.",
+    },
+    "fill_blank": {
+        "template": "El portafolio TAA unconstrained de Albert & Guillemet (Table 16) muestra active weights que suman +11.3%, creando un portafolio 'levered'. En la versión constrained (no net short, no leverage), la restricción de que los active weights sumen 0 se impone via _______-Variance optimization donde los retornos de equilibrio hacen que el portafolio unconstrained sea el óptimo de referencia.",
+        "answers": ["Mean", "Mean-Variance", "MV"],
+    },
+    "connections": ["Factor combination — value, momentum, macro, risk", "Relative-value signals — ranking-based scoring", "MV optimization — retornos de equilibrio como inputs", "Grinold (1989) — score diversification y Fundamental Law"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — AQR Capital Management (2014)
+# Alternative Thinking: Challenges of Incorporating Tactical Views
+# Q4 2014
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_tac_001",
+    "domain": "Asset Allocation",
+    "topic": "TAA — El Timing es Más Difícil de lo Que Parece: Evidencia CAPE",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "AQR Capital Management (2014) — 'Alternative Thinking: Challenges of Incorporating Tactical Views', Q4 2014",
+    "front": "¿Qué demuestra AQR (2014) sobre el valor predictivo del CAPE de Shiller para timing de mercados, y por qué la evidencia in-sample impresionante no se traduce a outperformance out-of-sample?",
+    "back": "Evidencia in-sample (Exhibit 1): los retornos del equity a 5 años están claramente ordenados por quintil de CAPE inicial — el quintil más barato produce retornos ~2x más altos que el más caro. Parece una señal de timing poderosa. Sin embargo, out-of-sample (Exhibit 2, rolling 60-year window): el patrón se debilita. La estrategia de timing basada en CAPE (pesos 50%/75%/100%/125%/150% por quintil) tiene MENOR Sharpe ratio que buy-and-hold (0.28 vs. 0.31 sobre 1900-2014). En el período 1957-2014, el timing tiene 4.6% de retorno vs. 5.2% de buy-and-hold. 3 razones para el fallo: (1) HINDSIGHT BIAS — los quintiles se definen con historia completa, no disponible en tiempo real. (2) VALUACIONES DRIFTAN — el CAPE subió estructuralmente desde 1957, dando señal de 'caro' cuando el mercado seguía subiendo (ej: señal 'overvalued' en 1991, 8 años antes del pico real). (3) LOW VALUATIONS PREDICT HIGHER VOL — el Sharpe ratio del timing no mejora aunque el retorno promedio mejore, porque baja valoración predice mayor riesgo.",
+    "mcq": {
+        "question": "AQR llama al fenómeno de vender prematuramente porque las métricas de valuación indican 'caro' años antes del pico real el problema de 'early equals wrong'. ¿Cuál es la solución parcial que proponen?",
+        "options": [
+            "A) Ignorar las métricas de valuación y usar solo señales fundamentales de earnings",
+            "B) Combinar valor contrario + momentum — el momentum filtra las señales de valor prematuras y reduce el riesgo de salir demasiado temprano de un trend en marcha",
+            "C) Alargar el horizonte de inversión de 5 a 20 años para reducir el ruido de corto plazo",
+            "D) Usar el CAPE con ventana rolling de 10 años en lugar de 30 años para capturar mejor el ciclo actual",
+        ],
+        "answer": "B",
+        "explanation": "AQR demuestra en el Apéndice que la combinación Value+Momentum (VM) logra Sharpe de 0.35 (1900-2014) vs. 0.31 del buy-and-hold, frente al 0.28 del timing puramente por valor. El momentum evita la trampa del 'early equals wrong': si el CAPE dice 'caro' pero el precio sigue subiendo (momentum positivo), el modelo VM no activa el underweight. La intuición: el valor identifica los candidatos a caída, el momentum confirma si la caída ya empezó. La combinación produce 'patient contrarian investing — with a supportive momentum signal'.",
+    },
+    "true_false": {
+        "statement": "AQR (2014) concluye que las valuaciones como el CAPE no tienen ningún valor predictivo para retornos futuros de equity y por tanto deben ignorarse en la gestión de portafolios.",
+        "answer": False,
+        "explanation": "AQR tiene una posición más matizada: 'We do believe that valuations are useful for setting long-term expectations.' El CAPE sí predice retornos a 5-10 años con evidencia estadística. El punto es que (1) esa predictibilidad es difícil de explotar con timing activo sin incurrir en los costos de 'early equals wrong', (2) el outperformance neto de transaction costs y forgone diversification es marginal, y (3) la señal de valor es más útil para calibrar retornos esperados estratégicos (SAA) que para tácticos.",
+    },
+    "fill_blank": {
+        "template": "El problema del CAPE como señal de timing es que las valuaciones pueden 'driftar' estructuralmente durante décadas. AQR documenta que una estrategia con ventana rolling de 60 años generó señal de 'overvalued' para el mercado US no en 1999 sino en _______ — ocho años de underperformance antes del pico real.",
+        "answers": ["1991", "finales de 1991", "1991 (early 1990s)"],
+    },
+    "graph_type": "efficient_frontier_bl",
+    "connections": ["Shiller CAPE — predictibilidad a largo plazo", "Goyal & Welch (2008) — fracaso de modelos de timing out-of-sample", "Momentum — tendencia en mercados a multi-month horizons", "HSBC TAA (2025) — combinación value+momentum+macro+risk"],
+},
+
+{
+    "id": "aa_tac_002",
+    "domain": "Asset Allocation",
+    "topic": "Diversificación Perdida — El Verdadero Costo del Tactical Tilting",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "AQR Capital Management (2014) — 'Alternative Thinking: Challenges of Incorporating Tactical Views', Q4 2014",
+    "front": "¿Qué es la 'forgone diversification' de AQR (2014), cómo la cuantifican matemáticamente, y qué hit-rate se requiere para que el timing táctico justifique su costo?",
+    "back": "Forgone diversification: al hacer tilts tácticos (sobreponderar A, subponderar B), el inversor efectivamente reduce su diversificación vs. el portafolio estratégico igualmente ponderado. Cuantificación: dos activos no correlacionados, vol=10%, Sharpe individual=0.5. Portafolio estratégico igualmente ponderado: Sharpe = √2 × 0.5 = 0.71 (por diversificación). Estrategia de tilting ±25%: Sharpe esperado sin habilidad ≈ 0.55. Switching total (100% en uno): Sharpe = 0.5 (sin diversificación). El hit-rate breakeven (proportion de tilts correctos) para activos no correlacionados con tilt de ±25%: aproximadamente 60% de aciertos por año. Para activos más diversificadores (correlación muy negativa), el breakeven es mayor — más difícil. Para activos positivamente correlacionados (ej. selección de stocks), es más fácil. Implicación: 'no skill equals no gain but no harm' es FALSO — el tilting sin habilidad destruye valor por la diversificación que se pierde.",
+    "latex": r"SR_{\text{strategic}} = \sqrt{\frac{w^T\bar{SR}^2 \mathbf{1}}{w^T C^{-1}w}} > SR_{\text{single asset}}, \quad \text{cuando } C < I",
+    "numerical_problem": {
+        "question": "Dos activos: vol=10% cada uno, Sharpe=0.5 cada uno, correlación ρ=0. (a) ¿Cuál es el Sharpe del portafolio 50/50? (b) Si el inversor hace timing (switching 100% entre activos), ¿cuál es el Sharpe sin habilidad?",
+        "steps": [
+            "(a) Portafolio 50/50: E[R_p] = 0.5×(0.5×10%) + 0.5×(0.5×10%) = 5% sobre RF",
+            "σ_p = √(0.25×100 + 0.25×100 + 2×0.25×0.25×0×10×10) = √(25+25) = √50 = 7.07%",
+            "Sharpe_50/50 = 5%/7.07% = 0.707 ≈ √2 × 0.5",
+            "(b) Switching sin habilidad: E[R] = 5% sobre RF (esperanza), σ = 10% (siempre en uno)",
+            "Sharpe_switching = 5%/10% = 0.50 (misma que un activo solo)",
+        ],
+        "answer": "(a) Sharpe 50/50 = 0.71 | (b) Sharpe switching sin habilidad = 0.50",
+        "bus_hint": "50/50: σ=√50=7.1% → SR=5/7.1≈0.71 | Switching: σ=10% → SR=5/10=0.50",
+    },
+    "mcq": {
+        "question": "AQR muestra que el hit-rate breakeven para el timing táctico es más alto cuando los activos son más 'diversificadores' (más negativamente correlacionados entre sí). ¿Cuál es la implicación para un gestor multi-asset que considera timing táctico entre renta variable y bonos de larga duración?",
+        "options": [
+            "A) Los bonos de larga duración son fáciles de timerear porque son los más predecibles con yield curves",
+            "B) El timing entre equity y bonos (activos muy diversificadores con correlación negativa históricamente) requiere el hitrate más alto para justificarse — es el timing más difícil de agregar valor y el que más destruye si se hace sin habilidad suficiente",
+            "C) La diversificación no es relevante para evaluación de timing porque los Sharpe ratios se reportan individualmente",
+            "D) Un gestor con IR=0.3 en signals de equity puede aplicar esos mismos signals a equity-bond timing con igual eficiencia",
+        ],
+        "answer": "B",
+        "explanation": "AQR es explícito: 'the required hit-rate is higher for more aggressive tilts and for tilts between more diversifying assets. For uncorrelated assets, the tactical investor must make profitable tilts in about 60% of years just to break even.' Para activos con correlación negativa (el par equity-bonos en régimen normal), la barra es aún más alta. El gráfico de Exhibit 6 del paper lo cuantifica: la barra de break-even sube a medida que aumenta la correlación negativa entre los activos. Implicación directa para una AFP: ser extremadamente cuidadoso con el timing equity-bonos — el strategic 60/40 (u otras proporciones) tiene una ventaja estadística estructural que requiere mucha habilidad para superar.",
+    },
+    "fill_blank": {
+        "template": "AQR demuestra que la 'simple intuition of no skill equals no gain but no _______' es falsa. Un gestor sin habilidad que hace tilts tácticos pierde sistemáticamente contra el portafolio estratégico diversificado, incluso antes de costos de transacción.",
+        "answers": ["harm", "daño", "perjuicio", "no harm"],
+    },
+    "connections": ["HSBC TAA (2025) — risk units calibrados para minimizar forgone diversification", "AQR — momentum como antídoto al timing prematuro", "Portfolio rebalancing — mantiene, no pierde, diversificación", "Information Ratio breakeven — Fundamental Law"],
+},
+
+{
+    "id": "aa_tac_003",
+    "domain": "Asset Allocation",
+    "topic": "TAA — Cuándo y Cómo Hacer Timing Correctamente",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "AQR Capital Management (2014) — 'Alternative Thinking: Challenges of Incorporating Tactical Views', Q4 2014; Albert & Guillemet (2025) — HSBC",
+    "front": "¿Bajo qué condiciones el timing táctico tiene mayor probabilidad de añadir valor, y cuáles son los principios que AQR recomienda para incorporar views tácticos correctamente en una asignación estratégica?",
+    "back": "Condiciones favorables para timing táctico: (1) ACTIVOS POSITIVAMENTE CORRELACIONADOS — el costo de diversificación perdida es menor (ej. selección dentro de un sector). (2) SEÑALES COMBINADAS — valor + momentum supera significativamente al valor solo (evidencia en 100+ años). (3) TILTS PEQUEÑOS — la penalización por diversificación perdida crece cuadráticamente con el tamaño del tilt. (4) POSICIÓN TÁCTICA COMO OVERLAY MODESTA de una SAA bien diversificada — no sustituye la SAA. Principios de AQR para la implementación correcta: (a) Calibrar tamaño de tilts modestamente — la convicción típica raramente justifica grandes desviaciones. (b) Reconocer que los modelos out-of-sample underperforman in-sample por hindsight bias y data-mining. (c) Usar el rebalanceo hacia pesos estratégicos como única estrategia activa 'de facto' que mantiene diversificación. (d) El portafolio estratégico bien diversificado con rebalanceo regular es la base que las posiciones tácticas rara vez superan en el largo plazo.",
+    "mcq": {
+        "question": "AQR afirma que el rebalanceo periódico hacia pesos estratégicos es 'the only active allocation strategy that systematically maintains, rather than forgoes, diversification.' ¿Qué significa esto en la práctica?",
+        "options": [
+            "A) El rebalanceo es una estrategia activa que genera alpha al comprar low y vender high dentro de la SAA — sistemáticamente contraria sin el riesgo del timing discrecional",
+            "B) El rebalanceo solo es útil para portafolios con activos idénticos en terms of vol y correlaciones",
+            "C) El rebalanceo activo al SAA es equivalente a una estrategia de timing de valor puro",
+            "D) El rebalanceo periódico tiene la misma eficiencia que el buy-and-hold a largo plazo",
+        ],
+        "answer": "A",
+        "explanation": "El rebalanceo a pesos estratégicos (ej. volver a 60/40 cuando equity sube y bonds bajan) compra sistemáticamente el activo que bajó y vende el que subió — es una estrategia contraria disciplinada. A diferencia del timing táctico, el rebalanceo mantiene la diversificación (siempre vuelve a la SAA diversificada) y no requiere habilidad predictiva — solo disciplina. La evidencia es que el rebalanceo mejora el Sharpe risk-adjusted comparado con buy-and-hold drift, especialmente cuando los activos exhiben mean-reversion.",
+    },
+    "true_false": {
+        "statement": "AQR (2014) recomienda eliminar completamente las posiciones tácticas de los portafolios institucionales y confiar únicamente en la SAA estratégica diversificada.",
+        "answer": False,
+        "explanation": "AQR tiene una posición equilibrada: 'We do believe that investors and managers are right to continue researching potential indicators of time-varying expected returns...but these should be approached with humility and sized and used appropriately.' No recomienda eliminar TAA, sino: (1) calibrar el tamaño modestamente, (2) combinar señales de valor con momentum, (3) evitar el exceso de confianza en modelos in-sample, y (4) reconocer que la estrategia más rentable a largo plazo suele ser la SAA con rebalanceo, no el timing agresivo.",
+    },
+    "fill_blank": {
+        "template": "AQR (2014) documenta que la estrategia de timing Value+Momentum sobre US equities 1900-2014 logra un Sharpe de _______, modestamente superior al buy-and-hold de 0.31, pero advierte que costos de transacción reducirían esta ventaja — sugiriendo que el timing debe ser muy eficiente en su ejecución para añadir valor neto.",
+        "answers": ["0.35", "0.35 (Value+Momentum)", "≈0.35"],
+    },
+    "connections": ["HSBC Albert & Guillemet (2025) — risk units modulan el tamaño del tilt", "Brunick & Harlow (2025) — views subjetivos calibrados cuantitativamente", "Rebalancing premium — buy low sell high sistemático", "Dimson, Marsh & Staunton (2013) — evidencia global de fracaso de timing"],
+},
+
 ]
 
 
