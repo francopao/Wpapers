@@ -3488,6 +3488,444 @@ print(f"Coeficientes: {lasso.coef_[selected].round(4)}")
     "connections": ["Momentum factor — Jegadeesh & Titman", "Contrarian — De Bondt & Thaler", "Size factor — Fama & French", "AQR (2014) — momentum como complemento al valor"],
 },
 
+# ════════════════════════════════════════════════════════════════
+# ALTERNATIVES — CONCEPTOS FUNDAMENTALES PREVIOS
+# (Pre-requisitos compartidos por los 4 papers)
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "alt_bas_001",
+    "domain": "Alternatives",
+    "topic": "¿Qué son los activos alternativos? — Taxonomía completa",
+    "difficulty": "Foundational",
+    "mode_tags": ["bus", "home"],
+    "source": "Matsuda, M. (2019) — 'Alternative Alphas and Asset Allocation', CAIA Q1 2019; Ennis, R.M. (2021) — 'Alternative Investing: The Fairy Tale And The Future', JPM",
+    "front": "¿Cuáles son las principales categorías de inversiones alternativas y en qué se diferencian fundamentalmente de las inversiones tradicionales (acciones y bonos)?",
+    "back": "Las inversiones alternativas son todo lo que no es renta variable cotizada o renta fija cotizada. Principales categorías: (1) Private Equity (PE) — capital en empresas no cotizadas: buyout, venture capital, growth equity. (2) Hedge Funds — estrategias con long/short, derivados, apalancamiento. (3) Real Estate privado — inmuebles no cotizados (distinto del REIT que sí cotiza). (4) Private Credit/Deuda Privada — préstamos directos a empresas no bancarios. (5) Infraestructura privada — aeropuertos, carreteras, utilities. (6) Commodities y Real Assets. La diferencia fundamental con los tradicionales: (a) Iliquidez — no puedes vender cuando quieres; (b) Opacidad — precios no observables en tiempo real, valuación con rezago; (c) Capital commitment structure — compromes capital hoy, lo llaman progresivamente; (d) Horizontes largos — típicamente 7-12 años de vida de un fondo. (e) Estructura LP/GP — tú como inversor eres Limited Partner, el gestor es General Partner.",
+    "intuition": "Las inversiones tradicionales son como comprar y vender acciones en un mercado con precios en tiempo real. Las alternativas son como comprar un negocio local con un socio gestor: firmás para invertir $1M en su negocio de restaurantes, él lo llama en cuotas durante 3 años mientras abre locales, y en 8 años te devuelve el capital con ganancias. No podés salir cuando querés — si necesitás el dinero antes, tenés que encontrar a alguien que compre tu parte a descuento.",
+    "mcq": {
+        "question": "Un inversor firma un compromiso de capital (commitment) de $10M con un fondo de PE. ¿Qué significa esto y cuándo se entrega realmente el dinero?",
+        "options": [
+            "A) El inversor transfiere los $10M inmediatamente al fondo el día de la firma",
+            "B) El inversor se compromete a entregar hasta $10M cuando el gestor (GP) lo llame progresivamente a lo largo de varios años para financiar inversiones concretas",
+            "C) El inversor deposita $10M en un escrow account que gana interés hasta ser invertido",
+            "D) El compromiso de $10M es solo indicativo — el inversor puede reducirlo si cambia de opinión",
+        ],
+        "answer": "B",
+        "explanation": "Este es el mecanismo central y más contraintuitivo de PE: la separación entre compromiso (commitment) y capital llamado (capital call). El GP llama el capital progresivamente (capital calls) cuando identifica inversiones concretas. Durante el período que el capital NO ha sido llamado, el LP debe tenerlo disponible en activos líquidos para responder. Si el LP no puede responder a un capital call, incurre en default — con consecuencias legales y pérdida del acceso al fondo.",
+    },
+    "true_false": {
+        "statement": "Los activos alternativos tienen históricamente muy baja volatilidad reportada porque genuinamente son activos de bajo riesgo, ideales para inversores conservadores.",
+        "answer": False,
+        "explanation": "La baja volatilidad REPORTADA de los alternativos es un artefacto del smoothing — los precios se actualizan con rezago, no en tiempo real. Ennis (2021) muestra que la volatilidad REAL de PE (medida correctamente) es 25.8% — superior a las acciones de gran capitalización (17.5%). Real estate privado alcanza 18%. La baja volatilidad reportada engaña: no es señal de bajo riesgo sino de valoración infrecuente. Un analista que use la vol reportada para construir portafolios estará sistemáticamente subestimando el riesgo real.",
+    },
+    "fill_blank": {
+        "template": "En la estructura típica de un fondo de Private Equity, el inversor es llamado _______ (LP) y el gestor del fondo que toma las decisiones de inversión es llamado _______ (GP). El GP cobra una management fee (típicamente 2% anual sobre capital comprometido) y una comisión de performance llamada _______.",
+        "answers": ["Limited Partner, General Partner, carry / carried interest", "LP, GP, carried interest"],
+    },
+    "connections": ["J-curve en PE", "Capital calls y liquidity management", "Illiquidity premium", "Corvino (2023) — cash management strategy"],
+},
+
+{
+    "id": "alt_bas_002",
+    "domain": "Alternatives",
+    "topic": "La J-Curve — Por Qué los Fondos Privados Pierden al Principio",
+    "difficulty": "Foundational",
+    "mode_tags": ["bus", "home"],
+    "source": "Corvino, G.L. (2023) — 'Asset Allocation and Private Markets: The Need for a Cash Management Strategy', Bocconi University, September 2023; Takahashi & Alexander (2001)",
+    "front": "¿Qué es la J-curve en fondos de inversión privados, qué la causa, y por qué las distintas clases de activos privados tienen J-curves de formas diferentes?",
+    "back": "La J-curve describe la evolución temporal del retorno acumulado de un fondo privado: empieza negativo (la J) y luego sube (la curva). Causas del tramo negativo inicial: (1) Las management fees se pagan desde el día 1 sobre el capital comprometido — aunque ninguna inversión haya sido realizada. (2) Los gastos de setup y due diligence se registran inmediatamente. (3) Las inversiones recién hechas se valúan al precio de compra o incluso con haircut inicial — el valor operativo no se refleja aún. (4) No hay distribuciones en los primeros años. El tramo positivo viene cuando: las inversiones maduran, se venden parcialmente, o se realizan distribuciones. Diferentes clases tienen J-curves distintas: PE Buyout — J profunda, lenta en recuperar (7-10 años, foco en empresas maduras con reestructuración). Venture Capital — J muy profunda, recuperación más tardía (hasta 12+ años). Private Debt — J menos profunda porque recibe cupones desde el inicio. Infraestructura — J muy suave, distribuciones desde casi el comienzo (activos que generan cashflow inmediato como peajes).",
+    "latex": r"NAV_t = NAV_{t-1}(1+g) + C_t - D_t \quad \text{(flujo neto de NAV periodo a periodo)}",
+    "mcq": {
+        "question": "Un fondo de infraestructura y un fondo de Venture Capital tienen J-curves muy diferentes. ¿Por qué el de infraestructura tiene una J mucho menos profunda?",
+        "options": [
+            "A) Porque los fondos de infraestructura cobran menores management fees que los de VC",
+            "B) Porque los activos de infraestructura (aeropuertos, peajes, utilities) generan flujos de caja operativos desde el inicio del fondo — el peaje cobra desde el día 1 — mientras que una startup de VC puede tardar 7+ años en generar cualquier ingreso",
+            "C) Porque los fondos de infraestructura son más pequeños y el capital se llama más lentamente",
+            "D) Porque los fondos de infraestructura usan IFRS mientras los de VC usan US GAAP, lo que cambia la contabilización",
+        ],
+        "answer": "B",
+        "explanation": "El activo subyacente determina la forma de la J-curve. Un aeropuerto o una autopista de peaje genera ingresos operativos desde el día en que se completa la inversión — esos flujos se distribuyen periódicamente al LP (dividend yield). En VC, una startup en etapa seed puede pasar 5-7 años sin revenue antes de su primer exit. La J-curve refleja exactamente esta realidad: a mayor demora en generar cash flows operativos, más profunda y prolongada es la J.",
+    },
+    "graph_type": "pe_cashflow_j_curve",
+    "true_false": {
+        "statement": "El fenómeno de la J-curve implica que un inversor que compara el retorno de un fondo de PE a 3 años con el retorno de un índice accionario a 3 años siempre estará comparando en condiciones equitativas.",
+        "answer": False,
+        "explanation": "No es una comparación equitativa por dos razones. Primero, el fondo de PE reporta en los primeros 3 años cuando está en la zona negativa de la J-curve (máximo costo, mínimas inversiones maduras) — cualquier benchmark de PE de 3 años subestimará el retorno final del fondo. La comparación correcta es sobre el horizonte completo del fondo (típicamente 10 años). Segundo, el capital no invertido (que se mantiene como 'dry powder' esperando capital calls) devenga solo el retorno del instrumento líquido donde se guarda, no el retorno del PE — diluyendo el retorno global para el LP.",
+    },
+    "fill_blank": {
+        "template": "En el modelo de Takahashi & Alexander (2001), el NAV de un fondo privado en el período t se calcula como: NAV_t = NAV_{t-1} × (1+g) + _______ − _______, donde g es la tasa de crecimiento de las inversiones.",
+        "answers": ["Contribuciones (C_t), Distribuciones (D_t)", "capital calls, distributions", "C_t, D_t"],
+    },
+    "connections": ["Capital calls — timing y cash management", "Corvino (2023) — estrategias de recommitment", "TVPI, DPI, IRR — métricas de PE", "Vintage year diversification"],
+},
+
+{
+    "id": "alt_bas_003",
+    "domain": "Alternatives",
+    "topic": "IRR, TVPI y DPI — Las Métricas de Performance de PE",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Matsuda (2019) — CAIA; Chen & Gambarotta et al. (2025) — arXiv:2503.01099",
+    "front": "¿Cuáles son las 3 métricas principales de performance en Private Equity (IRR, TVPI, DPI), cómo se calculan, y cuáles son sus limitaciones más importantes?",
+    "back": "IRR (Internal Rate of Return): tasa de descuento que hace VPN de todos los flujos = 0. Ventaja: ajusta por tiempo, intuitivo. Limitación crítica: favorece fondos que distribuyen pronto y puede ser manipulado con préstamos a corto plazo que elevan artificialmente el IRR inicial. TVPI (Total Value to Paid-In): (NAV + distribuciones totales) / capital aportado total. Ejemplo: TVPI de 2.0x = dobló el capital. Simple de entender. No ajusta por tiempo. Un 2.0x en 3 años es brillante; en 12 años es pobre. DPI (Distributions to Paid-In): solo distribuciones realizadas / capital aportado. Excluye el NAV no realizado. Mide el 'dinero en el bolsillo'. DPI bajo con TVPI alto = el valor está 'atrapado' en el portafolio, aún no realizado. RVPI (Residual Value to Paid-In) = TVPI − DPI. Limitación de IRR para LPs: cuando los retornos tienen autocorrelación serial (como demuestra Chen et al. 2025), el IRR calculado sobre retornos observados suavizados subestima el riesgo real y sobreestima el Sharpe.",
+    "latex": r"TVPI = \frac{NAV + \Sigma D_t}{\Sigma C_t}, \quad DPI = \frac{\Sigma D_t}{\Sigma C_t}, \quad IRR: \sum_t \frac{CF_t}{(1+IRR)^t} = 0",
+    "numerical_problem": {
+        "question": "Un LP aportó $100 (año 0), recibió distribuciones de $20 (año 2), $40 (año 4), y el NAV actual (año 5) es $80. Calcular TVPI y DPI.",
+        "steps": [
+            "Total distributions = $20 + $40 = $60",
+            "Capital paid-in = $100",
+            "TVPI = (NAV + distribuciones) / capital = (80 + 60) / 100 = 1.40x",
+            "DPI = distribuciones / capital = 60 / 100 = 0.60x",
+            "RVPI = TVPI − DPI = 1.40 − 0.60 = 0.80x (aún en el fondo)",
+        ],
+        "answer": "TVPI = 1.40x | DPI = 0.60x | RVPI = 0.80x",
+        "bus_hint": "TVPI=(80+60)/100=1.4x | DPI=60/100=0.6x | RVPI=0.8x todavía en el fondo",
+    },
+    "mcq": {
+        "question": "¿Por qué un fondo con IRR alto pero DPI bajo debería generar cautela en un inversor institucional?",
+        "options": [
+            "A) Porque el IRR alto es imposible si el DPI es bajo",
+            "B) Porque el alto IRR puede reflejar principalmente valuaciones no realizadas (NAV aún en el portafolio), no efectivo realmente devuelto. El DPI bajo indica que el valor está 'atrapado' y aún puede no materializarse si las exits resultan peores de lo esperado",
+            "C) Porque los reguladores prohíben reportar IRR alto con DPI bajo",
+            "D) Porque el DPI bajo indica que el fondo tiene muchos activos en default",
+        ],
+        "answer": "B",
+        "explanation": "Esta es la 'trampa del IRR versus DPI'. Un fondo puede reportar IRR de 25% con TVPI de 3.0x pero DPI de solo 0.3x — significando que el 90% del valor está en el NAV no realizado. El NAV en PE se valúa con metodología mark-to-model, no mark-to-market — puede ser subjetivo. Los LPs sofisticados exigen ver el DPI como la prueba real del retorno. El TVPI sin realizar puede evaporarse si el mercado de exits se cierra (como en 2022-2023 con el repricing de tasas).",
+    },
+    "connections": ["Public Market Equivalent (PME) — comparación con equity público", "Return smoothing — Getmansky et al.", "Chen et al. (2025) — retornos PE con autocorrelación", "Net IRR vs. Gross IRR — impacto de fees"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ALTERNATIVES — Ennis (2021)
+# "Alternative Investing: The Fairy Tale And The Future"
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "alt_enn_001",
+    "domain": "Alternatives",
+    "topic": "El Cuento de Hadas — Las 4 Promesas de los Alternativos que No se Cumplen",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Ennis, R.M. (2021) — 'Alternative Investing: The Fairy Tale And The Future', Journal of Portfolio Management",
+    "front": "Ennis (2021) destruye 4 argumentos centrales del 'cuento de hadas' sobre los alternativos. ¿Cuáles son y qué evidencia empírica presenta contra cada uno?",
+    "back": "4 promesas desmontadas: (1) BAJA VOLATILIDAD: Falso. Datos de CEM Benchmarking (1998-2018) — PE tiene volatilidad REAL de 25.8% (mayor que large-cap stocks 17.5%). Real estate 18%. Hedge funds 11.4%. Solo los bonos tienen baja volatilidad (5.2%). El PE parece 'suave' porque no se valúa diariamente, pero la volatilidad real es superior. (2) BAJA CORRELACIÓN: Falso. Correlación promedio de las 4 clases de alts con el Russell 3000: 0.89. PE tiene correlación de 0.98 con el Russell 3000. Hedge funds: 0.94. Solo el Aggregate Bonds tiene correlación negativa (−0.34). Los alts 'no son lo suficientemente alternativos.' (3) DIVERSIFICACIÓN: Falso. El R² de regresionar el composite de grandes endowments sobre 3 índices stock+bond es 0.984 — los alts no añaden nada estadísticamente distinto. El alpha de la regresión es −1.88% anualizado (t-stat: −3.6). (4) RETORNO SUPERIOR: Falso. Durante el bull market 2009-2020: PE alpha = −0.9%, Hedge funds alpha = −3.1%, Real estate alpha = −6.0%. El culpable principal: fees de 3-4% anuales sobre el NAV.",
+    "mcq": {
+        "question": "El R² = 0.984 en la regresión del composite de endowments de NACUBO sobre índices de stock+bond es un hallazgo devastador para los defensores de los alternativos. ¿Por qué?",
+        "options": [
+            "A) Porque un R² alto indica que los alts tienen mayor riesgo sistemático de lo declarado",
+            "B) Porque demuestra que el 98.4% de la varianza de retorno del composite se explica con solo 3 índices de acciones y bonos — los alts no añaden una dimensión de retorno/riesgo genuinamente distinta que justifique su complejidad y costo",
+            "C) Porque el R² mide únicamente el riesgo de mercado pero no el riesgo específico de cada alt",
+            "D) Porque un R² de 0.984 indica que los gestores de alts están replicando pasivamente los índices en lugar de ser activos",
+        ],
+        "answer": "B",
+        "explanation": "El argumento para incluir alts es que tienen 'return properties distintas' a stocks y bonds — que añaden diversificación genuina. Si el R² = 0.984, los retornos de un portafolio lleno de alts (60% average para los grandes endowments) son explicados al 98.4% por una mezcla de stocks y bonds. El 1.6% restante (la varianza no explicada) es ínfimo — representado además por un alpha de −1.88% al año. Esto sugiere que los alts son esencialmente un paquete caro de beta de equity mezclado con algo de fixed income, no una fuente diferenciada de retorno.",
+    },
+    "true_false": {
+        "statement": "Ennis (2021) argumenta que los alternativos tuvieron buen desempeño durante el GFC (2008-2009) porque siendo activos de bajo beta no cayeron como las acciones.",
+        "answer": False,
+        "explanation": "Ennis documenta lo opuesto: el composite de grandes endowments (con 42% en alts en ese momento, la mitad en hedge funds) perdió −20.5% en el año fiscal terminado en junio 2009, mientras que el benchmark equivalente de 72% stocks / 28% bonds perdió solo −18.1%. Harvard, Princeton y Yale, con mayores asignaciones a alts (60%+), perdieron −25.1% en promedio. El GFC fue precisamente el momento donde los alts debían 'demostrar' su naturaleza defensiva — y fallaron. Lejos de actuar como amortiguadores, amplificaron las pérdidas.",
+    },
+    "fill_blank": {
+        "template": "La principal causa del underperformance de los alternativos según Ennis (2021) no es la mala selección de activos sino las _______ anuales de 3-4% sobre el valor del portafolio, que en un contexto donde el alpha bruto de PE, hedge funds y real estate promedió −3.3% durante el bull market 2009-2020, resultan en un alpha neto consistentemente negativo.",
+        "answers": ["fees", "comisiones", "management fees + carried interest", "costos totales"],
+    },
+    "graph_type": "hedge_fund_dispersion",
+    "connections": ["Matsuda (2019) — alternative alphas como contrapropuesta", "NACUBO endowment composite", "CEM Benchmarking — datos institucionales", "Endowment model de Yale — Swensen"],
+},
+
+{
+    "id": "alt_enn_002",
+    "domain": "Alternatives",
+    "topic": "El Futuro de los Alternativos — El Marco Simplificado de Ennis",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Ennis, R.M. (2021) — 'Alternative Investing: The Fairy Tale And The Future'",
+    "front": "¿Cuáles son las 4 recomendaciones prácticas de Ennis para el futuro de los institucionales en alternativos, y cuál es su propuesta de simplificación de asset allocation?",
+    "back": "4 recomendaciones: (1) ELIMINAR SILOS DE ASIGNACIÓN FIJA — no tener quotas obligatorias de '15% PE, 10% HF, 10% real estate'. Los alts son estrategias activas, deben evaluarse una por una, no como 'clases de activos diversificadoras'. (2) CONCENTRAR SELECCIÓN — fondos grandes tienen promedio de 182 portafolios, 144 de ellos en alts. 'Cuando acumulás 144 partnerships, ¿qué tan selectivo podés ser?' La única razón para hacer cualquier alt es la convicción en ESA inversión particular. Apuntar a no más de 10-20 posiciones activas en total. (3) REDUCIR COSTOS RADICALMENTE — evitar funds-of-funds (doble capa de fees). Los fondos canadienses grandes (CPPIB, OTPP) hacen inversiones directas, eliminando fees de GP. En real estate, el fondo soberano de Noruega hace deals directos. (4) SIMPLIFICAR ASSET CLASSES — algunos institucionales ya están consolidando PE + VC + listed equity en 'Equity'. Llevado a su conclusión lógica: volvemos a 2 clases de activos — Equity y Fixed Income. Los alts son activos dentro de Equity.",
+    "mcq": {
+        "question": "Ennis señala que el valor total de PE + Hedge Funds + Real estate privado es menor al 5% del valor global de stocks + bonds. ¿Por qué esta observación es relevante para la asset allocation institucional?",
+        "options": [
+            "A) Porque el tamaño pequeño implica mayor liquidez y menores costos de transacción",
+            "B) Porque bajo una visión de equilibrio (CAPM-like), el peso natural de los alts en el portafolio de mercado global es solo 5% — poner 30-60% de un portafolio en alts implica una apuesta activa masiva que requiere expectativas EXTRAORDINARIAMENTE superiores para justificarse",
+            "C) Porque los mercados pequeños son ineficientes y por tanto siempre ofrecen alpha superior a los grandes",
+            "D) Porque el tamaño pequeño significa que los fondos institucionales pueden distorsionar precios y capturar más valor",
+        ],
+        "answer": "B",
+        "explanation": "Este es un argumento de equilibrio tipo CAPM: si todos los activos del mundo están representados en el 'portafolio de mercado', los alts (siendo el 5%) deberían tener también alrededor del 5% de peso 'natural'. Cuando un endowment pone 60% en alts, está apostando 12x su peso de equilibrio — una desviación que solo puede justificarse con expectativas de retorno muy superiores a las históricas, o con la creencia de que estos mercados tienen ineficiencias masivas y persistentes que pueden capturarse. La evidencia de Ennis sugiere que ambas creencias son erróneas.",
+    },
+    "true_false": {
+        "statement": "Ennis recomienda que todos los inversores institucionales eliminen completamente sus inversiones en alternativos y migren a portafolios de solo acciones y bonos indexados.",
+        "answer": False,
+        "explanation": "'Specific alternative investments will continue to present allocators with attractive opportunities.' Lo que Ennis rechaza NO es la inversión en alts per se, sino: (1) la asignación rígida a 'silos' de alts por razones de diversificación que no se materializa, (2) el excesivo número de managers (promedio 182), (3) los altos costos (3-4% anual). Recomendación real: pocos alts seleccionados individualmente por convicción genuina, con costos bajos (directo o sin fund-of-funds), tratados como estrategias activas (no como 'clases de activos').",
+    },
+    "fill_blank": {
+        "template": "Ennis argumenta que los alternativos son estrategias _______, no activos diversificadores — por lo tanto deben evaluarse 'uno por uno, basado en su mérito' y mantenerse de forma _______ (pueden desinvertirse) en lugar de ser parte de la política de asset allocation fija.",
+        "answers": ["activas, transitoria", "active, transitory", "activas, transitoriamente"],
+    },
+    "connections": ["Matsuda (2019) — la contrapropuesta: alternative betas sí añaden valor", "Factor investing como alternativa a silos", "CPPIB, OTPP — modelo canadiense de inversión directa", "Alpha bruto vs. neto de fees"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ALTERNATIVES — Matsuda (2019)
+# "Alternative Alphas and Asset Allocation"
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "alt_mat_001",
+    "domain": "Alternatives",
+    "topic": "El Continuum Beta-Alpha — De Índices a Alternativos",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Matsuda, M. (2019) — 'Alternative Alphas and Asset Allocation', CAIA Journal Q1 2019",
+    "front": "¿Cómo ordena Matsuda (2019) las inversiones en el continuum desde beta puro hasta alpha puro, y qué es lo que aumenta progresivamente a lo largo de ese espectro?",
+    "back": "El continuum de Matsuda (de menor a mayor complejidad): (1) Index funds / ETFs — beta puro, mínima complejidad de risk management, fees más bajas. (2) Long-only activos con factor tilts (size, value, momentum) — algo de alpha, complejidad baja-media. (3) Smart Beta / Alternative Beta — factores estilizados (value, momentum, carry) implementados long/short para ser market-neutral. Mayor complejidad. (4) Risk Premium Investing — factores ortogonales entre sí (momentum en equity, carry en FX, roll yield en commodities) — requiere conocimiento avanzado de correlaciones. (5) Alternative Alphas (Hedge Funds, PE, infraestructura, private credit) — máxima complejidad, manager-specific, sources: factor control, allocation alpha dinámica, illiquidity premium, security selection ('true alpha'), retornos no correlacionados (litigation finance, life settlements). Lo que aumenta: complejidad de risk management, especificidad del riesgo, potencial de alpha genuino, pero también: fees, opacidad, riesgo idiosincrático. Lo que disminuye: riesgo de mercado sistemático, transparencia.",
+    "mcq": {
+        "question": "¿Por qué Matsuda distingue entre 'Alternative Beta' y 'Risk Premium Investing', siendo que ambos usan factores no tradicionales?",
+        "options": [
+            "A) No hay diferencia real — son términos intercambiables en la industria",
+            "B) En Alternative Beta los factores pueden estar correlacionados entre sí (multi-colinealidad). En Risk Premium Investing los factores se construyen para ser ortogonales (no correlacionados) entre sí y con el mercado — lo cual es más robusto estadísticamente y evita el problema de factor instability",
+            "C) Alternative Beta usa solo datos de mercado, Risk Premium Investing usa datos fundamentales contables",
+            "D) Alternative Beta incluye siempre posiciones largas y cortas; Risk Premium no permite posiciones cortas",
+        ],
+        "answer": "B",
+        "explanation": "La distinción de Matsuda es precisa y técnicamente importante: cuando dos factores están correlacionados (Alternative Beta, donde se 'apilan' muchos factores sin verificar ortogonalidad), el modelo sufre de multi-colinealidad — los coeficientes son inestables, la atribución de retorno a cada factor es ambigua, y puede haber exposiciones ocultas a otros factores. El Risk Premium Investing construye explícitamente factores ortogonales — su Exhibit 4 muestra momentum como factor latente en equity, FX, fixed income y commodities simultáneamente, ortogonal al beta de mercado.",
+    },
+    "true_false": {
+        "statement": "Matsuda (2019) argumenta que la correlación del EAFE (índice de renta variable internacional desarrollada ex-US) con las acciones de EE.UU. es tan baja que sirve perfectamente como diversificador genuino en un portafolio institucional.",
+        "answer": False,
+        "explanation": "El Exhibit 1 de Matsuda muestra lo contrario: para cada subgrupo de EAFE (Eurozone, Asia/Oceania, otros Europa), la correlación con el US es MAYOR que la correlación intra-EAFE. Los países del Eurozone tienen correlación promedio con US de 0.77, mayor que su correlación intra-grupo de 0.73. El EAFE promedio tiene correlación 0.76 con el US vs. 0.70 intra-EAFE. Conclusión: EAFE no cumple el primer criterio de una asset class propiamente definida (mutually exclusive) — su dinámica está más determinada por el factor global de US equity que por factores regionales propios.",
+    },
+    "fill_blank": {
+        "template": "La 'allocation alpha' de Matsuda se refiere al alpha generado por ajustar dinámicamente la _______ al mercado (beta) según la volatilidad implícita o esperada del mercado — como usar el VIX para reducir exposición cuando la volatilidad es alta y aumentarla cuando es baja, lo cual históricamente ha generado mejores retornos ajustados al riesgo.",
+        "answers": ["exposición", "beta exposure", "beta", "exposición al mercado"],
+    },
+    "graph_type": "hedge_fund_dispersion",
+    "connections": ["Ennis (2021) — ¿realmente hay alpha en alternatives?", "Fama-French — factores size y value", "Cloutier et al. (2017) — VIX como señal para ajustar beta (allocation alpha)"],
+},
+
+{
+    "id": "alt_mat_002",
+    "domain": "Alternatives",
+    "topic": "5 Fuentes de Alternative Alpha y el Framework de Asset Allocation Alternativo",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Matsuda, M. (2019) — 'Alternative Alphas and Asset Allocation', CAIA Journal Q1 2019",
+    "front": "¿Cuáles son las 5 fuentes de alpha alternativo según Matsuda y cuál es su framework de asset allocation alternativo de 3 componentes?",
+    "back": "5 FUENTES DE ALTERNATIVE ALPHA: (1) Control de factores de riesgo — explotar sistemáticamente exposiciones a factores con risk premium (value, momentum, etc.) de forma activa y controlada. (2) Allocation alpha dinámica — ajustar la exposición al mercado (beta) en función de la volatilidad esperada (VIX). Matsuda documenta: estrategia ajustando leverage por VIX/VIX_promedio generó 134.98% vs. 81.97% del S&P 500 en 2000-2017. (3) Illiquidity premium — PE y real estate capturan prima por iliquidez al invertir en activos no negociables. Requiere habilidad del GP en deal selection, gestión, y exit. (4) True alpha de stock selection — raro genuino, basado en análisis fundamental superior. Más accesible para HFs que para fondos long-only. (5) Retornos no correlacionados — Litigation Finance (retornos basados en fallos judiciales, no en mercados) y Life Settlements (mortalidad, no correlacionada con mercados financieros). FRAMEWORK DE 3 COMPONENTES: (1) Equity systematic risk (ETF/índice global). (2) Orthogonal risk factors (momentum, value, carry, etc. — factores no correlacionados entre sí). (3) Alternative alphas (de las 5 fuentes). Beta-ajuste continuo entre componentes.",
+    "mcq": {
+        "question": "Matsuda cita evidencia empírica de que una estrategia de 'allocation alpha' que ajusta el leverage por VIX generó 134.98% vs. S&P 500 con 81.97% entre 2000-2017, con leverage promedio de 1.11. ¿Qué conclusión clave extrae sobre los alternativos vs. el S&P 500?",
+        "options": [
+            "A) Que los hedge funds de macro son mejores que el S&P 500 en todos los entornos",
+            "B) Que ajustar dinámicamente la beta al mercado usando el VIX (reducirla cuando la volatilidad es alta, aumentarla cuando es baja) añade retorno con menor riesgo — esto es una ventaja específica de los gestores alternativos que no tienen restricciones de benchmark",
+            "C) Que el apalancamiento promedio de 1.11x es la clave del outperformance",
+            "D) Que el VIX predice perfectamente los retornos futuros del S&P 500",
+        ],
+        "answer": "B",
+        "explanation": "La clave de este hallazgo es la flexibilidad — los fondos long-only con mandato de tracking error reducido no pueden implementar esta estrategia porque se desviarían demasiado del benchmark. El gestor alternativo (hedge fund, multi-strategy) tiene libertad de reducir beta a 0.3-0.5x cuando el VIX está en 40+ (crisis) y aumentarlo a 1.5-2x cuando el VIX está en 10-12 (calma). Esta flexibilidad es per se un activo. El VIX alto predice mayor volatilidad futura, y los datos de Matsuda muestran que los meses de VIX bajo (promedio 12.21) generaron retorno promedio de 5.9% en el mes siguiente, vs. 2.3% en meses de VIX alto (promedio 30.90).",
+    },
+    "true_false": {
+        "statement": "Matsuda (2019) argumenta que un portafolio 60/40 clásico tiene solo el 40% de concentración de riesgo en renta variable, porque el 60% restante está en bonos que aportan similar concentración de riesgo.",
+        "answer": False,
+        "explanation": "Matsuda cita evidencia de Callan Institute (2018): el portafolio 60/40 (36% US equity, 24% non-US equity, 40% US fixed income) tiene >90% de CONCENTRACIÓN DE RIESGO en equity. Los bonos tienen volatilidad tan baja que contribuyen marginalmente al riesgo total del portafolio. Incluso añadiendo alts (30% US eq, 20% non-US, 25% FI, 10% HF, 10% RE, 5% HY), la concentración de riesgo en equity sigue siendo 79%. Esto es la motivación principal de Matsuda para su framework alternativo — el objetivo real de diversificación requiere activos genuinamente ortogonales, no solo diferentes clases de activos.",
+    },
+    "fill_blank": {
+        "template": "El 'true alpha' de Matsuda es la forma más rara de alpha alternativo — es el retorno generado por _______ genuina del gestor sobre el valor de activos específicos, distinto del alpha proveniente de factor exposure, iliquidez o dynamic beta management.",
+        "answers": ["stock selection", "selección genuina", "información superior", "security selection"],
+    },
+    "connections": ["Ennis (2021) — escepticismo sobre el true alpha en práctica", "Litigation finance — retornos no correlacionados", "Life settlements — mortalidad como factor", "Cloutier et al. (2017) — VIX y allocation alpha"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ALTERNATIVES — Corvino (2023)
+# "Asset Allocation and Private Markets: The Need for a
+# Cash Management Strategy"
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "alt_cor_001",
+    "domain": "Alternatives",
+    "topic": "El Problema de Underinvestment — Por Qué el Objetivo de Exposición No Se Alcanza",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Corvino, G.L. (2023) — 'Asset Allocation and Private Markets: The Need for a Cash Management Strategy', Bocconi University, September 2023",
+    "front": "¿Cuál es el 'problema de underinvestment' en mercados privados, por qué el enfoque buy-and-hold simple falla dramáticamente, y cuáles son las métricas que Corvino usa para medir la calidad y cantidad de la exposición real?",
+    "back": "El problema: si un inversor institucional define como objetivo 'X% en PE', no puede simplemente comprar X% en fondos de PE hoy — porque el capital no se invierte todo de golpe sino que se llama progresivamente (capital calls) durante los primeros años. Mientras tanto, el capital no llamado queda en activos líquidos, creando underinvestment estructural. La estrategia one-shot (commitear todo el objetivo en el año 0) falla porque: al año 5, el average cash (capital sin invertir) es 48.72% del portafolio objetivo; al año 10, 57.44%. Es decir, más de la mitad del capital nunca estuvo realmente invertido en PE durante este período. Métricas de Corvino: (1) AVERAGE VARIANCE — varianza promedio de los pesos reales de cada sub-fondo respecto al objetivo. Mide 'calidad' (¿están los pesos en la proporción correcta?). (2) AVERAGE CASH — peso promedio del cash no invertido. Mide 'cantidad' (¿cuánto capital está realmente en private markets?). Objetivo: minimizar ambas métricas simultáneamente.",
+    "mcq": {
+        "question": "¿Por qué la estrategia de 'reinvestment of distributions' por sí sola no resuelve el problema de underinvestment según Corvino?",
+        "options": [
+            "A) Porque los fondos de PE no pagan distribuciones en los primeros años (J-curve)",
+            "B) Reinvertir solo las distribuciones mantiene el average cash elevado (47-47% vs. objetivo de 0%) porque las distribuciones en los primeros años son mínimas — la J-curve significa que los flujos de salida son casi nulos hasta el año 5-7. Para reducir el cash, se necesita un mecanismo de recommitment continuo basado en el estado actual del portafolio",
+            "C) Porque las distribuciones se reciben en efectivo y no pueden recomprometerse legalmente",
+            "D) Porque reinvertir distribuciones viola los Investment Policy Statements de los fondos institucionales",
+        ],
+        "answer": "B",
+        "explanation": "La J-curve implica que las distribuciones son muy pequeñas en los primeros años (el fondo está invirtiendo, no devolviendo capital). Si el inversor solo reinvierte lo que recibe, y lo que recibe es casi cero, el portafolio sigue masivamente underinvested. Los resultados empíricos de Corvino confirman: reinvertir distribuciones reduce el average cash de 48.72% solo a 47.12% al año 5 — una mejora mínima. La solución real requiere comprometer capital adicional proactivamente, no esperar a que lleguen las distribuciones.",
+    },
+    "true_false": {
+        "statement": "Corvino demuestra que el approach de recommitment de de Zwart et al. (2007) es perfectamente aplicable para todos los inversores institucionales, incluyendo aseguradoras y fondos de pensiones regulados.",
+        "answer": False,
+        "explanation": "Corvino señala explícitamente la limitación del de Zwart approach: 'the worse the asset performs relative to other investments, the more you need to buy' — matemáticamente, cuando el NAV cae mucho, el modelo exige commitear enormes cantidades de capital nuevo, lo que puede exceder el capital disponible. Esto genera 'overcommitment' — comprometer más del 100% del capital disponible. Para aseguradoras y fondos de pensiones con requisitos regulatorios de capital (Solvencia II, NAIC RBC), este exceso de compromiso puede violar límites legales y regulatorios. Por eso Corvino propone la 'cash constraint strategy' — un modificación que agrega C_t = Min(de Zwart formula, Cash_disponible).",
+    },
+    "numerical_problem": {
+        "question": "Usando el modelo de de Zwart et al.: NAV_t = 80, Cash_t = 40, UC_{t-P} = 30. IDt = NAV/(NAV+Cash). ¿Cuál es el monto de nuevo commitment C_t?",
+        "steps": [
+            "IDt = NAV / (NAV + Cash) = 80 / (80 + 40) = 80/120 = 0.667",
+            "C_t = (1/IDt) × (Distribuciones + UC_{t-P})",
+            "Asumiendo distribuciones = 5 en el período",
+            "C_t = (1/0.667) × (5 + 30) = 1.50 × 35 = 52.5",
+            "¡El modelo pide commitear 52.5 cuando solo hay 40 en cash! → overcommitment",
+        ],
+        "answer": "C_t = 52.5 (pero solo hay 40 disponible → necesita cash constraint: C_t = min(52.5, 40) = 40)",
+        "bus_hint": "ID=80/120=0.67 → C=(1/0.67)×35=1.5×35=52.5 > cash disponible → aplicar min(52.5, 40)",
+    },
+    "graph_type": "pe_cashflow_j_curve",
+    "connections": ["Chen et al. (2025) — capital calls como estado del modelo", "de Zwart et al. (2007) — recommitment original", "Cardie et al. (2000) — rule of thumb original", "J-curve — razón del underinvestment"],
+},
+
+{
+    "id": "alt_cor_002",
+    "domain": "Alternatives",
+    "topic": "Cash Constraint Strategy — La Solución Óptima de Corvino",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Corvino, G.L. (2023) — 'Asset Allocation and Private Markets', Bocconi University, September 2023",
+    "front": "¿Cuál es la 'cash constraint strategy' de Corvino, en qué se diferencia del de Zwart, y cuáles son sus implicancias para el ALM de un inversor institucional?",
+    "back": "Cash Constraint Strategy: C_t = Min[ (1/ID_t) × (D_t + UC_{t-P}), Cash_t ]. La única modificación respecto a de Zwart: el nuevo commitment nunca excede el cash disponible. Resultados empíricos vs. estrategia one-shot: Average variance al año 5 cae de 0.54% a 0.14% (−74%). Average cash al año 5 cae de 48.72% a 41.83% (mejor cantidad de exposición). Al año 10: average cash cae de 57.44% a 34.79% — sustancialmente más invertido. Ventaja adicional: los ongoing recommitments usan datos perfectly known at the time of decision (NAV, distribuciones, uncalled capital actuales) — solo el commitment inicial requiere proyecciones. Implicancias para ALM: El portafolio de activos líquidos (public equity + bonds) debe construirse no solo según el perfil de pasivos (como en ALM tradicional) sino también según el perfil de cash flows ESPERADOS del portafolio privado. Las capital calls son 'pseudo-pasivos' que el portfolio público debe poder cubrir. El mercado secundario es una válvula de escape: si el cash becomes insufficient, vender participaciones en mercado secundario (a descuento) puede ser preferible a incurrir en default.",
+    "latex": r"C_t = \min\!\left[\frac{1}{ID_t}(D_t + UC_{t-P}),\; Cash_t\right] \quad \text{con} \quad ID_t = \frac{NAV_t}{NAV_t + Cash_t}",
+    "mcq": {
+        "question": "Corvino concluye que la diversificación por vintage year (comprometer capital en distintos años, no todo al mismo tiempo) tiene una implicación importante para la gestión del cash. ¿Cuál?",
+        "options": [
+            "A) La diversificación de vintage aumenta el average cash porque hay más fondos en etapa de J-curve simultáneamente",
+            "B) La diversificación de vintage suaviza la distribución temporal de los capital calls — en lugar de picos de llamadas concentradas en pocos años, los calls se distribuyen más uniformemente, permitiendo mantener una proporción mayor del cash de reserva en activos de riesgo en lugar de efectivo puro",
+            "C) La diversificación de vintage complica el cálculo del recommitment y por eso se debe evitar",
+            "D) La diversificación de vintage elimina completamente el problema de underinvestment",
+        ],
+        "answer": "B",
+        "explanation": "Meads et al. (2016) — citado por Corvino — demuestran que portafolios con mayor diversificación de vintage y fondo permiten tener más capital de reserva invertido en activos de riesgo (en lugar de cash puro), porque los capital calls se suavizan en el tiempo. Esto reduce el costo de oportunidad del 'dry powder'. Un portafolio con todos los compromisos en el mismo vintage year tendría capital calls concentradas en los años 2-4, requiriendo mantener grandes buffers en efectivo exactamente cuando el mercado puede estar en buenas condiciones para invertir.",
+    },
+    "true_false": {
+        "statement": "La cash constraint strategy de Corvino garantiza que el portafolio de private markets siempre alcanzará el 100% de la exposición objetivo definida en la asset allocation.",
+        "answer": False,
+        "explanation": "Incluso la mejor estrategia de Corvino deja un average cash significativo: 34.79% al año 10 (vs. 57.44% del approach naïve). Estructuralmente, es imposible estar al 100% invertido en private markets manteniendo capacidad de responder a capital calls futuros. Hay un trade-off inherente: a mayor inversión en activos ilíquidos, menor buffer de liquidez, mayor riesgo de default en capital calls. La solución de Corvino minimiza este trade-off pero no lo elimina. La propuesta de usar el mercado secundario y ajustar el portafolio público según los cash flows proyectados del privado son complementos necesarios.",
+    },
+    "fill_blank": {
+        "template": "Corvino concluye que para una aseguradora o fondo de pensiones, el portafolio de activos _______ debe construirse considerando no solo la estructura de los _______ (ALM tradicional) sino también el perfil de cash flows esperado del portafolio de mercados privados — porque las capital calls son cuasi-pasivos que el portafolio líquido debe poder absorber.",
+        "answers": ["líquidos, pasivos", "públicos, liabilities", "líquidos, obligaciones"],
+    },
+    "connections": ["Chen et al. (2025) — default en capital calls como variable del modelo", "Solvency II y NAIC RBC — restricciones regulatorias", "Secondary market PE — válvula de escape", "ALM y private markets — integración necesaria"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ALTERNATIVES — Chen, Gambarotta, Scheidegger & Xu (2025)
+# "A Dynamic Model of Private Asset Allocation"
+# arXiv:2503.01099
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "alt_chen_001",
+    "domain": "Alternatives",
+    "topic": "Modelo Dinámico de PE — Los 5 Factores que Complican la Asignación Óptima",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Chen, H., Gambarotta, G., Scheidegger, S. & Xu, Y. (2025) — 'A Dynamic Model of Private Asset Allocation', arXiv:2503.01099, MIT/Lausanne/Columbia, March 4, 2025",
+    "front": "¿Cuáles son los 5 factores que Chen et al. (2025) incorporan en su modelo dinámico de PE, y por qué cada uno hace la asignación más compleja que el simple MVO de Markowitz?",
+    "back": "5 FACTORES: (1) ILIQUIDEZ — no se puede rebalancear libremente. Cerrar una posición de PE cuesta tiempo (años) y dinero (discount de mercado secundario: 66% del NAV en recesión). (2) TIMING LAGS — hay tres momentos distintos: el commitment (compromiso), el capital call (cuando realmente se entrega el dinero), y la distribución (cuando se recibe el retorno). El modelo captura estas tres fases con sus respectivos procesos estocásticos. (3) CICLO ECONÓMICO — las tasas de capital call (λN, λK), las distribuciones (λD), y los retornos de PE (μP) son todos distintos en recesión vs. expansión. Calibración con NBER: en recesión, capital call de nuevos compromisos = 18% vs. 4.7% en expansión. (4) SERIAL CORRELATION — los retornos observados de PE tienen autocorrelación = 0.20 (trimestral) porque el mark-to-market es infrecuente. Getmansky, Lo & Makarov (2004). (5) RESTRICCIONES REGULATORIAS — riesgo de capital (Risk-Based Capital) con costo cuadrático por exceder el umbral: Γ(θ) = κ(θ−θ̄)² si θ>θ̄. Por qué MVO simple falla: MVO asume liquidez perfecta, retornos iid, sin restricciones dinámicas — ninguna de estas es válida en PE.",
+    "latex": r"\lambda_N(s), \lambda_K(s), \lambda_D(s) \quad \text{tasas de call/distrib. dependientes del ciclo } s\in\{1=\text{reces}, 2=\text{exp}\}",
+    "mcq": {
+        "question": "En el modelo de Chen et al., durante una recesión el GP llama el 18% de los nuevos compromisos (λN=0.18) pero solo el 5% de los compromisos previos (λK=0.05). ¿Qué implicación tiene esto para la gestión de liquidez del LP?",
+        "options": [
+            "A) El LP debe mantener más liquidez para los compromisos existentes (viejos) que para los nuevos",
+            "B) En una recesión, cuando los mercados públicos también están cayendo y el LP necesita liquidez, los GPs aceleran las llamadas de capital en nuevos compromisos pero son más lentos en llamar el capital comprometido anteriormente — esto crea una tormenta perfecta: mayor necesidad de liquidez justo cuando los activos líquidos valen menos",
+            "C) Las tasas de capital call son irrelevantes para la gestión de liquidez si el LP tiene suficientes bonos",
+            "D) Los compromisos previos generan menos capital calls en recesión porque el GP ya invirtió ese capital",
+        ],
+        "answer": "B",
+        "explanation": "El diseño del modelo captura una dinámica perversa: en recesión, el LP enfrenta simultáneamente (1) caída de valor de sus activos públicos (stocks caen, correlación con PE = 0.95 en recesión), (2) aceleración de capital calls de nuevos compromisos (λN sube de 4.7% a 18%), (3) menor liquidez de PE (distribuciones caen de 7.1% a 2.8%), y (4) mayor costo de liquidar PE en mercado secundario (descuento del 34% = 1-0.66 en recesión vs. 10% en expansión). Todo esto ocurre al mismo tiempo — exactamente cuando el LP más necesita liquidez.",
+    },
+    "true_false": {
+        "statement": "Chen et al. (2025) demuestran que no vale la pena 'unsmooth' (eliminar la autocorrelación) de los retornos de PE antes de tomar decisiones de asignación — el resultado es prácticamente idéntico al de usar los retornos observados directamente.",
+        "answer": True,
+        "explanation": "Este es un hallazgo sorprendente y contraintuitivo: con autocorrelación trimestral de 0.20 en el modelo base, la diferencia entre optimizar con retornos observados (suavizados) vs. unsmoothed es mínima. Razón: los inversores de PE son long-term — les importan los retornos a 10 años, no la autocorrelación de corto plazo. A largo horizonte, el efecto del suavizamiento se promedia y la distribución de retornos converge. Además, la autocorrelación serial en el modelo captura tanto el mark-to-market infrecuente (artificial) como posible autocorrelación verdadera en los retornos económicos de PE — ambos tienen implicaciones similares para las políticas de largo plazo.",
+    },
+    "fill_blank": {
+        "template": "Chen et al. calibran el descuento de liquidación de PE en el mercado secundario en α(s): _______ del NAV durante recesiones y _______ durante expansiones, basándose en datos de Nadauld et al. (2019) sobre transacciones reales en el mercado secundario de PE.",
+        "answers": ["66%, 90%", "0.66, 0.90", "66 centavos por dólar de NAV, 90 centavos"],
+    },
+    "connections": ["Corvino (2023) — cash management strategy en práctica", "Getmansky, Lo & Makarov (2004) — return smoothing en activos ilíquidos", "Ang, Papanikolaou & Westerfield (2014) — portfolio choice con iliquidez", "Solvency II — Risk-Based Capital regulatorio"],
+},
+
+{
+    "id": "alt_chen_002",
+    "domain": "Alternatives",
+    "topic": "Ciclo de Vida Óptimo del LP — Ramping Up, Mantenimiento y Ciclo Económico",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Chen, H., Gambarotta, G., Scheidegger, S. & Xu, Y. (2025) — 'A Dynamic Model of Private Asset Allocation', arXiv:2503.01099",
+    "front": "¿Cuáles son las 3 fases del ciclo de vida óptimo de asignación al PE según el modelo de Chen et al., y cómo usa el LP las acciones públicas vs. el PE como instrumentos de ajuste de riesgo en cada fase?",
+    "back": "3 FASES: (1) RAMPING UP (Años 1-4): El LP hace commitments agresivos (100% de la riqueza total en el primer año, luego 47%, luego 10%). Para mantener el riesgo total objetivo mientras el PE aún es bajo, el LP aloca pesadamente a acciones públicas (55% del capital total en año 1). La lógica: las acciones son el 'sustituto temporal' del PE mientras este se construye. (2) MAINTENANCE (Años 5-10): PE alcanza 62% de la riqueza total. Las acciones se reducen al 5%. Los nuevos compromisos son solo para mantener la exposición. El portafolio es estable. (3) GESTIÓN DEL CICLO ECONÓMICO: El LP ajusta el riesgo PRINCIPALMENTE via acciones públicas (no via PE). Razón: los costos de ajuste de PE son enormes (iliquidez, commitment lags), mientras que los de acciones son mínimos. En recesión (año 1): acciones = 38% de la riqueza. En expansión (año 1): acciones = 62%. La diferencia del 24% refleja el ajuste táctico de riesgo que el LP realiza completamente en el portafolio líquido. El PE mantiene trayectoria casi igual en ambos regímenes — no se ajusta cíclicamente porque es demasiado costoso.",
+    "mcq": {
+        "question": "La tasa de default acumulada del LP en el modelo base de Chen et al. es solo 0.1% en 10 años, pero sube a 13.6% para el 'naive LP' que ignora el ciclo económico. ¿Qué hace exactamente el LP óptimo para mantener la default rate en 0.1%?",
+        "options": [
+            "A) El LP óptimo hace menos compromisos de PE en recesión, manteniendo más capital disponible",
+            "B) El LP óptimo mantiene más exposición en bonos para tener liquidez disponible para capital calls",
+            "C) El LP óptimo ajusta su exposición a acciones públicas según el ciclo — reduce acciones en recesiones cuando los capital calls son más frecuentes y los activos valen menos, y aumenta acciones en expansiones. Mantiene la trayectoria de PE casi igual pero la gestión del riesgo líquido evita defaults",
+            "D) El LP óptimo no hace nuevos compromisos durante los dos primeros años hasta que tiene suficiente capital",
+        ],
+        "answer": "C",
+        "explanation": "Este es el hallazgo central del modelo: el LP óptimo no evita el default ajustando PE (demasiado costoso). Lo hace ajustando las acciones públicas. En recesión, donde los capital calls son más agresivos (λN=18% vs. 4.7%), los retornos de PE son menores, y los activos públicos valen menos — el LP reduce su exposición a acciones para tener más bonos (mayor liquidez). En expansión, puede asumir más riesgo en acciones porque la probabilidad de default es menor. La consecuencia: el naive LP (que ignora el ciclo y mantiene siempre alta exposición a acciones) queda sin liquidez en recesiones para cubrir capital calls → 13.6% de default acumulado.",
+    },
+    "numerical_problem": {
+        "question": "El LP empieza con riqueza total W₀=1. En año 1 de expansión: 55% en acciones, 62% en PE objetivo (en construcción). Si la riqueza líquida inicial es el 100% (W=1, P=0, K=0), ¿qué fracción de la riqueza líquida total va a acciones?",
+        "steps": [
+            "Al inicio (t=0): W_líquida = 1, P (PE NAV) = 0, K (uncalled) = 0",
+            "Total wealth = W + P = 1 + 0 = 1",
+            "Allocation acciones = 55% × total wealth = 55% × 1 = 0.55",
+            "Allocation bonos = 45% (resto de la riqueza líquida)",
+            "El 62% en PE es el objetivo a alcanzar durante los próximos 4-5 años vía commitments",
+        ],
+        "answer": "55% en acciones, 45% en bonos. El PE aún es 0% pero el objetivo es llevarlo al 62% durante la fase de ramping up.",
+        "bus_hint": "t=0: toda riqueza es líquida → 55% en stocks, 45% en bonds; PE se construye en los próximos años",
+    },
+    "connections": ["Corvino (2023) — underinvestment y ramping up", "Guidolin (2018) — programación dinámica en portafolios", "Ang et al. (2014) — iliquidez y portfolio choice", "RBC/Solvency II — restricciones sobre equity en insurers"],
+},
+
+{
+    "id": "alt_chen_003",
+    "domain": "Alternatives",
+    "topic": "Modelo Dinámico vs. Heurístico — El Costo de Usar MVO Simple para PE",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Chen, H., Gambarotta, G., Scheidegger, S. & Xu, Y. (2025) — 'A Dynamic Model of Private Asset Allocation', arXiv:2503.01099",
+    "front": "¿Cómo cuantifican Chen et al. el costo de usar el enfoque heurístico (MVO estático) en lugar del modelo dinámico óptimo para gestionar una cartera de PE, y cuál es la diferencia en las asignaciones resultantes?",
+    "back": "Cuantificación del costo: el LP naïve (que ignora ciclos económicos y usa MVO estático) sufre una pérdida de 9.3% de riqueza inicial en términos de certainty equivalent wealth (riqueza cierta equivalente). Adicionalmente, su default acumulado es 13.6% vs. 0.1% del LP óptimo. Diferencia en asignaciones: Modelo heurístico en expansión → PE = 67.3%, stocks = 0% (solo PE y bonos). En recesión → PE = 0%, stocks = 36.4%. Contraste con el modelo dinámico óptimo en mantenimiento: PE = 45-65%, stocks ≤ 10% (consistente en ambos regímenes). El problema del heurístico: en recesión elimina completamente el PE (cuando los activos están baratos y sería mejor mantener), y en expansión elimina las acciones (cuando el ciclo favorece el riesgo). El modelo dinámico mantiene el PE estable (difícil de ajustar) y usa las acciones como palanca de riesgo.",
+    "mcq": {
+        "question": "La pérdida de certainty equivalent wealth del 9.3% para el LP naïve es en términos de riqueza INICIAL. Si el LP parte con €500M de patrimonio, ¿cuánto vale la mejora de usar el modelo dinámico?",
+        "options": [
+            "A) €9.3M (0.93% del patrimonio inicial)",
+            "B) €46.5M (9.3% × €500M) en términos de equivalente de riqueza cierta inicial",
+            "C) €93M si el horizonte de inversión es de 10 años",
+            "D) El valor es incalculable porque la certeza equivalente es un concepto teórico sin valor monetario",
+        ],
+        "answer": "B",
+        "explanation": "Certainty equivalent wealth es la riqueza fija (segura) que el inversor considera equivalente en utilidad a la distribución aleatoria de resultados. Una pérdida de 9.3% en términos de certainty equivalent wealth significa que el LP naïve necesitaría partir con €500M × 1.093 ≈ €546.5M para alcanzar el mismo nivel de utilidad esperada que el LP óptimo con €500M. La mejora vale €46.5M de riqueza inicial adicional que el LP óptimo 'ahorra' por usar la estrategia correcta.",
+    },
+    "true_false": {
+        "statement": "Chen et al. (2025) demuestran que su modelo dinámico es computacionalmente intractable con los métodos tradicionales de programación dinámica, siendo necesario usar Deep Kernel Gaussian Processes para resolverlo.",
+        "answer": True,
+        "explanation": "El modelo tiene 6 variables de estado: riqueza líquida (W), riqueza ilíquida/NAV PE (P), compromisos no llamados (K), retorno esperado de PE (μP), estado macroeconómico (s), y tiempo (t). La programación dinámica tradicional sufre de 'curse of dimensionality' — el número de puntos necesarios para cubrir el espacio crece exponencialmente con las dimensiones. Chen et al. usan Deep Kernel Gaussian Processes (DKGP) que combinan redes neuronales con Gaussian Processes: las redes aprenden la representación del espacio de estados, y el GP provee la interpolación suave con incertidumbre calibrada — especialmente importante para capturar la transición no lineal entre el régimen de default y no-default.",
+    },
+    "fill_blank": {
+        "template": "El costo regulatorio de exceder el umbral de risk budget en el modelo de Chen et al. sigue una función _______ (cuadrática): Γ(θ) = κ(θ − θ̄)² cuando θ > θ̄, donde θ̄ es el umbral. Aumentar el risk charge del PE de 50% a 100% reduce el retorno realizado de _______ a _______ en el modelo.",
+        "answers": ["cuadrática, 8.4%, 7.1%", "quadratic, 8.41%, 7.1%"],
+    },
+    "connections": ["Corvino (2023) — modelo más simple pero aplicable", "Takahashi & Alexander (2002) — heurístico estándar en práctica", "Deep Learning en Finance — Schopf (2024)", "Risk-Based Capital — NAIC y Solvency II"],
+},
+
 ]
 
 
