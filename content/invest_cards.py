@@ -1015,6 +1015,275 @@ print(f"Coeficientes: {lasso.coef_[selected].round(4)}")
     "connections": ["GARCH — volatility clustering", "Conrad & Kaul (1988) — autocorrelación de retornos", "Structural breaks", "Regime switching models"],
 },
 
+# ════════════════════════════════════════════════════════════════
+# EQUITY INVESTING — Yee (2004)
+# Forward Versus Trailing Earnings in Equity Valuation
+# Review of Accounting Studies, 9, 301–329
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "eq_fwd_001",
+    "domain": "Equity Investing",
+    "topic": "Valoración — Forward vs. Trailing Earnings",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Yee, K.K. (2004) — Review of Accounting Studies 9:301–329; Columbia Business School. DOI: 10.1023/B:RAST.0000028195.75276.44",
+    "front": "¿Por qué las forward earnings son teóricamente más precisas como atributo de valoración que las trailing earnings, según Yee (2004)?",
+    "back": "Porque cuando existen variables de información no observables (como el estado del ciclo de demanda de la industria), las accrual rules lineales NO pueden lograr relaciones contemporáneas exactas valor-earnings — requieren actualización bayesiana no lineal por parte del contador. En cambio, SÍ pueden lograr relaciones forward exactas, porque el analista que hace el forecast incorpora su propia estimación bayesiana (mt) al proyectar. Así, forward accounting traslada la carga de la inferencia subjetiva del contador al usuario de los estados financieros. Regla general: cuanto más hacia adelante el earnings, más preciso como atributo de valoración.",
+    "latex": r"V_t = \frac{f \cdot E_t[ox_{t+1}]}{R} \quad \text{(forward)} \quad \text{vs.} \quad V_t = f \cdot ox_t^c - c_t \quad \text{(contemporánea, no lineal)}",
+    "intuition": "Las trailing earnings son como navegar mirando solo por el espejo retrovisor — el contador trata de incorporar todo lo que el mercado sabe, pero no puede hacerlo sin subjetividad. Las forward earnings le piden al conductor que señale hacia dónde va: el analista que pronostica usa su propia visión del futuro (mt), y eso es exactamente lo que necesita la valoración.",
+    "mcq": {
+        "question": "En el modelo de Yee (2004), ¿qué es mt y por qué genera heterogeneidad de creencias entre analistas?",
+        "options": [
+            "A) mt es la tasa de descuento del mercado, que varía según el risk premium de cada inversor",
+            "B) mt es la creencia bayesiana sobre la probabilidad de que la industria esté en estado de alta persistencia (H), y varía porque depende del prior m₀ subjetivo de cada analista",
+            "C) mt es el múltiplo de capitalización aplicado a los earnings forward, que varía por diferencias en metodología",
+            "D) mt es el margen de error de los accruals contables, determinado por la calidad de auditoría",
+        ],
+        "answer": "B",
+        "explanation": "mt = Pr(st=H | m₀, Ω_t) es la probabilidad bayesiana de que el estado de la industria sea 'alta persistencia' dado el prior m₀ y toda la historia de shocks. Dos analistas igualmente racionales con la misma información pueden tener mt distintos si su m₀ inicial difiere — y m₀ es puramente subjetivo. Esta heterogeneidad NO requiere asimetría de información.",
+    },
+    "true_false": {
+        "statement": "Según Yee (2004), si una política contable logra una relación contemporánea exacta (Vt = f·oxt − ct), entonces automáticamente logra también la relación forward (Vt = f·E[oxt+1]/R).",
+        "answer": True,
+        "explanation": "Ohlson (1991) demostró que cualquier sistema que logre la relación contemporánea la logra también como subproducto, pero NO al revés. La relación forward es menos exigente: se puede lograr con accruals lineales incluso cuando la contemporánea requiere no-linealidad bayesiana.",
+    },
+    "fill_blank": {
+        "template": "En Yee (2004), la accrual policy forward-earnings logra una relación valor-earnings lineal sin requerir que el contador estime mt, porque traslada esa inferencia _______ al usuario del estado financiero que hace el forecast.",
+        "answers": ["bayesiana", "subjetiva", "no lineal", "bayesian"],
+    },
+    "connections": ["Ohlson (1995) — modelo residual income", "Accruals quality — Dechow & Dichev", "Analyst forecasts — valor informativo de EPS estimates", "Shaffer (2024) — multiples en M&A"],
+},
+
+{
+    "id": "eq_fwd_002",
+    "domain": "Equity Investing",
+    "topic": "Valoración — Más Forward = Más Preciso",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Yee, K.K. (2004) — Review of Accounting Studies 9:301–329; Columbia Business School",
+    "front": "¿Qué establece la Proposición 2 de Yee (2004) sobre horizonte del forecast y precisión de valoración, y qué implica para el uso de EPS 1Y vs. 2Y forward?",
+    "back": "Proposición 2: para cualquier error de valoración ε>0 deseado, existe un horizonte F* tal que el forecast F-períodos adelante logra error < ε para todo F≥F*. Implicancia: si hay variables no observables en S estados, un forecast F=S-1 períodos adelante puede lograr valoración exacta con accruals lineales. El EPS 2Y-forward es generalmente más preciso que el 1Y-forward — aunque la mejora no es siempre estrictamente monotónica. Esto justifica el uso de NTM+1 en modelos de valoración.",
+    "latex": r"\|V_t - \hat{V}_t(F')\| \leq \|V_t - \hat{V}_t(F)\| \quad \forall F' > F",
+    "mcq": {
+        "question": "La Observación 1 de Yee (2004) muestra que el error de valoración decae con el horizonte de forecast cuando los earnings tienen ruido persistente de duración T. ¿Cuál es la fórmula del error para F<T?",
+        "options": [
+            "A) error(F) = σ²_Z × F, creciente con el horizonte",
+            "B) error(F) = (f/R^F)² × σ²_Z × (T−F), decreciente con F; cero para F≥T",
+            "C) error(F) = σ²_Z / F, decreciente hiperbólicamente",
+            "D) error(F) = σ²_Z × (1−ρ^F), convergiendo asintóticamente",
+        ],
+        "answer": "B",
+        "explanation": "error(F) = (f/R^F)² × σ²_Z × (T−F) para F<T. Cuando F≥T, el error es exactamente cero — los cargos contables persistentes se han revertido completamente. Para F<T, el error decrece linealmente con F porque hay T−F cargos aún pendientes de reversión. Los errores temporales de accruals se 'cancelan' al mirar suficientemente hacia adelante.",
+    },
+    "true_false": {
+        "statement": "Yee (2004) demuestra de forma incondicional (Conjetura A) que más-forward earnings es siempre más preciso que menos-forward earnings para cualquier política contable posible.",
+        "answer": False,
+        "explanation": "El paper explícitamente reconoce que la Conjetura A (validez universal) NO pudo ser probada — ni siquiera el autor la considera plausible en su forma más fuerte. Lo que sí se prueba es la Proposición 2 (existencia de al menos una política contable para la que más-forward es más preciso) y la Observación 1 (para ruido i.i.d. persistente). La honestidad del paper sobre sus propias limitaciones es clave.",
+    },
+    "fill_blank": {
+        "template": "Si el espacio de la variable no observable abarca S estados, una accrual policy lineal con S parámetros puede lograr valoración exacta para forecasts de horizonte F ≥ _______.",
+        "answers": ["S-1", "S menos 1", "S−1"],
+    },
+    "connections": ["EPS consensus estimates — 1Y vs 2Y forward", "NTM earnings en modelos DCF", "Accrual accounting — persistencia de errores", "Ohlson-Juettner-Nauroth (2000) — AEG model"],
+},
+
+{
+    "id": "eq_fwd_003",
+    "domain": "Equity Investing",
+    "topic": "Valoración — Efficient Accounting con Variables No Observables",
+    "difficulty": "Advanced",
+    "mode_tags": ["home"],
+    "source": "Yee, K.K. (2004) — Review of Accounting Studies 9:301–329; Columbia Business School",
+    "front": "¿Por qué el Lema 3 de Yee (2004) implica que el 'efficient accounting' (Feltham-Ohlson) es imposible con accruals lineales cuando hay variables no observables, y qué solución ofrece el paper?",
+    "back": "Efficient accounting requiere valor = combinación lineal de book value y earnings. Pero cuando Vt depende de mt (creencia bayesiana sobre estado no observable), los accruals lineales no pueden capturar mt — que es una función no lineal de toda la historia de shocks. Lema 3: ninguna elección de parámetros {d₀, d₁, d₂} logra efficient accounting. Solución de Yee: relajar el objetivo a relaciones forward — con política OXF lineal se logra Vt = f·E[oxt+1]/R sin necesitar mt. Alternativa para mantener efficient accounting: accruals dependientes de beliefs (no lineales), o anclar a cash flow forecasts como proxies de mt (Observación 3).",
+    "latex": r"ox_t = (1+d_1)c_t - (1-d_0)oa_{t-1} + d_2 n_t \quad \text{(lineal, belief-free)} \implies \text{no logra efficient accounting}",
+    "fill_blank": {
+        "template": "El Lema 3 de Yee demuestra que la efficient accounting de Feltham-Ohlson es imposible con accruals _______ cuando el flujo de caja depende de una variable de estado no observable.",
+        "answers": ["lineales", "belief-free", "lineales y libres de creencias", "linear"],
+    },
+    "true_false": {
+        "statement": "En el modelo de Yee (2004), las reservas de siniestros de seguros que anclan a forecasts de cash flows son equivalentes a políticas contables que dependen explícitamente de beliefs bayesianos.",
+        "answer": True,
+        "explanation": "Observación 3: la política que usa ct+1 (forecast de cash flow) como proxy de mt produce exactamente la misma efficient accounting que la política que usa mt directamente. Esto racionaliza por qué SFAS 60 (seguros) exige reservas basadas en forecasts de pagos futuros — es incorporar beliefs sin nombrarlos. La subjetividad existe igualmente; solo está enmascarada.",
+    },
+    "connections": ["Feltham-Ohlson (1995/1996) — efficient accounting", "SFAS 60 — reservas de seguros", "Accruals no lineales", "Creencias heterogéneas y precios de activos"],
+},
+
+{
+    "id": "eq_fwd_004",
+    "domain": "Equity Investing",
+    "topic": "Valoración — Aplicación: NTM vs. TTM P/E",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Yee (2004) — RAS; Shaffer (2024) — RAS; Koller et al. (2020) — Valuation (McKinsey)",
+    "front": "¿Cómo el resultado de Yee (2004) justifica el uso de NTM P/E sobre TTM P/E, y en qué contextos el TTM sigue siendo relevante?",
+    "back": "Justificación teórica: si las trailing earnings incorporan shocks transitorios no observables (write-offs, provisiones inusuales), el TTM P/E será volátil y ruidoso — no guarda relación lineal estable con el precio. NTM earnings filtran esos ruidos porque los analistas proyectan condiciones normalizadas, incorporando su propia mt. TTM sigue siendo relevante cuando: (1) sin cobertura de analistas (small caps, mercados emergentes como Perú), (2) empresa cíclica con earnings normalizados históricos (ej. Shiller CAPE), (3) M&A donde los abogados prefieren números auditados para limitar litigación.",
+    "mcq": {
+        "question": "Shaffer (2024) documenta que en M&A advisory se usan trailing multiples el 42% del tiempo y forward solo el 25%, aunque la teoría recomienda forward. ¿Cuál es la explicación más consistente con Yee (2004)?",
+        "options": [
+            "A) Los trailing earnings son más precisos en M&A por el mayor riesgo de forecast",
+            "B) Los asesores prefieren trailing por su menor subjetividad aparente — anclan a números auditados para limitar litigación, aunque teóricamente sean menos precisos",
+            "C) La regulación SEC prohíbe el uso de earnings forecasts de terceros en fairness opinions",
+            "D) Los trailing multiples producen valuaciones sistemáticamente más altas, beneficiando al target advisor",
+        ],
+        "answer": "B",
+        "explanation": "Yee (2004) advierte que los trailing earnings parecen más 'objetivos' porque no dependen de beliefs del analista — pero es una ilusión cuando hay variables no observables. DeAngelo (1990) lo explica: los multiples contables se prefieren porque son 'transparentes y anclados en señales comúnmente reconocidas', aunque teóricamente inferiores. Paradoja: trailing parece más objetivo pero es potencialmente menos preciso.",
+    },
+    "true_false": {
+        "statement": "El CAPE de Shiller (precio / earnings promedio 10 años ajustado por inflación) contradice directamente el resultado de Yee (2004) al usar trailing earnings.",
+        "answer": False,
+        "explanation": "No necesariamente. El CAPE promedia 10 años para suavizar shocks transitorios — precisamente los Zt que distorsionan las trailing earnings en Yee. La media de 10 años actúa como filtro que reduce el ruido de corto plazo, aproximando earnings normalizados. Donde sí hay tensión: el CAPE no captura cambios estructurales en márgenes o crecimiento que sí captaría un NTM forecast.",
+    },
+    "fill_blank": {
+        "template": "El P/E usando earnings _______ es teóricamente más preciso porque el analista que hace el forecast incorpora su propia estimación bayesiana del estado no observable de la industria.",
+        "answers": ["forward", "proyectados", "futuros", "NTM", "next twelve months"],
+    },
+    "graph_type": "pe_ratio_vs_growth",
+    "connections": ["Shiller CAPE", "NTM vs TTM P/E en Bloomberg", "I/B/E/S analyst earnings forecasts", "Shaffer (2024) — multiples en M&A"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# EQUITY INVESTING — Shaffer (2024)
+# Which Multiples Matter in M&A? An Overview
+# Review of Accounting Studies (2024) 29:2724–2752
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "eq_mna_001",
+    "domain": "Equity Investing",
+    "topic": "Valoración M&A — Las 4 Dimensiones de los Multiples",
+    "difficulty": "Foundational",
+    "mode_tags": ["bus", "home"],
+    "source": "Shaffer, M. (2024) — Review of Accounting Studies 29:2724–2752; USC Marshall. DOI: 10.1007/s11142-023-09768-7",
+    "front": "¿Cuáles son las 4 dimensiones en que Shaffer (2024) clasifica todos los multiples en M&A advisory, y cuál es el hallazgo más llamativo sobre la distribución de frecuencias?",
+    "back": "Las 4 dimensiones: (1) Numerador: Enterprise Value vs. Equity Value. (2) Value driver denominador: EBITDA, Net Income, Revenue, Book Equity, EBIT, etc. (3) Período de medición: trailing (pasado), current (LTM), o forward (NTM). (4) Tipo de comps: comparable transactions vs. comparable trading firms. Hallazgo llamativo: enorme heterogeneidad — el multiple más común (EV/EBITDA current, trading comps) representa apenas 7.48% de la muestra. Se necesitan los 22 multiples más frecuentes para cubrir el 80% del total. Los 5 value drivers dominantes (EBITDA 32%, Net Income 25%, Revenue 22%, Book Equity 9%, EBIT 6%) cubren el 95%, pero cash flow metrics solo el 1.8%.",
+    "mcq": {
+        "question": "Shaffer (2024) encuentra que cash flow metrics representan solo 1.8% de los multiples en M&A. ¿Qué implica esto respecto al debate sobre la relevancia del accrual accounting?",
+        "options": [
+            "A) Confirma que el accrual accounting es irrelevante y debe reemplazarse por métricas de caja",
+            "B) Es paradójico: a pesar del debate académico sobre declining value-relevance de accruals, los practicantes de M&A los usan casi universalmente como value drivers",
+            "C) Los advisors de M&A no conocen la teoría de DCF y por eso evitan métricas de cash flow",
+            "D) El 1.8% es consistente con la teoría porque el FCF libre de deuda es difícil de observar",
+        ],
+        "answer": "B",
+        "explanation": "La paradoja señalada por Shaffer: precisamente cuando Lev & Gu (2016) y otros académicos argumentan que el accounting ha perdido relevancia, los usuarios más sofisticados de financial statements en el mundo (bancos de inversión en M&A de $bn) siguen usando métricas de accrual accounting en el 97%+ de sus valuaciones. La 'revealed preference' de los practitioners contradice la narrativa de declining relevance.",
+    },
+    "true_false": {
+        "statement": "En M&A advisory, según Shaffer (2024), el P/Book es un múltiplo frecuentemente usado en la mayoría de sectores industriales.",
+        "answer": False,
+        "explanation": "Book equity como value driver aparece en solo 9% total, y está masivamente concentrado en FIRE (Finance, Insurance, Real Estate) donde llega al 32%. Para empresas industriales y de servicios, solo 2.0%. Shaffer concluye que los M&A advisors tratan al P/Book como irrelevante para empresas operativas — lo que contrasta con su amplio uso en investigación académica.",
+    },
+    "fill_blank": {
+        "template": "La revealed preference de los advisors de M&A en Shaffer (2024) muestra que las métricas del estado de _______ dominan (97%) sobre métricas de flujo de caja como value drivers de valoración.",
+        "answers": ["resultados", "income statement", "cuenta de resultados", "resultados y balance"],
+    },
+    "graph_type": "pe_ratio_vs_growth",
+    "intuition": "Los asesores de M&A son como arquitectos que saben que el cemento reforzado es superior, pero siguen usando ladrillo porque todos lo entienden, es auditable, y nadie los puede demandar por usarlo. El trailing EBITDA no es la 'verdad' económica, pero es la lengua común de las salas de directorio.",
+    "connections": ["EV/EBITDA como múltiplo preferido", "DeAngelo (1990) — por qué multiples en M&A", "Yee (2004) — forward vs. trailing earnings", "Fairness opinions — Smith v. Van Gorkom"],
+},
+
+{
+    "id": "eq_mna_002",
+    "domain": "Equity Investing",
+    "topic": "Valoración M&A — El Puzzle de los Trailing Multiples",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Shaffer, M. (2024) — Review of Accounting Studies 29:2724–2752; USC Marshall",
+    "front": "¿Por qué Shaffer (2024) describe como 'puzzle' que los asesores de M&A usen trailing multiples (42%) más que forward (25%), cuando teoría, textos y los propios DCFs del mismo deal usan proyecciones?",
+    "back": "Es un puzzle porque: (1) McKinsey Valuation y la teoría recomiendan explícitamente forward multiples. (2) No hay restricción legal — Delaware referencia DCFs con múltiples años de proyecciones. (3) Los mismos asesores presentan DCFs en el 84% de los deals — que requieren 5-10 años de proyecciones. (4) Forecasts de analistas están disponibles para la mayoría de empresas públicas. (5) Shaffer verifica que los advisors NO usan más forward multiples incluso cuando ya incluyeron un DCF en el mismo deal — descartando la hipótesis de que 'ya cubrieron esa base'. Ninguna explicación simple es satisfactoria.",
+    "mcq": {
+        "question": "Cuando los advisors NO incluyen DCF en el deal (16% de los casos), ¿qué cambio en value driver ocurre según Shaffer (2024)?",
+        "options": [
+            "A) Usan más EBITDA para compensar la ausencia del análisis de flujos",
+            "B) Usan menos earnings multiples y más revenue multiples — porque ambos (earnings y DCF) son inviables para empresas no rentables",
+            "C) Usan más forward multiples para reemplazar el poder predictivo del DCF",
+            "D) Usan más book equity como proxy de valor intrínseco",
+        ],
+        "answer": "B",
+        "explanation": "Sin DCF: revenue sube de 20.7% a 30.4%; earnings baja de 25.2% a 21.8%; EBITDA baja de 33.3% a 25.9%. La explicación: advisors consideran que tanto DCF como earnings multiples son inadecuados para empresas pre-rentables — usan revenue como único denominador viable. Esto sugiere que DCF y earnings multiples son sustitutos en la percepción del practicante, no complementos.",
+    },
+    "true_false": {
+        "statement": "Usar comparable transaction multiples en M&A establece un benchmark de valoración más alto que trading multiples, porque los precios de transacciones pasadas incluyen el premium de control.",
+        "answer": True,
+        "explanation": "La prima de control en la muestra de Shaffer es 30% (mediana) a 38% (media) sobre el precio de mercado a 30 días. Los transaction comps están calculados sobre deal prices que ya incluyen ese premium. Al usar transaction comps, el advisor benchmarks el target contra empresas ya adquiridas con premium — lo que Shaffer señala como relevante para el debate sobre sesgos de advisors.",
+    },
+    "fill_blank": {
+        "template": "Los multiples de _______ proveen una estimación del valor en el mercado de control corporativo, mientras que los trading comps estiman el valor standalone.",
+        "answers": ["transaction comps", "transacciones comparables", "comparable transactions", "precedent transactions"],
+    },
+    "connections": ["Comparable company analysis (CCA)", "Precedent transaction analysis (PTA)", "Control premium en M&A", "Eaton et al. (2001) — sesgos de peer selection"],
+},
+
+{
+    "id": "eq_mna_003",
+    "domain": "Equity Investing",
+    "topic": "Valoración M&A — EV vs. Equity Value: Regla de Consistencia",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Shaffer, M. (2024) — Review of Accounting Studies 29:2724–2752; Damodaran (2012) — Investment Valuation",
+    "front": "¿Cuándo usar EV multiples vs. Equity Value multiples, y qué excepción documenta Shaffer (2024) para el sector FIRE?",
+    "back": "Regla de consistencia: numerador y denominador deben representar a la misma entidad. EV (equity + deuda neta) → denominadores pre-deuda: EBITDA, EBIT, Revenue. Equity Value → denominadores post-deuda: Net Income, Book Equity. Excepción FIRE documentada por Shaffer: para bancos y aseguradoras, los advisors usan Equity Value en el 84% de casos (vs. 27% en otros sectores). Razón: definir 'net debt' es problemático cuando los depósitos son simultáneamente 'deuda' y 'activo operativo'. El balance ES el activo en firmas financieras, por lo que P/Book y equity multiples son más naturales.",
+    "numerical_problem": {
+        "question": "Una empresa tiene EBITDA = $100M, Net Debt = $200M, y comparables trading tienen EV/EBITDA = 8x. ¿Cuál es el Equity Value implícito?",
+        "steps": [
+            "EV implícito = 8x × $100M = $800M",
+            "Equity Value = EV − Net Debt = $800M − $200M = $600M",
+        ],
+        "answer": "Equity Value = $600M",
+        "bus_hint": "EV = 8×100 = 800 → Equity = 800 − 200 = 600",
+    },
+    "mcq": {
+        "question": "Un analista usa EV/Net Income para valorar una empresa. ¿Cuál es el problema fundamental?",
+        "options": [
+            "A) Net Income es volátil y no refleja el poder de generación de caja",
+            "B) EV incluye deuda, pero Net Income ya descontó los intereses — inconsistencia entre numerador pre-deuda y denominador post-deuda",
+            "C) El múltiplo no es comparable entre firmas con diferentes tasas impositivas",
+            "D) Net Income incluye items no recurrentes que distorsionan el múltiplo",
+        ],
+        "answer": "B",
+        "explanation": "EV representa el valor total (accionistas + acreedores), pero Net Income ya restó intereses — es solo el retorno para el accionista. Mezcla a quién beneficia el numerador vs. el denominador. Lo correcto: EV/EBITDA o EV/EBIT para valor total; Equity/Net Income (P/E) para valor del accionista.",
+    },
+    "fill_blank": {
+        "template": "El EV/EBITDA domina en M&A porque es consistente con Enterprise Value y neutral respecto a diferencias en estructura de _______, depreciación y tasas impositivas entre compañías comparables.",
+        "answers": ["capital", "capital y deuda", "deuda", "financiamiento"],
+    },
+    "connections": ["EBITDA como proxy de FCF operativo", "Net debt adjustment en M&A", "P/E vs EV/EBITDA — cuándo usar cada uno", "Sector FIRE — valoración por P/Book"],
+},
+
+{
+    "id": "eq_mna_004",
+    "domain": "Equity Investing",
+    "topic": "Valoración M&A — Tendencias 2000-2020: EBITDA, Non-GAAP y Decline del P/Book",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Shaffer, M. (2024) — Review of Accounting Studies 29:2724–2752; Lev & Gu (2016) — The End of Accounting",
+    "front": "¿Qué tres tendencias documenta Shaffer (2024) en la evolución de multiples de M&A entre 2000-2020, y qué paradoja normativa señala?",
+    "back": "Tres tendencias: (1) EV multiples crecen de ~55% a ~65%+ del total. (2) EBITDA reemplaza a Net Income y EBIT como value driver dominante — acelerado post-2005, vinculado al auge Non-GAAP y preferencia por métricas más arriba en el income statement. (3) Book equity cae sostenidamente de ~12% a <6%, atribuido al crecimiento de intangibles no reconocidos (IP, brand, data) que hacen el book value menos representativo. Paradoja normativa: si los usuarios más sofisticados de financial statements usan casi exclusivamente flow measures para valorar, ¿justifica esto seguir invirtiendo esfuerzos en mejorar el balance sheet para empresas operativas?",
+    "mcq": {
+        "question": "Shaffer (2024) señala que el aumento de EBITDA en M&A NO se explica solo por la migración hacia EV multiples. ¿Cuál es su explicación adicional?",
+        "options": [
+            "A) Los DCFs usan EBITDA como punto de partida, y su auge arrastró a los multiples",
+            "B) Dentro de los EV multiples, EBITDA también desplazó al EBIT — vinculado al fenómeno Non-GAAP y preferencia por métricas que excluyen D&A y restructuring",
+            "C) Los reguladores contables redefinieron EBIT para incluir items que antes excluía, haciendo EBITDA más limpio",
+            "D) Las empresas con mayor deuda prefieren EBITDA porque sube su valoración al ignorar intereses",
+        ],
+        "answer": "B",
+        "explanation": "EBITDA y EBIT compiten en el mismo espacio (ambos pre-intereses, ambos matched con EV). Si el cambio fuera solo por el auge de EV multiples, EBIT y EBITDA crecerían igualmente. Pero EBITDA desplazó también al EBIT — Shaffer lo vincula al auge del Non-GAAP reporting y la preferencia por excluir D&A y costos de restructuring para mostrar una métrica de 'cash earnings' más alta.",
+    },
+    "true_false": {
+        "statement": "La caída del P/Book en M&A advisory entre 2000-2020 implica que el mercado de control corporativo ha abandonado el valor en libros como referencia de valoración para empresas del sector financiero.",
+        "answer": False,
+        "explanation": "La caída es para empresas operativas (industriales, servicios, retail). El sector FIRE (Finance, Insurance, Real Estate) es la excepción: en esas industrias el Book Equity sigue siendo el value driver en el 32% de los casos. Shaffer distingue explícitamente: para firmas financieras donde los activos en balance son el negocio (préstamos, depósitos, securities), el book value es relevante. Para empresas con intangibles no capitalizados, no.",
+    },
+    "fill_blank": {
+        "template": "La declining relevance del Book Equity como value driver en M&A refleja el crecimiento de _______ no reconocidos en balance, que hacen que el book value subestime progresivamente los activos económicos reales.",
+        "answers": ["intangibles", "activos intangibles", "intangible assets"],
+    },
+    "connections": ["Lev & Gu (2016) — The End of Accounting", "Non-GAAP earnings — auge post-2000", "Intangibles y relevancia del accounting", "Income statement vs. balance sheet (FASB debate)"],
+}
+
 ]
 
 
