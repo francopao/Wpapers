@@ -2277,6 +2277,477 @@ print(f"Coeficientes: {lasso.coef_[selected].round(4)}")
     "connections": ["Somefun et al. (2022) — criterios de selección de temas", "Methling & von Nitzsch (2020) — tri-dimensional optimization", "Bai et al. — TCI para due diligence", "MSCI (2019) — relevance scores para análisis de portafolio"],
 },
 
+  # 07/06/2026
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Leung (2009) UCLA
+# Portfolio Selection and Risk Management:
+# An Introduction, Empirical Demonstration and R-Application
+# Master of Science in Statistics, UCLA
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_mpt_001",
+    "domain": "Asset Allocation",
+    "topic": "MPT — Fundamentos: Risk, Return y Diversificación",
+    "difficulty": "Foundational",
+    "mode_tags": ["bus", "home"],
+    "source": "Leung, A.H.Y. (2009) — 'Portfolio Selection and Risk Management: An Introduction, Empirical Demonstration and R-Application', UCLA Master of Science in Statistics",
+    "front": "¿Por qué la varianza de un portafolio de N activos con igual ponderación converge al promedio de las covarianzas (no a cero) a medida que N → ∞, y qué implica esto sobre qué tipo de riesgo puede y no puede eliminarse con diversificación?",
+    "back": "Para un portafolio igualmente ponderado (xi = 1/N), la varianza es: σ²p = (1/N)·σ̄² + (N-1)/N·σ̄jk. Cuando N → ∞, el primer término (varianza promedio individual/N) → 0, pero el segundo término → σ̄jk (covarianza promedio entre activos). Implicación: el riesgo idiosincrático (específico de cada empresa) se diversifica hacia cero con suficientes activos, pero el riesgo sistemático (representado por las covarianzas entre activos, que captura movimientos de mercado comunes) NO se puede eliminar nunca. En el modelo de un factor, la covarianza entre activos i y j es βi·βj·σ²M — este riesgo de mercado permanece sin importar cuántos activos se tengan.",
+    "latex": r"\sigma_p^2 = \frac{1}{N}\bar{\sigma}^2 + \frac{N-1}{N}\bar{\sigma}_{jk} \xrightarrow{N\to\infty} \bar{\sigma}_{jk}",
+    "intuition": "Imagina poner tus ahorros en 100 negocios distintos. Si uno quiebra solo por mala suerte interna, el impacto es mínimo — eso es riesgo idiosincrático diversificado. Pero si hay una recesión global, todos los 100 negocios sufren juntos — eso es el riesgo sistemático que ninguna diversificación elimina, porque está capturado en la covarianza entre ellos.",
+    "numerical_problem": {
+        "question": "Un portafolio de 2 activos tiene: σ₁=20%, σ₂=15%, ρ₁₂=0.3, w₁=0.6, w₂=0.4. ¿Cuál es la desviación estándar del portafolio?",
+        "steps": [
+            "σ²p = w₁²σ₁² + w₂²σ₂² + 2·w₁·w₂·σ₁·σ₂·ρ",
+            "= (0.6)²(0.04) + (0.4)²(0.0225) + 2(0.6)(0.4)(0.20)(0.15)(0.3)",
+            "= 0.0144 + 0.0036 + 2(0.6)(0.4)(0.009)",
+            "= 0.0144 + 0.0036 + 0.00432 = 0.02232",
+            "σp = √0.02232 ≈ 14.9%",
+        ],
+        "answer": "σp ≈ 14.9% (menor que cualquiera de las σ individuales ponderadas por correlación < 1)",
+        "bus_hint": "σ² = 0.36×0.04 + 0.16×0.0225 + 2×0.24×0.009 ≈ 0.0223 → σ≈14.9%",
+    },
+    "mcq": {
+        "question": "Para un portafolio con correlación ρ = -1 entre dos activos, ¿qué ocurre con la varianza mínima alcanzable?",
+        "options": [
+            "A) La varianza mínima es el promedio ponderado de las varianzas individuales",
+            "B) La varianza mínima puede reducirse a cero con los pesos correctos",
+            "C) La varianza mínima es siempre positiva porque los activos individuales son volátiles",
+            "D) La varianza mínima depende del retorno esperado del portafolio",
+        ],
+        "answer": "B",
+        "explanation": "Con ρ = -1, existe una combinación w₁ = σ₂/(σ₁+σ₂) y w₂ = σ₁/(σ₁+σ₂) que produce σ²p = 0. Matemáticamente: σ²p = (w₁σ₁ - w₂σ₂)² = 0 cuando w₁σ₁ = w₂σ₂. Esta es la base teórica de los hedges perfectos. En la práctica, correlaciones perfectamente negativas son imposibles en portafolios de acciones.",
+    },
+    "true_false": {
+        "statement": "Según Leung (2009), el retorno de un portafolio es siempre mayor que el retorno del activo individual de menor retorno incluido en él.",
+        "answer": False,
+        "explanation": "El retorno de un portafolio es la media ponderada de los retornos individuales: E(Rp) = Σxi·E(Ri). Por definición de promedio ponderado, el retorno del portafolio siempre está ENTRE el mínimo y el máximo de los retornos individuales — nunca superior al máximo ni inferior al mínimo. La diversificación reduce riesgo pero no puede elevar el retorno esperado por encima del activo de mayor retorno.",
+    },
+    "graph_type": "efficient_frontier_bl",
+    "connections": ["Single Index Model — Sharpe (1963)", "VaR — Risk Management", "Markowitz (1952) — Portfolio Selection", "Capital Market Line — CAPM"],
+},
+
+{
+    "id": "aa_mpt_002",
+    "domain": "Asset Allocation",
+    "topic": "Single Index Model — Construcción de Portafolio Óptimo con Ranking",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Leung, A.H.Y. (2009) — UCLA; Elton, Gruber & Padberg (1976) — Journal of Finance",
+    "front": "Describe el algoritmo de Elton-Gruber-Padberg para construir el portafolio óptimo con el Single Index Model: ¿qué ratio se usa para rankear, cómo se calcula el threshold C*, y cómo se obtienen los pesos?",
+    "back": "Algoritmo en 4 pasos: (1) RANKING — Calcular el Excess Return to Beta ratio: Zi = [E(Ri) − RF] / βi para cada activo y ordenar de mayor a menor. (2) THRESHOLD C* — Calcular iterativamente Ci = [σ²M · Σ(βj·(E(Rj)−RF)/σ²εj)] / [1 + σ²M · Σ(βj²/σ²εj)] hasta que Ci alcance su máximo (ese máximo es C*). Todos los activos con Zi > C* entran al portafolio; los que tienen Zi < C* quedan fuera. (3) PESOS — Zi proporcionales = (βi/σ²εi)·(Zi − C*). Normalizar para que sumen 1 (o que el valor absoluto sume 1 para short sales). (4) RETORNO Y RIESGO — E(Rp) = α + βp·E(RM); σ²p = βp²·σ²M + Σxi²·σ²εi.",
+    "latex": r"Z_i = \frac{E(R_i) - R_F}{\beta_i}, \quad C_i = \frac{\sigma_M^2 \sum_{j=1}^{i}\frac{\beta_j(E(R_j)-R_F)}{\sigma_{\varepsilon j}^2}}{1 + \sigma_M^2 \sum_{j=1}^{i}\frac{\beta_j^2}{\sigma_{\varepsilon j}^2}}",
+    "mcq": {
+        "question": "En el Single Index Model, la covarianza entre dos activos i y j se simplifica a βi·βj·σ²M. ¿Cuántos parámetros requiere estimar este modelo para N activos, comparado con el modelo de Markowitz completo?",
+        "options": [
+            "A) Single Index: N parámetros vs. Markowitz: N² parámetros",
+            "B) Single Index: 2N+1 parámetros (αi, βi, σ²εi para cada i, más σ²M) vs. Markowitz: N(N+1)/2 parámetros de covarianza",
+            "C) Ambos modelos requieren el mismo número de parámetros",
+            "D) Single Index: N+1 parámetros vs. Markowitz: N² parámetros",
+        ],
+        "answer": "B",
+        "explanation": "Para N=50 activos: Single Index necesita 2(50)+1=101 parámetros (50 alfas, 50 betas, 50 varianzas residuales, 1 varianza de mercado). Markowitz completo necesita N(N+1)/2 = 50×51/2 = 1,275 parámetros de la matriz de covarianza, más N retornos = 1,325 total. La reducción es de ~13x para N=50 y se hace exponencialmente mayor con N más grande. Esta simplificación fue la contribución práctica de Sharpe (1963).",
+    },
+    "true_false": {
+        "statement": "En el Single Index Model, el segundo término de la varianza del portafolio [Σxi²·σ²εi] tiende a cero para un portafolio ampliamente diversificado, dejando solo el riesgo sistemático βp²·σ²M.",
+        "answer": True,
+        "explanation": "Con N activos y pesos xi ≈ 1/N, el término residual es Σ(1/N²)·σ²εi = (1/N)·σ̄²ε → 0 cuando N → ∞. Este resultado confirma matemáticamente dentro del Single Index Model que el riesgo diversificable (residual idiosincrático) desaparece con suficientes activos, y solo queda βp²·σ²M (riesgo de mercado no diversificable).",
+    },
+    "fill_blank": {
+        "template": "El Constant Correlation Model de Elton-Gruber rankea activos usando el ratio [E(Ri)−RF] / _______, mientras que el Single Index Model usa [E(Ri)−RF] / βi. Esta diferencia refleja que el primer modelo usa volatilidad total como medida de riesgo.",
+        "answers": ["σi", "sigma_i", "la desviación estándar del activo"],
+    },
+    "connections": ["CAPM — Sharpe Ratio generalizado", "Constant Correlation Model — Elton & Gruber", "Markowitz MVO — full covariance", "Beta estimation — robust regression"],
+},
+
+{
+    "id": "aa_mpt_003",
+    "domain": "Asset Allocation",
+    "topic": "Constant Correlation Model — Simplificación Adicional al SIM",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Leung, A.H.Y. (2009) — UCLA; Elton & Gruber (1977) — Journal of Finance",
+    "front": "¿Qué supuesto hace el Constant Correlation Model sobre la matriz de correlaciones, cuál es su ventaja práctica sobre el Single Index Model, y cuál es su ratio de ranking?",
+    "back": "Supuesto clave: todas las correlaciones entre activos son iguales a ρ̄ (correlación promedio constante). La matriz de covarianza se simplifica a: σij = ρ̄·σi·σj para i≠j. Ventaja práctica: NO requiere datos de mercado (retornos del índice de referencia) — solo necesita retornos históricos de los propios activos para calcular ρ̄ y las σi. Esto es útil cuando el mercado de referencia no está claro o cuando se trabaja con activos heterogéneos. Ratio de ranking: [E(Ri) − RF] / σi (Sharpe ratio), que rankea activos por retorno por unidad de volatilidad total. El threshold C* se calcula de forma análoga al SIM pero con ρ̄/(1−ρ̄) en lugar de factores de mercado.",
+    "latex": r"\rho_{ij} = \bar{\rho} \;\forall\; i \neq j, \quad \text{Ratio ranking} = \frac{E(R_i)-R_F}{\sigma_i}",
+    "mcq": {
+        "question": "Si el Constant Correlation Model produce pesos de portafolio muy diferentes al Single Index Model para el mismo universo de activos, ¿qué nos indica esa diferencia?",
+        "options": [
+            "A) Uno de los modelos está matemáticamente mal implementado",
+            "B) El modelo de un factor captura el riesgo sistemático vía beta de manera diferente a asumir correlación constante — activos con beta alta pero σi moderada pueden rankear diferente en SIM vs. CCM",
+            "C) Los datos de retorno histórico son insuficientes para cualquiera de los dos modelos",
+            "D) La correlación promedio ρ̄ debe ser recalibrada para coincidir con el mercado",
+        ],
+        "answer": "B",
+        "explanation": "El SIM rankea por exceso de retorno / beta (riesgo sistemático), mientras que el CCM rankea por exceso de retorno / sigma total. Un activo con beta=0.5 y σ=30% (alta volatilidad idiosincrática) tendrá Zi_SIM diferente a Zi_CCM. Los activos con alto riesgo idiosincrático relativo a su beta se penalizan más en el CCM que en el SIM. Las diferencias en pesos revelan cuánto importa la distinción entre riesgo sistemático y total.",
+    },
+    "fill_blank": {
+        "template": "En el Constant Correlation Model, el factor Ci en la iteración i-ésima incluye el coeficiente ρ̄/(1 − ρ̄ + i·ρ̄), donde a mayor ρ̄ (correlación promedio más alta), el valor de C* _______ — dificultando la entrada de más activos al portafolio óptimo.",
+        "answers": ["aumenta", "sube", "crece", "es más alto"],
+    },
+    "true_false": {
+        "statement": "El Constant Correlation Model siempre produce portafolios con menor riesgo que el Single Index Model para el mismo conjunto de activos y restricciones.",
+        "answer": False,
+        "explanation": "No hay una relación de dominancia universal entre los dos modelos. El CCM asume correlación homogénea entre todos los activos — un supuesto que puede sub-estimar las correlaciones entre activos del mismo sector y sobreestimar las correlaciones entre activos de sectores muy distintos. En el SIM, las correlaciones están mediadas por las betas, lo cual es más preciso si el mercado es el factor común dominante. La performance relativa depende de la validez del supuesto de correlación constante en el universo específico.",
+    },
+    "connections": ["Single Index Model — comparación directa", "Sharpe Ratio como criterio de ranking", "Elton & Gruber (1977) — optimal portfolio rules", "Kwan (1984) — unified treatment SIM/CCM"],
+},
+
+{
+    "id": "aa_var_001",
+    "domain": "Asset Allocation",
+    "topic": "Value at Risk — Tres Métodos: Paramétrico, Histórico y Monte Carlo",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Leung, A.H.Y. (2009) — UCLA; RiskMetrics Technical Document (1996) — JP Morgan",
+    "front": "¿Cuáles son los 3 métodos principales para calcular VaR, en qué supuesto descansa cada uno, y cuál fue el resultado empírico de Leung (2009) sobre su performance en back-testing con acciones del DJIA?",
+    "back": "3 métodos: (1) PARAMÉTRICO (RiskMetrics): Asume normalidad de retornos. VaR = zα · σp · √h, donde zα es el cuantil normal (1.645 para 95% CI), σp es la volatilidad del portafolio y h son los días horizon. Variante EWMA da mayor peso a retornos recientes (decay factor λ=0.97). (2) HISTÓRICO: Sin supuesto distribucional — toma directamente el percentil 5% (o 1%) de la distribución histórica de retornos. Variante bootstrap re-muestrea de la historia completa. (3) MONTE CARLO: Simula escenarios artificiales usando la media y covarianza histórica, extrae el percentil deseado de los retornos simulados. Resultado empírico Leung (2009): El VaR Paramétrico (EWMA) tuvo menor failure rate en back-testing para acciones DJIA 2001-2009, seguido del Histórico-Bootstrap. El Monte Carlo fue el más conservador (mayores VaR estimados) pero tuvo menor exceedance.",
+    "latex": r"VaR_{95\%}^{1day} = -z_{0.05} \cdot \sigma_p = 1.645 \cdot \sigma_p \quad \text{(normalidad, 1-día)}",
+    "intuition": "Piensa en el VaR como la respuesta a: 'En el peor 5% de los días (o 1% para VaR 99%), ¿cuánto puedo perder?' El paramétrico asume una campana de Gauss — simple pero subestima colas gruesas. El histórico dice 'lo que ha pasado puede pasar' — honesto pero limitado por el pasado disponible. El Monte Carlo genera miles de futuros posibles — flexible pero tan bueno como el modelo de simulación.",
+    "mcq": {
+        "question": "Un portafolio tiene σp = 2% diario. ¿Cuál es el VaR paramétrico al 99% de confianza para 1 día?",
+        "options": [
+            "A) VaR = 1.645 × 2% = 3.29%",
+            "B) VaR = 2.326 × 2% = 4.65%",
+            "C) VaR = 1.96 × 2% = 3.92%",
+            "D) VaR = 2.576 × 2% = 5.15%",
+        ],
+        "answer": "B",
+        "explanation": "Para confianza del 99%, el cuantil de la distribución normal estándar en el 1% inferior es z₀.₀₁ = 2.326 (o 2.33). VaR₉₉% = 2.326 × 2% = 4.65%. Para 95% usamos z₀.₀₅ = 1.645. Para 97.5% usamos z₀.₀₂₅ = 1.96. Para 99.9% usamos z₀.₀₀₁ = 3.09. En el contexto de Basilea, los bancos calculan VaR al 99% para determinar capital regulatorio.",
+    },
+    "true_false": {
+        "statement": "El VaR Histórico simple siempre captura mejor las colas de la distribución de retornos (fat tails) que el VaR Paramétrico RiskMetrics, porque no asume normalidad.",
+        "answer": False,
+        "explanation": "El VaR Histórico tiene la ventaja de no asumir distribución, pero tiene limitaciones importantes: (1) Está completamente condicionado a la historia específica del período de estimación — si no hay crisis en la ventana, no predice crises. (2) Da igual peso a todos los retornos históricos, mientras que EWMA pondera más los recientes. (3) Con ventanas cortas puede no tener suficientes observaciones de la cola. Pritsker (2006) documentó que el VaR Histórico tiene los 'hidden dangers' de sesgar hacia condiciones históricas específicas. El bootstrap parcialmente remedía esto al remuestrear.",
+    },
+    "fill_blank": {
+        "template": "El VaR para un horizonte de h días se obtiene escalando el VaR de 1 día por √h, bajo el supuesto de que los retornos diarios son _______ e idénticamente distribuidos. Este supuesto es cuestionable en mercados reales que exhiben autocorrelación de volatilidad.",
+        "answers": ["independientes", "i.i.d.", "independientes e idénticamente distribuidos"],
+    },
+    "connections": ["Back-testing VaR — failure rate", "CVaR/Expected Shortfall — crítica al VaR", "EWMA volatility — RiskMetrics", "Stress testing — complemento al VaR"],
+},
+
+{
+    "id": "aa_var_002",
+    "domain": "Asset Allocation",
+    "topic": "VaR — Back-Testing, Failure Rate y Críticas Fundamentales",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Leung, A.H.Y. (2009) — UCLA; Jorion (2001) — Value at Risk; Taleb (2007) — The Black Swan",
+    "front": "¿Cómo funciona el back-testing del VaR mediante failure rate, qué nivel de failure es aceptable, y cuáles son las 4 críticas fundamentales al VaR como medida de riesgo?",
+    "back": "Back-testing: comparar el VaR estimado ex-ante con el retorno real ex-post. Failure = día en que la pérdida real supera el VaR estimado. Failure rate = (días con exceedance) / (días totales). Para VaR al 95%, la tasa esperada es 5% — si es significativamente mayor, el modelo subestima el riesgo. Leung (2009) documenta que el Paramétrico-EWMA tiene failure rate más cercano al 5% teórico. 4 críticas fundamentales: (1) NORMALIDAD — Los retornos financieros tienen colas más gruesas que la normal (leptokurtosis), por lo que el VaR normal subestima las pérdidas extremas. (2) COHERENCIA — El VaR no es una medida de riesgo coherente; puede violar la subaditividad (VaR(A+B) > VaR(A) + VaR(B)). (3) NO INFORMA SEVERIDAD — Solo dice 'perderás más que X con 5% de probabilidad' pero no cuánto más. (4) MODELO ESPECÍFICO — Diferentes supuestos dan VaR muy distintos para el mismo portafolio.",
+    "mcq": {
+        "question": "Un portafolio tenía 250 días de observación. El VaR fue superado 20 veces. Para un VaR al 95%, ¿cuál es el failure rate y cómo se interpreta?",
+        "options": [
+            "A) Failure rate = 8% — el modelo subestima el riesgo (más exceedances de lo esperado al 5%)",
+            "B) Failure rate = 8% — el modelo sobreestima el riesgo (debería ser exactamente 5%)",
+            "C) Failure rate = 5% — el modelo es perfectamente calibrado",
+            "D) Failure rate = 12.5% — el modelo es extremadamente conservador",
+        ],
+        "answer": "A",
+        "explanation": "Failure rate = 20/250 = 8%. Para un VaR al 95%, se espera un failure rate de exactamente 5% (12.5 días de 250). Tener 20 exceedances en lugar de 12.5 indica que el modelo subestima el riesgo real — las pérdidas superan el VaR más frecuentemente de lo que debería. Tests estadísticos (como el de Kupiec) pueden determinar si la diferencia 8% vs. 5% es estadísticamente significativa o podría ser ruido.",
+    },
+    "true_false": {
+        "statement": "La medida CVaR (Conditional VaR o Expected Shortfall) es preferible al VaR porque además de ser coherente (satisface subaditividad), también informa cuánto se puede perder en promedio dado que se supera el umbral del VaR.",
+        "answer": True,
+        "explanation": "El CVaR = E[pérdida | pérdida > VaR] es coherente en el sentido de Artzner et al. (1999): satisface monotonicidad, homogeneidad positiva, invarianza traslacional Y subaditividad. El VaR solo cumple las tres primeras. Para distribuciones continuas, CVaR siempre es ≥ VaR y cuantifica la severidad promedio de las pérdidas en la cola. Esto lo hace más informativo para gestión de riesgo institucional, aunque más complejo de calcular y comunicar.",
+    },
+    "fill_blank": {
+        "template": "La crítica de Taleb (2007) al VaR se centra en que los modelos de riesgo financiero subestiman los eventos de 'Black Swan': sucesos de alta severidad y baja probabilidad que caen completamente _______ del soporte de la distribución normal asumida.",
+        "answers": ["fuera", "más allá", "outside", "en las colas extremas"],
+    },
+    "connections": ["CVaR / Expected Shortfall — alternativa coherente", "LTCM — consecuencias de VaR mal calibrado", "Extreme Value Theory — distribuciones de cola", "Stress Testing — complemento para escenarios extremos"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Zenti, Pallotta, Marsala & Ricci (2006)
+# Equity Portfolio Construction: A Comparative Analysis
+# Practitioners chapter — Italian asset managers
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_pc_001",
+    "domain": "Asset Allocation",
+    "topic": "Error de Estimación en MVO — El Problema Central de la Optimización",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Zenti, R., Pallotta, M., Marsala, C. & Ricci, S. (2006) — 'Equity Portfolio Construction: A Comparative Analysis', Practitioners Chapter",
+    "front": "¿Por qué Zenti et al. (2006) describen el MVO estándar como un 'error maximizer' en lugar de un optimizer, y cuál es la evidencia empírica de Chopra & Ziemba (1993) sobre qué inputs son más dañinos?",
+    "back": "El MVO es un 'error maximizer' porque la optimización cuadrática amplifica los errores de estimación: los activos con retornos esperados sobreestimados y varianzas subestimadas reciben pesos excesivamente altos. En la práctica nunca conocemos los parámetros verdaderos — solo estimaciones sesgadas por error muestral. La evidencia empírica de Chopra & Ziemba (1993) es clara: los errores en los retornos esperados son APROXIMADAMENTE 10 VECES más dañinos que los errores en la covarianza. Específicamente: error en medias genera pérdida de utilidad ~10x mayor que error en varianzas, que a su vez es ~2x más dañino que error en covarianzas. Consecuencia práctica: la precisión en los retornos esperados (el alpha) domina completamente la calidad del portafolio final — más que cualquier sofisticación en la estimación de la matriz de covarianza.",
+    "latex": r"\text{Daño relativo: } \underbrace{E[R_i]}_{\times 10} > \underbrace{\sigma_i^2}_{\times 2} > \underbrace{\sigma_{ij}}_{\times 1}",
+    "intuition": "Imagina construir una casa: el plano (la covarianza) puede tener ligeras imprecisiones y la casa seguirá en pie. Pero si el arquitecto se equivoca en dónde colocar los cimientos (el retorno esperado), la casa puede derrumbarse. El alpha (la estimación de retornos) es el cimiento del portafolio — un error del 1% en los retornos esperados puede ser más destructivo que un error del 30% en la correlación.",
+    "mcq": {
+        "question": "Jagannathan & Ma (2003) muestran que imponer restricciones de no-short sales en MVO es equivalente a una contracción bayesiana de la matriz de covarianza. ¿Cuál es la implicación más importante de este resultado?",
+        "options": [
+            "A) Las restricciones de no-short sales son siempre óptimas y deberían usarse universalmente",
+            "B) Las restricciones, aunque 'incorrectas' desde la perspectiva de optimización pura, reducen el error de estimación actuando como regularización — con frecuencia mejoran el performance out-of-sample",
+            "C) La restricción de no-short sales y los estimadores de covarianza son sustitutos perfectos",
+            "D) Los portfolios con restricciones siempre tienen mayor TEV que los portafolios sin restricciones",
+        ],
+        "answer": "B",
+        "explanation": "Este es un resultado no intuitivo: las restricciones que artificialmente limitan la solución óptima in-sample pueden mejorar el resultado out-of-sample porque actúan como regularización, reduciendo la amplificación de errores de estimación. Una restricción binding modifica la matriz de covarianza efectiva de forma que shrinkea las covarianzas extremas. Por eso, tanto las restricciones de pesos máximos/mínimos como las de sector son útiles no solo por razones económicas sino por su efecto estadístico regularizador.",
+    },
+    "true_false": {
+        "statement": "Según Zenti et al. (2006), la razón T/n (observaciones / número de activos) es irrelevante para la calidad del estimador de la matriz de covarianza muestral.",
+        "answer": False,
+        "explanation": "La razón T/n es crítica. Si T/n < 1, la matriz de covarianza muestral es singular (no invertible) y MVO es directamente inaplicable. Si T/n es pequeño aunque >1, la matriz es muy inestable con alta error de estimación. Como regla práctica, se necesita T >> n (idealmente T/n > 5-10) para que la matriz muestral sea razonablemente estable. Para un universo de 500 acciones europeas necesitaríamos >2,500 observaciones (>10 años de datos diarios) solo para T/n = 5 — lo que genera otro problema: la no-estacionariedad de las correlaciones a lo largo del tiempo.",
+    },
+    "fill_blank": {
+        "template": "En el análisis empírico de Zenti et al. con acciones del Dow Jones Eurostoxx, los primeros 3 componentes principales explican más del ______% de la varianza total de retornos, y el primer PC solo representa más del 25% — sugiriendo un fuerte factor común de mercado que puede usarse para constraining el portafolio.",
+        "answers": ["30", "30%", "treinta"],
+    },
+    "connections": ["Ledoit-Wolf — shrinkage de covarianza", "Vasicek beta — shrinkage de betas", "Michaud (1989) — portfolio resampling", "Factor models — reducción de dimensionalidad"],
+},
+
+{
+    "id": "aa_pc_002",
+    "domain": "Asset Allocation",
+    "topic": "Estimadores de Covarianza — Shrinkage, EWMA y RMT",
+    "difficulty": "Advanced",
+    "mode_tags": ["home"],
+    "source": "Zenti, R. et al. (2006) — Practitioners Chapter; Ledoit & Wolf (2003, 2004); Bengtsson & Holst (2004)",
+    "front": "Describe los 4 estimadores de covarianza que evalúa Zenti et al. y el trade-off central que cada uno gestiona entre error de estimación y error de especificación.",
+    "back": "Trade-off fundamental: la covarianza muestral tiene máximo error de estimación (no sesgada pero alta varianza), mientras que las matrices estructuradas tienen menor varianza pero mayor sesgo (error de especificación). Los estimadores de shrinkage combinan ambos: Σ̂ = (1−α)·Σ̂A + α·Σ̂B. (1) HISTORICAL (muestra): mínimo sesgo, máximo error de estimación, posible singularidad. (2) EWMA (λ=0.97): pesos exponenciales a retornos recientes, responde rápido a shocks pero puede ser inestable — mayor turnover. (3) LEDOIT-WOLF: shrinkage óptimo entre covarianza muestral y matriz de correlación constante. Garantizado positivo-definida incluso cuando n>T. (4) SHRINK-RMT (Bengtsson-Holst): combina covarianza muestral con estructura de factor con número de factores determinado por Random Matrix Theory — elimina eigenvalores que son 'ruido'. (5) COVMIX (Jagannathan-Ma): promedio de covarianza muestral, CAPM y diagonal. Resultado empírico: todas las alternativas superan la covarianza muestral, con diferencias entre ellas relativamente menores — la mayor ganancia viene de cualquier regularización vs. ninguna.",
+    "latex": r"\hat{\Sigma}_{shrink} = (1-\alpha)\hat{\Sigma}_{sample} + \alpha \hat{\Sigma}_{target}",
+    "mcq": {
+        "question": "Random Matrix Theory (RMT) establece que los eigenvalores de una matriz de correlación aleatoria (puro ruido) para n activos y T observaciones están dentro de los límites [λ₋, λ₊]. ¿Para qué se usa este resultado en la construcción de portafolios?",
+        "options": [
+            "A) Para calcular cuántos activos se deben incluir en el portafolio óptimo",
+            "B) Para distinguir entre eigenvalores que contienen información real (factores genuinos) y los que son ruido estadístico — solo los eigenvalores fuera del rango RMT merecen ser modelados como factores",
+            "C) Para determinar el decay factor λ en el estimador EWMA",
+            "D) Para establecer los límites de concentración UCITS sobre pesos individuales",
+        ],
+        "answer": "B",
+        "explanation": "RMT predice que para una matriz de correlación aleatoria con n variables y T observaciones, los eigenvalores se distribuyen en [λ₋ = (1−√(n/T))², λ₊ = (1+√(n/T))²]. Los eigenvalores de la covarianza muestral que caen DENTRO de este rango son estadísticamente indistinguibles de ruido puro. Solo los eigenvalores por encima de λ₊ contienen información genuina (señal). Bengtsson-Holst shrinkean hacia una estructura que retiene solo los factores genuinos y trata el resto como ruido — una forma de filtrar la matriz de covarianza.",
+    },
+    "true_false": {
+        "statement": "Zenti et al. (2006) encuentran que el estimador EWMA (con λ=0.97) produce significativamente menor tracking error volatility out-of-sample que el estimador Ledoit-Wolf, justificando su mayor complejidad.",
+        "answer": False,
+        "explanation": "Al contrario: EWMA genera significativamente MAYOR turnover y tracking error out-of-sample que los estimadores de shrinkage como Ledoit-Wolf. La razón: EWMA reacciona muy rápido a shocks de mercado, generando pesos más inestables que cambian frecuentemente — lo cual se traduce en mayor turnover y costos de transacción. Los estimadores de shrinkage producen matrices más estables en el tiempo, con portfolios que rotan menos y logran mejor performance ajustada por costos.",
+    },
+    "derivation": "Ledoit-Wolf: el coeficiente de shrinkage α se deriva minimizando E[||Σ̂shrink − Σverdadera||²] bajo el criterio de Frobenius. La solución analítica requiere estimar la varianza del estimador muestral y el error cuadrático del target. Para target = matriz de correlación constante, Ledoit & Wolf (2004) demuestran: α* = [Σvar(sample entries)] / [||Σsample − Σtarget||² + bias correction]. Una implementación práctica usa como target σ̄²·[(1−ρ̄)·I + ρ̄·11'].",
+    "connections": ["Stein (1956) — shrinkage statistics", "Random Matrix Theory — Plerou et al. (2002)", "Ledoit & Wolf (2003, 2004) — original papers", "EWMA — JP Morgan RiskMetrics"],
+},
+
+{
+    "id": "aa_pc_003",
+    "domain": "Asset Allocation",
+    "topic": "TEV Optimization — Construcción de Portafolios Benchmark-Relative",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Zenti, R. et al. (2006) — Practitioners Chapter; Vasicek (1973) — beta shrinkage",
+    "front": "¿Cuál es el modelo de optimización de Tracking Error Volatility que usa Zenti et al., qué restricciones incluye (UCITS + beta + sector + cardinality), y cuáles son los 5 hallazgos principales de los backtests?",
+    "back": "Modelo: min(w−wBMK)' · Σ · (w−wBMK) sujeto a: (C1) wi ∈ [0, 10%], (C2) Σwi>5% ≤ 40% [UCITS], (C3) Σwi = 1, (C4) n ≤ Max_n [cardinality], (C5) sector bands [Lj, Uj], (C6) beta constraint ±δ del benchmark, (C7) small cap constraint. Algoritmo: Differential Evolution (heurístico para manejar cardinality constraint). 5 hallazgos principales: (1) Restricciones en múltiples factores simultáneos disturba el tracking — solo constraining UN factor (beta) ayuda. (2) Vasicek beta shrinkage mejora performance vs. OLS beta. (3) Sample corto (~125 días) mejor que largo (>1,000 días) porque las betas son time-varying. (4) Entre estimadores de shrinkage de covarianza hay poca diferencia — cualquier regularización es mejor que covarianza muestral. (5) Reducir Max_n (más cardinality restriction) aumenta TEV y turnover exponencialmente.",
+    "latex": r"\min_w (w - w^{BMK})' \Sigma (w - w^{BMK}) \;\text{s.t. UCITS, beta, sector, cardinality}",
+    "mcq": {
+        "question": "Vasicek (1973) propone shrinkear el beta OLS hacia el beta promedio cross-seccional. Si u = σ²b/(σ²b + σ²OLS), ¿qué ocurre con el beta de Vasicek cuando la varianza cross-seccional σ²b es muy grande?",
+        "options": [
+            "A) El beta de Vasicek converge hacia el beta promedio de mercado (1.0)",
+            "B) u → 1, entonces el beta de Vasicek converge al beta OLS individual (sin shrinkage)",
+            "C) u → 0, entonces el beta de Vasicek converge al promedio de todos los betas",
+            "D) El beta de Vasicek se vuelve negativo cuando σ²b > σ²OLS",
+        ],
+        "answer": "B",
+        "explanation": "u = σ²b/(σ²b + σ²OLS). Beta_Vasicek = u·Beta_OLS + (1−u)·Beta_promedio. Cuando σ²b >> σ²OLS (hay mucha variación cross-seccional entre betas), u → 1, y Beta_Vasicek ≈ Beta_OLS — el beta individual es confiable. Cuando σ²OLS >> σ²b (beta muy imprecisamente estimado), u → 0, y Beta_Vasicek ≈ Beta_promedio — el promedio cross-seccional es mejor estimador que el OLS individual. La intuición: shrinkear hacia la media es más útil cuando la estimación individual es imprecisa.",
+    },
+    "numerical_problem": {
+        "question": "Beta_OLS = 1.5, SE_OLS = 0.4, Beta_promedio = 1.0, σ_b (cross-sectional SD) = 0.3. ¿Cuál es el beta de Vasicek?",
+        "steps": [
+            "u = σ²b / (σ²b + σ²OLS) = 0.09 / (0.09 + 0.16) = 0.09/0.25 = 0.36",
+            "Beta_Vasicek = u × Beta_OLS + (1−u) × Beta_promedio",
+            "= 0.36 × 1.5 + 0.64 × 1.0 = 0.54 + 0.64 = 1.18",
+        ],
+        "answer": "Beta_Vasicek = 1.18 (shrinkea de 1.5 hacia 1.0)",
+        "bus_hint": "u=0.09/0.25=0.36 → Beta=0.36×1.5 + 0.64×1.0 = 0.54+0.64 = 1.18",
+    },
+    "true_false": {
+        "statement": "Zenti et al. (2006) encuentran que reducir la frecuencia de rebalanceo de 21 días a 100 días incrementa significativamente el TEV out-of-sample, penalizando la estrategia de replicación.",
+        "answer": False,
+        "explanation": "Los resultados del paper muestran que cambiar la frecuencia de rebalanceo de 21 a 100 días (Spec18 y Spec19 en su Tabla 5.4) NO afecta significativamente el TEV out-of-sample. Los valores son comparables (~0.64-0.66%). Esto sugiere que para estrategias de replicación benchmark-relative con restricción de beta, el timing del rebalanceo no es tan crítico — lo que sí importa es la calidad de los estimadores de covarianza y beta. El resultado también implica que pueden reducirse costos de transacción eligiendo horizontes más largos sin sacrificar calidad de tracking.",
+    },
+    "graph_type": "efficient_frontier_bl",
+    "connections": ["MVO — error maximization problem", "Shrinkage estimators — Ledoit-Wolf, COVMIX, RMT", "Differential Evolution — heuristic optimization", "Fama-French — factor attribution post-optimization"],
+},
+
+{
+    "id": "aa_pc_004",
+    "domain": "Asset Allocation",
+    "topic": "PCA en Construcción de Portafolios — Factor Constraints y Exposición Latente",
+    "difficulty": "Advanced",
+    "mode_tags": ["home"],
+    "source": "Zenti, R. et al. (2006) — Practitioners Chapter; Fama & French (1993); Ross (1976) — APT",
+    "front": "¿Cómo usa Zenti et al. el PCA (Análisis de Componentes Principales) para constraining los portafolios, cuál es la descomposición espectral de la covarianza, y por qué constraining un solo factor PCA es mejor que constraining múltiples factores PCA?",
+    "back": "Descomposición espectral: Σ = E·Λ·E', donde Λ es la matriz diagonal de eigenvalores (λ₁ ≥ λ₂ ≥ ... ≥ λn) y E es la matriz ortogonal de eigenvectores. El j-ésimo factor loading del activo i es: bij = √λj · eij. La exposición del portafolio al j-ésimo factor es: bp_j = Σ(bij·wi). Para el primer PC (que explica >25% de la varianza en acciones europeas), constraining bp_1 ≈ bBMK_1 asegura que el portafolio tiene exposición de mercado similar al benchmark. Constraining múltiples PC simultáneamente empeora: los PCs 2 y 3 son mucho más inestables temporalmente (sus eigenvectores cambian significativamente cada período), introduciendo ruido. El hallazgo es paradójico pero robusto: más constraints de factor = peor performance, porque los constraints incorrectos introducen sesgo peor que no constrained.",
+    "latex": r"\Sigma = E\Lambda E', \quad b_{ij} = \sqrt{\lambda_j} \cdot e_{ij}, \quad b_j^{PTF} = \sum_i b_{ij} \cdot w_i",
+    "fill_blank": {
+        "template": "Según Zenti et al., los primeros 3 PCs de las acciones del DJ Eurostoxx explican más del 30% de la varianza total, con el PC1 solo explicando más del ______%. Esto sugiere que el mercado de renta variable europea tiene un único factor dominante de mercado.",
+        "answers": ["25", "25%", "veinticinco"],
+    },
+    "mcq": {
+        "question": "Zenti et al. prueban constraining el beta usando: (a) PC1 con OLS sobre ventana larga (~1000 días), (b) PC1 con OLS sobre ventana corta (~125 días), y (c) benchmark return con Vasicek beta. ¿Cuál combina mejores resultados de TEV, turnover y MDD?",
+        "options": [
+            "A) PC1 con ventana larga — más historia da estimaciones más estables",
+            "B) Vasicek beta sobre ventana corta — shrinkage + datos recientes captura la dinámica temporal del beta",
+            "C) PC1 con ventana corta — el factor estadístico es más puro que el benchmark",
+            "D) Todos producen resultados idénticos — la elección del factor no importa",
+        ],
+        "answer": "B",
+        "explanation": "La combinación ganadora es Vasicek beta con ventana corta (~125 días). Zenti et al. documentan TEV=0.63%, Turnover=11%, MDD=1.0% para este specification (Spec7). La ventana corta es mejor porque los betas son time-varying — usar 4 años de historia incluye regímenes pasados irrelevantes. El Vasicek shrinkage reduce el ruido de estimación en la ventana corta. El benchmark como factor es más interpretable que el PC1 estadístico para practitioners. La combinación de shrinkage estadístico y relevancia económica da lo mejor de ambos mundos.",
+    },
+    "connections": ["PCA en finance — Alexander & Dimitriu (2004)", "APT — Ross (1976)", "Factor attribution — Fama-French (1993)", "Lee & Liu (2026) — temas como missing factors"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Kapoor (2014)
+# Financial Portfolio Management: Decision Making in Investment
+# International Journal of Research, Vol-1, Issue-10, Nov 2014
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_lp_001",
+    "domain": "Asset Allocation",
+    "topic": "Proceso de Inversión — 5 Pasos y Tipos de Portafolios",
+    "difficulty": "Foundational",
+    "mode_tags": ["bus", "home"],
+    "source": "Kapoor, N. (2014) — 'Financial Portfolio Management: Overview and Decision Making in Investment Process', International Journal of Research, Vol-1, Issue-10, ISSN 2348-6848",
+    "front": "¿Cuáles son los 5 pasos del proceso de inversión según Kapoor (2014), qué 5 tipos de portafolios identifica, y cuáles son los 7 objetivos fundamentales de la gestión de portafolios?",
+    "back": "5 PASOS: (1) Entender la salud financiera del inversor (objetivos, tolerancia al riesgo, horizonte). (2) Identificar objetivos financieros concretos. (3) Plan de inversión con análisis de seguridad (económico, sectorial, fundamental). (4) Construcción del portafolio: selección de activos y sus proporciones. (5) Revisión y rebalanceo periódico. 5 TIPOS DE PORTAFOLIO: (1) Agresivo: alto beta, high risk/reward, empresas en crecimiento temprano. (2) Defensivo: bajo beta, aislado de ciclos, bienes esenciales. (3) Income: dividendos altos, REITs y MLPs. (4) Especulativo: IPOs, rumores de M&A, máx. 10% del capital invertible. (5) Híbrido: mix acciones + bonos con correlación negativa entre ellos. 7 OBJETIVOS: seguridad del principal, consistencia de retorno, crecimiento de capital, marketability, liquidez, diversificación, eficiencia fiscal.",
+    "mcq": {
+        "question": "Kapoor (2014) afirma que añadir 15 stocks a un portafolio puede reducir el riesgo no sistemático a cero. ¿Esta afirmación es consistente con la evidencia matemática de Leung (2009)?",
+        "options": [
+            "A) Sí — tanto Kapoor como Leung muestran que 15 activos son suficientes para eliminación total de riesgo idiosincrático",
+            "B) Parcialmente — Leung muestra que el riesgo idiosincrático TIENDE a cero asintóticamente con N→∞, no que 15 activos lo eliminen completamente; además la literatura reciente sugiere necesitar 30-50 stocks",
+            "C) No — Leung demuestra que ningún número de activos puede reducir el riesgo sistemático",
+            "D) Sí — la diversificación perfecta se logra exactamente con 15 activos",
+        ],
+        "answer": "B",
+        "explanation": "Leung (2009) muestra matemáticamente que el riesgo idiosincrático → σ̄jk (covarianza promedio, ≠ 0) cuando N → ∞, nunca llega a cero a menos que σ̄jk = 0. Además, el paper de Schopf (2024) menciona que la literatura reciente sugiere 30-50 stocks para 'neutralizar' el riesgo idiosincrático (no eliminarlo) — comparado con los 8-10 de los años 1960. La diferencia se debe a que las correlaciones entre stocks han aumentado con la globalización, requiriendo más activos para lograr el mismo nivel de diversificación.",
+    },
+    "true_false": {
+        "statement": "El enfoque Moderno de Portafolios (Kapoor 2014) distingue entre inversores risk-averse, risk-seeking y risk-neutral. El enfoque Modern Portfolio Theory de Markowitz asume que TODOS los inversores son risk-averse.",
+        "answer": True,
+        "explanation": "El supuesto fundamental de MPT de Markowitz es que los inversores son risk-averse: dado el mismo retorno esperado, prefieren el portafolio de menor varianza (o dado el mismo riesgo, prefieren el mayor retorno). Este supuesto genera la frontera eficiente — portafolios que ningún inversor racional debería estar dispuesto a abandonar. Los inversores risk-seeking buscarían el máximo retorno sin considerar el riesgo, mientras que los risk-neutral son indiferentes a la varianza.",
+    },
+    "fill_blank": {
+        "template": "El portafolio especulativo de Kapoor (2014) puede incluir IPOs y rumores de M&A. La guía de asignación es no más del ______% del capital investible, reconociendo que este tipo de portafolio es esencialmente un 'trade' de corto plazo, no una inversión buy-and-hold.",
+        "answers": ["10", "10%", "diez"],
+    },
+    "connections": ["MPT — Markowitz (1952)", "Riesgo sistémico vs. idiosincrático", "Portfolio types — AFP Fondos 1/2/3", "Rebalancing — periódico vs. por umbrales"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Schopf (2024)
+# Advancing Portfolio Construction and Optimization:
+# AI's Role in Boosting Returns, Lowering Risks, and
+# Streamlining Efficiency
+# SMC Frankfurt — February 2024, SSRN 4717163
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_ml_001",
+    "domain": "Asset Allocation",
+    "topic": "ML en Construcción de Portafolios — MVO vs. ML: GPS vs. Mapa",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Schopf, M. CFA (2024) — 'Advancing Portfolio Construction and Optimization: AI's Role in Boosting Returns, Lowering Risks, and Streamlining Efficiency', SMC Frankfurt, SSRN 4717163, February 2024",
+    "front": "¿Cuál es la analogía GPS vs. mapa de Schopf (2024) para distinguir ML del MVO tradicional, y cuáles son las 5 ventajas específicas que el ML aporta sobre los métodos clásicos de construcción de portafolios?",
+    "back": "Analogía: el MVO es como un mapa de carreteras — preciso para rutas conocidas pero incapaz de recalcular en tiempo real. El ML es como un GPS — ajusta continuamente la ruta óptima según condiciones actuales. La distinción clave: MVO usa parámetros estáticos (retornos y covarianzas estimados de datos históricos), asumiendo estacionariedad que raramente se cumple. El ML actualiza dinámicamente sus modelos con nueva información. 5 ventajas ML: (1) PREDICTIVE ANALYTICS — mira hacia adelante (tendencias futuras), no por el espejo retrovisor. (2) AUTOMATED REBALANCING — ajuste continuo sin calendarios fijos, responde a cambios de régimen. (3) RISK MANAGEMENT HOLÍSTICO — analiza un espectro más amplio de factores de riesgo incluyendo no-lineales. (4) IMPLEMENTACIÓN DE VISIÓN DEL COMITÉ — traduce el outlook macroeconómico en posiciones concretas manteniendo diversificación. (5) EFICIENCIA Y ESCALABILIDAD — procesa grandes universos de activos con múltiples constraints simultáneamente.",
+    "mcq": {
+        "question": "Schopf (2024) describe un caso de estudio de una AM holandesa con €60B que reemplazó MVO por ML. ¿Cuál fue el beneficio más mencionado en términos del proceso de inversión, más allá del performance financiero?",
+        "options": [
+            "A) Eliminación completa de los errores de estimación de retornos esperados",
+            "B) Reducción significativa en el tiempo de construcción de portafolios, permitiendo que los PMs destinen más recursos a actividades estratégicas de mayor valor añadido",
+            "C) Capacidad de eliminar el riesgo sistemático mediante análisis ML avanzado",
+            "D) Reducción de fees al eliminar la necesidad de analistas fundamentales",
+        ],
+        "answer": "B",
+        "explanation": "El paper explícitamente señala: 'The AM witnessed a significant reduction in the time required for portfolio construction and optimization...This efficiency gain enabled the portfolio management teams to allocate more resources to other strategic, value-adding activities.' El beneficio principal documentado es de proceso: velocidad y eficiencia, no necesariamente alpha incremental. Esto es relevante porque el tiempo del portfolio manager es un recurso escaso — automatizar la construcción mecánica libera tiempo para el análisis de alta convicción que genuinamente añade valor.",
+    },
+    "true_false": {
+        "statement": "Schopf (2024) argumenta que el ML debe reemplazar completamente al portfolio manager humano porque el modelo es más objetivo y no sufre sesgos conductuales.",
+        "answer": False,
+        "explanation": "Schopf es explícito: 'It is crucial to remember that AI cannot replace the strategic insight and experience of an investor. Instead, it should be viewed as a powerful tool for portfolio creation. The key to success depends on the collaboration between human portfolio managers and AI systems.' El paper enfatiza la complementariedad: humanos tienen ventaja con datos limitados (IPOs, situaciones especiales), mientras ML tiene ventaja con grandes datasets y múltiples constraints. El caso de estudio también mantuvo la decisión final en manos del PM humano.",
+    },
+    "fill_blank": {
+        "template": "Según Schopf (2024), la literatura reciente sugiere que se necesitan _______ a _______ stocks para neutralizar el riesgo idiosincrático en los mercados actuales, comparado con solo 8-10 stocks en la década de 1960.",
+        "answers": ["30 a 50", "30-50", "treinta a cincuenta"],
+    },
+    "connections": ["MVO — limitaciones estáticas", "Leung (2009) — riesgo idiosincrático y diversificación", "Portfolio construction vs. optimization — distinción conceptual", "Quantum computing — próxima frontera (WEF 2024)"],
+},
+
+{
+    "id": "aa_ml_002",
+    "domain": "Asset Allocation",
+    "topic": "Construcción vs. Optimización — Métodos de Ponderación y el Investment Circle",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Schopf, M. CFA (2024) — 'Advancing Portfolio Construction and Optimization', SMC Frankfurt, SSRN 4717163",
+    "front": "¿Cuál es la distinción conceptual entre portfolio construction y portfolio optimization según Schopf (2024), y qué 4 métodos de ponderación principales existen para la construcción inicial?",
+    "back": "DISTINCIÓN CONCEPTUAL: Construction = arte de FORMAR el portafolio desde cero (seleccionar activos + asignar pesos iniciales alineados con objetivos, tolerancia al riesgo y constraints). Optimization = AFINAR un portafolio ya construido, ajustando pesos dinámicamente para lograr balance riesgo-retorno óptimo dentro del marco dado (proceso continuo de rebalanceo). Analogía: construction es crear la receta; optimization es ajustar la sazón. 4 MÉTODOS DE PONDERACIÓN: (1) Equal weighting: 1/N a cada activo — simplicidad, alta diversificación pero ignora diferencias de riesgo/oportunidad. (2) Market cap weighting: más peso a empresas grandes — alta liquidez, bajo turnover, pero concentración en mega-caps. (3) Discretionary weighting: basado en convicción del PM — factors como upside/downside ratio (Kelly Criterion), diversificación geográfica/sectorial, caps min/max. (4) Risk-adjusted weighting: inversamente proporcional al riesgo — activos de menor riesgo reciben mayor peso (base de risk parity).",
+    "mcq": {
+        "question": "Schopf (2024) cita a Warren Buffett diciendo que la diversificación 'makes very little sense for anyone that knows what they're doing'. Sin embargo, el propio Buffett mantiene 45 stocks con 80% en 5 posiciones. ¿Qué enseñanza práctica se extrae de este aparente conflicto?",
+        "options": [
+            "A) La concentración extrema en 1-5 posiciones es óptima para todos los inversores con alta convicción",
+            "B) Existe un continuum: la concentración es apropiada cuando el investor tiene genuina información superior sobre pocas empresas. La diversificación es necesaria cuando no hay edge diferencial — ambas estrategias pueden ser racionalmente óptimas según el nivel de expertise específico del gestor",
+            "C) Buffett contradice la Teoría Moderna de Portafolios y por tanto el MPT es inválido",
+            "D) El número óptimo universal de stocks es exactamente 45",
+        ],
+        "answer": "B",
+        "explanation": "Esta es la tensión central en gestión de portafolios: diversificación reduce riesgo pero también diluye el alpha de las mejores ideas. El framework de Van Nieuwerburgh & Veldkamp (2009) — citado en el contexto de TCI por Bai et al. — predice que inversores con información edge en áreas específicas deben concentrar allí. Buffett concentra en negocios que entiende profundamente (consumo, financials, utilities). Para un gestor sin ese edge específico, diversificar más ampliamente es racionalmente óptimo porque el alpha esperado de ideas adicionales es bajo.",
+    },
+    "true_false": {
+        "statement": "Schopf (2024) distingue entre optimización absoluta (independiente de benchmark) y optimización relativa (vs. benchmark). Para un gestor activo con clientes institucionales, la optimización absoluta es siempre preferible porque maximiza el retorno total.",
+        "answer": False,
+        "explanation": "Para un gestor activo institucional (como una AFP), la optimización relativa es frecuentemente más relevante porque: (1) el performance se evalúa vs. un benchmark explícito, (2) el Information Ratio (alpha/tracking error) mide la eficiencia de las apuestas activas mejor que el Sharpe ratio absoluto, y (3) los clientes institucionales tipicamente tienen mandatos con tracking error constraints. Schopf señala explícitamente que 'relative optimization is crucial in active portfolio management' — el objetivo no es solo buenos retornos sino buenos retornos EN RELACIÓN al benchmark predeterminado.",
+    },
+    "fill_blank": {
+        "template": "El Kelly Criterion, mencionado por Schopf (2024) como método de ponderación discrecional, basa el tamaño de posición en la relación _______ — apostando más cuando el upside potencial supera al downside dado la probabilidad de cada outcome.",
+        "answers": ["upside/downside", "retorno potencial / pérdida potencial", "ganancia esperada / pérdida máxima"],
+    },
+    "connections": ["Risk parity — equal risk contribution", "Information Ratio — active management metric", "Kelly Criterion — optimal bet sizing", "Van Nieuwerburgh & Veldkamp (2009) — information advantage y concentración"],
+},
+
+{
+    "id": "aa_ml_003",
+    "domain": "Asset Allocation",
+    "topic": "Integración de ML en el Investment Process — 3 Modelos y el Caso Práctico AFP",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Schopf, M. CFA (2024) — 'Advancing Portfolio Construction and Optimization', SMC Frankfurt; Leung (2009), Zenti et al. (2006)",
+    "front": "¿Cuáles son los 3 modelos de integración de ML en el proceso de inversión que describe Schopf (2024), y cómo se aplica este framework a una AFP que quiere modernizar su proceso de construcción de portafolios de renta variable local?",
+    "back": "3 MODELOS DE INTEGRACIÓN: (1) IN-HOUSE DEVELOPMENT — Construir capacidades ML internamente. Ventaja: solución 100% a medida. Desventaja: alta complejidad, costo de IT experts, riesgo de obsolescencia tecnológica. (2) THIRD-PARTY SOFTWARE — Usar plataformas externas (Bloomberg, BlackRock Aladdin, Morningstar Direct + ML layer). Ventaja: acceso inmediato a estado del arte con bajo costo relativo. Desventaja: menor customización. (3) HYBRID — Desarrollo propio + soluciones externas. Balance óptimo para organizaciones medianas. APLICACIÓN AFP: En el contexto de RVL desk de una AFP, el modelo más realista a corto plazo es el Third-Party (usar Bloomberg PORT, Barra optimizer) con calibración de parámetros locales (BVL, mercado peruano). A mediano plazo, un modelo Hybrid podría combinar herramientas institucionales con modelos propios de scoring de acciones locales vía Python (ya existe capacidad técnica: ZODA, modelo electoral). El objetivo: mantener control del PM en la decisión final mientras se automatiza la construcción mecánica.",
+    "mcq": {
+        "question": "Schopf (2024) menciona que la optimización absoluta usa el Sharpe Ratio y la relativa usa el Information Ratio. Si un fondo de AFP tiene Tracking Error activo de 2% y alfa activo de 0.6%, ¿cuál es el IR?",
+        "options": [
+            "A) IR = 0.3 (mediocre — generalmente se busca IR > 0.5 para gestión activa de calidad)",
+            "B) IR = 3.0 (excelente — indica alpha significativo por unidad de tracking error)",
+            "C) IR = 0.006 (muy bajo — el alpha es casi cero)",
+            "D) IR no puede calcularse sin conocer el retorno del benchmark",
+        ],
+        "answer": "A",
+        "explanation": "IR = α / TE = 0.6% / 2% = 0.30. Este IR es mediocre — la industria considera que un IR > 0.5 es 'bueno' y > 1.0 es excepcional. Con IR = 0.30, el gestor genera alpha pero la relación alfa/riesgo activo es baja. Para mejorar: o se debe aumentar el alfa (mejor stock selection/allocation) manteniendo el TE, o reducir el TE manteniendo el alfa. En el contexto de una AFP, el IR es la métrica correcta para evaluar si el riesgo activo tomado está suficientemente compensado.",
+    },
+    "numerical_problem": {
+        "question": "Un portafolio de RVL tiene: Retorno portafolio = 18%, Retorno benchmark = 15%, TE = 4%, Risk-free = 5%. Calcular: (a) alfa activo, (b) Information Ratio, (c) Sharpe Ratio del portafolio.",
+        "steps": [
+            "(a) Alfa activo = 18% − 15% = 3%",
+            "(b) IR = Alfa/TE = 3%/4% = 0.75 (buen ratio)",
+            "(c) Sharpe = (18%−5%)/σp — necesitamos σp total. Si σp = 20% (estimado), Sharpe = 13%/20% = 0.65",
+        ],
+        "answer": "Alfa = 3%, IR = 0.75 (bueno), Sharpe ≈ 0.65",
+        "bus_hint": "Alfa = 18−15 = 3% | IR = 3/4 = 0.75 | Sharpe = (18−5)/σp ≈ 13/20 = 0.65",
+    },
+    "fill_blank": {
+        "template": "Schopf (2024) menciona que la próxima frontera tecnológica es la computación _______, que combinada con ML permitirá análisis de datasets masivos para mejorar diversificación y asset allocation, según lo mencionado en el World Economic Forum de enero 2024.",
+        "answers": ["cuántica", "quantum", "cuántica (quantum)"],
+    },
+    "connections": ["ZODA — sistema de scoring RVL en AFP Integra", "Bloomberg PORT / Barra optimizer", "Information Ratio vs. Sharpe Ratio", "Active risk budget — TEV en portafolios AFP"],
+},
+
 ]
 
 
