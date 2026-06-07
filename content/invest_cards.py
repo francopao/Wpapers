@@ -1887,6 +1887,396 @@ print(f"Coeficientes: {lasso.coef_[selected].round(4)}")
     "connections": ["Shleifer (1986) — downward sloping demand curves", "ESG investing — señalización vs. retornos", "Emerging markets — eficiencia de mercado", "Thematic index design — Blitz (2021)"],
 },
 
+  # PARTE 4
+# ════════════════════════════════════════════════════════════════
+# THEMATIC INVESTING — Morningstar (2025)
+# Global Thematic Fund Landscape 2025
+# Kenneth Lamont — Morningstar Manager Research
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "th_ms_001",
+    "domain": "Thematic Investing",
+    "topic": "Landscape Global 2025 — AUM, Flujos y Supervivencia",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Lamont, K. (2025) — 'Global Thematic Fund Landscape 2025', Morningstar Manager Research, Q3 2025",
+    "front": "¿Cuál es el estado actual del mercado global de fondos temáticos según Morningstar (2025) y qué revela el ciclo boom-bust post-pandemia sobre el riesgo de timing en temáticos?",
+    "back": "AUM global: USD 779B en Q3 2025 (máximo en 3 años) pero aún 15% por debajo del pico de 2021. El ciclo: activos crecieron 175% entre 2020-2021 (la 'everything rally') y luego cayeron 45% en los dos años siguientes. Europa lidera (44% del global), aunque perdió su share por encima del 50% por primera vez en una década. China impulsó el resto del mundo al 32% del global (+8pp en 3 años). EE.UU. creció 50% en 3 años, llegando al 23% global, impulsado por active ETFs. El hallazgo más crítico para un inversor: la probabilidad de seleccionar un fondo temático que sobrevive Y supera al equity global es MENOR AL 10% en horizontes largos.",
+    "mcq": {
+        "question": "Morningstar (2025) documenta que la probabilidad combinada de supervivencia Y outperformance de un fondo temático vs. equity global en períodos largos es menor al 10%. ¿Cuál es la implicación más directa para decidir si incluir fondos temáticos en un portafolio institucional?",
+        "options": [
+            "A) Los fondos temáticos deben excluirse completamente de portafolios institucionales por su baja tasa de éxito",
+            "B) La selección del vehículo temático correcto es crítica — el promedio del universo destruye valor; solo los mejores fondos justifican la inclusión, requiriendo capacidad analítica de selección superior",
+            "C) El universo temático es eficiente y la probabilidad refleja que el alpha ya está en precio",
+            "D) Los fondos temáticos solo deben usarse tácticamente con horizontes de menos de 1 año",
+        ],
+        "answer": "B",
+        "explanation": "La estadística del <10% no dice que los temáticos sean malos per se — dice que el PROMEDIO destruye valor. La distribución de retornos es altamente dispersa: algunos fondos outperforman significativamente mientras la mayoría falla. Para un institutional player como una AFP, esto implica que la decisión de incluir temáticos requiere: (1) capacidad de selección superior al promedio del mercado, (2) un proceso claro de evaluación, y (3) una tesis de inversión fundamentada en el tema — no en la narrativa popular.",
+    },
+    "true_false": {
+        "statement": "Según Morningstar (2025), Europa lidera el mercado global temático en AUM (44%) y también ha sido la región con mejor recuperación post-2021, recuperando su share por encima del 50%.",
+        "answer": False,
+        "explanation": "Incorrecto — este es un dato contraintuitivo clave. Europa lidera en AUM (44%) pero ha tenido la PEOR recuperación: lleva 10 trimestres consecutivos de salidas netas hasta Q3 2025 y su market share cayó por debajo del 50% por primera vez en más de una década. La recuperación del AUM global es impulsada por EE.UU. (+50% en 3 años gracias a active ETFs) y el Resto del Mundo (+8pp liderado por China). La debilidad de Europa refleja el backlash ESG y el underperformance de los fondos de transición energética.",
+    },
+    "fill_blank": {
+        "template": "Morningstar clasifica fondos temáticos con 3 niveles de granularidad: broad theme → theme → _______. Este sistema se basa en la intencionalidad declarada del fondo, no en sus holdings de portafolio.",
+        "answers": ["subtheme", "subtema", "sub-theme"],
+    },
+    "numerical_problem": {
+        "question": "El AUM global temático cayó 45% desde su pico de 2021 y luego se recuperó hasta USD 779B en Q3 2025, que representa el 85% del pico. Si el pico era X, ¿cuál era el AUM en el pico de 2021?",
+        "steps": [
+            "Si 779B = 85% del pico → pico = 779 / 0.85",
+            "pico ≈ USD 916B (aprox. USD 920B)",
+        ],
+        "answer": "≈ USD 916B fue el pico en 2021",
+        "bus_hint": "779 / 0.85 ≈ 780/0.85 ≈ 916B",
+    },
+    "connections": ["Blitz (2021) — crítica a índices temáticos", "Dombrovska & Dvorņikova (2021) — thematic appetite", "Somefun et al. (2022) — framework de inversión temática", "Robeco (2025) — active vs. passive en temáticos"],
+},
+
+{
+    "id": "th_ms_002",
+    "domain": "Thematic Investing",
+    "topic": "Landscape 2025 — Temas Ganadores, Perdedores y Señales de Mercado",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Lamont, K. (2025) — 'Global Thematic Fund Landscape 2025', Morningstar Manager Research, Q3 2025",
+    "front": "¿Qué temas ganan y pierden AUM en el mercado global temático en 2025, y qué narrativas macroeconómicas explican cada movimiento?",
+    "back": "Ganadores (AUM e inflows): (1) AI + Big Data — tema dominante tecnológico, impulsado por el ciclo de capex de los Magnificent Seven (+47% en 2024). (2) Security/Geopolítica — refleja el aumento de tensiones globales (guerras, ciberataques, reshoring de defensa). (3) Nuclear/Uranium — la necesidad energética de los data centers de IA generó inflows en todas las regiones. (4) Deglobalización (EE.UU.) — las políticas 'America First' de Trump impulsan estrategias de reshoring. Perdedores: (1) Energía de transición (-40% desde el pico, rebound en 2025) — backlash anti-ESG + recorte de subsidios. (2) Consumer/Supply Chain — refleja convicción de desglobalización. (3) Alternative Energy — aún el subtema más grande en AUM pero con mayores outflows.",
+    "mcq": {
+        "question": "Morningstar (2025) documenta que los fondos de nuclear/uranium recibieron inflows en TODAS las regiones globales. ¿Qué conecta el auge de IA con el tema nuclear?",
+        "options": [
+            "A) Las empresas de IA están invirtiendo directamente en reactores nucleares como activo estratégico",
+            "B) Los data centers de IA tienen demanda energética extraordinaria que requiere fuentes de energía base 24/7 — el nuclear es la única fuente de baja carbono con esa característica, creando una narrativa de convergencia entre tecnología y energía",
+            "C) Los fondos de nuclear son simplemente un sustituto de los fondos de energía renovable que perdieron flujos",
+            "D) Los gobiernos están subsidializando el nuclear como parte de las políticas 'America First' exclusivamente en EE.UU.",
+        ],
+        "answer": "B",
+        "explanation": "Esta es la narrativa de convergencia más relevante de 2025: los LLMs requieren enormes cantidades de energía eléctrica constante (sin intermitencia) — exactamente lo que el solar y eólico no pueden proveer fácilmente. El nuclear (base load, 24/7, baja carbono) emerge como la solución energética del AI boom. Microsoft firmó acuerdos con Three Mile Island; Google con empresas de SMR (Small Modular Reactors). Esto crea un tema de inversión transversal que une el sector de defensa energética, el sector tecnológico y la transición climática — un ejemplo perfecto de tema multi-driver.",
+    },
+    "true_false": {
+        "statement": "Morningstar (2025) encuentra que Alternative Energy sigue siendo el subtema con MAYOR AUM global a pesar de haber sufrido los mayores outflows en los últimos 3 años.",
+        "answer": True,
+        "explanation": "Este es uno de los hallazgos más llamativos del report: Alternative Energy (solar, eólico) combina el paradox de ser el subtema más grande en AUM global AND el que más activos ha perdido. La explicación: el stock de activos acumulado durante el boom 2020-2021 es tan grande que, a pesar de los enormes outflows, sigue siendo el número 1. También lo son algunos de los subthemes más establecidos como 'water' y 'brands'. El tamaño heredado no implica momentum favorable — es una advertencia importante sobre inercia en selección de temas.",
+    },
+    "fill_blank": {
+        "template": "En EE.UU., las políticas 'America First' de Trump han generado fuertes inflows hacia estrategias de _______, mientras que el nuclear ha atraído inflows globales impulsado por la necesidad energética de los centros de datos de IA.",
+        "answers": ["deglobalización", "deglobalization", "reshoring", "deglobalización/reshoring"],
+    },
+    "graph_type": "ai_value_chain",
+    "connections": ["Nuclear como tema emergente 2024-2025", "AI capex cycle — Magnificent Seven", "Reshoring y deglobalización", "Energy transition — backlash anti-ESG"],
+},
+
+{
+    "id": "th_ms_003",
+    "domain": "Thematic Investing",
+    "topic": "Landscape 2025 — Fees, Sesgo Growth y Propuesta para AFP",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Lamont, K. (2025) — 'Global Thematic Fund Landscape 2025', Morningstar Manager Research, Q3 2025",
+    "front": "¿Cuáles son los 3 hechos estilizados sobre fondos temáticos (fees, sesgo de estilo, performance) más relevantes para diseñar una propuesta de inclusión en un investment desk institucional?",
+    "back": "Hecho 1 — FEES: Los fondos temáticos cobran consistentemente más que sus equivalentes no-temáticos, tanto en activos activos como pasivos. En EE.UU., el gap se amplía en base asset-weighted, indicando que los inversores son menos price-sensitive en temáticos. Hecho 2 — SESGO GROWTH: El 61% de los fondos temáticos globales tienen sesgo growth (vs. 10% con sesgo value). Este bias es estructural por definición: los temas buscan empresas que aún están creciendo. Implica alta sensibilidad a tasas de interés (duration larga). Hecho 3 — PERFORMANCE LONG-TERM: A pesar de retornos espectaculares en bull markets (postpandemia), la probabilidad de survival AND outperformance vs. equity global es <10% en períodos largos. La conclusión para un institutional desk: los temáticos no son 'free alpha' — requieren fee consciousness, gestión del riesgo de tasa de interés, y horizonte suficientemente largo.",
+    "mcq": {
+        "question": "Dado el sesgo growth estructural del 61% de fondos temáticos (Morningstar 2025) y que las growth stocks son casi el doble de sensibles a tasas que las value stocks (CPRAM 2024), ¿qué variable macroeconómica debe monitorearse más estrechamente en una asignación a temáticos?",
+        "options": [
+            "A) El VIX — como medida de aversión al riesgo que afecta todos los activos de riesgo",
+            "B) La curva de rendimientos y las expectativas de política monetaria — los ciclos de tightening son sistemáticamente más adversos para temáticos que para el mercado general debido al growth bias estructural",
+            "C) El tipo de cambio USD/Soles — como determinante del retorno en moneda local",
+            "D) El spread de crédito high yield — indicador adelantado de estrés en empresas de crecimiento",
+        ],
+        "answer": "B",
+        "explanation": "El growth bias del universo temático implica que las empresas en los portfolios tienen flujos de caja concentrados en el futuro (alta duration). Cuando las tasas suben, el valor presente de esos flujos futuros cae más que el de empresas value (cuya rentabilidad es más inmediata). CPRAM (2024) documenta que growth stocks son casi 2x más sensibles a tasas que value stocks. Para un desk de AFP que gestiona fondos con objetivos de retorno real, entender el régimen de política monetaria antes de incrementar la asignación temática es crítico — el período 2022-2023 de tightening agresivo destruyó exactamente este tipo de exposición.",
+    },
+    "true_false": {
+        "statement": "Según Morningstar (2025), en el mercado de EE.UU. los inversores muestran MAYOR sensibilidad al precio (menor tolerancia a fees altos) cuando invierten en fondos temáticos comparado con fondos de equity tradicionales.",
+        "answer": False,
+        "explanation": "Al contrario: Morningstar documenta que los inversores muestran MENOR price-sensitivity en temáticos que en equity tradicional. El gap de fees entre temáticos y no-temáticos se amplía en base asset-weighted — esto significa que las estrategias más caras reciben proporcionalmente más capital. Una posible explicación conductual: el storytelling de los temas (la narrativa del 'próximo Tesla' o 'la IA que cambiará todo') genera un efecto de convicción que reduce la sensibilidad al costo. Para un investor institucional, esto es una advertencia — el fee premium raramente está justificado por alpha neto en el promedio del universo.",
+    },
+    "fill_blank": {
+        "template": "Morningstar documenta que solo el _______ % de los fondos temáticos logran simultáneamente sobrevivir Y superar al equity global en períodos largos, lo que implica que la media del universo destruye valor neto respecto a un benchmark global diversificado.",
+        "answers": ["10", "menos de 10", "<10", "menor al 10"],
+    },
+    "connections": ["Factor investing — growth vs. value interest rate sensitivity", "Fee drag — impacto en retornos netos a largo plazo", "Bai et al. — TCI y performance de fondos activos", "CPRAM (2024) — sesgos naturales del thematic investing"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# THEMATIC INVESTING — Bai, Tang, Wan & Yuksel
+# Thematic Concentration and Mutual Fund Performance
+# JFE (forthcoming) — Northeastern, UFL, SDSU, URI
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "th_tci_001",
+    "domain": "Thematic Investing",
+    "topic": "TCI — Thematic Concentration Index: Definición y Construcción",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Bai, J., Tang, Y., Wan, C. & Yuksel, Z. — 'Thematic Concentration and Mutual Fund Performance', Northeastern / U. Florida / SDSU / URI. JEL: G11, G23, J24",
+    "front": "¿Cómo construyen Bai et al. el Thematic Concentration Index (TCI) de un fondo y qué lo distingue conceptualmente del Industry Concentration Index (ICI) de Kacperczyk et al. (2005)?",
+    "back": "Construcción del TCI: (1) Aplican LDA (Latent Dirichlet Allocation) a la sección 'Risk Factors' (Item 1A) de los 10-K de cada empresa — generando 100 temas semánticos anuales a nivel de empresa (T_i,k). (2) Para cada fondo, calculan la exposición temática ponderada: v_p,k = Σ(w_i × T_i,k). (3) TCI = Σ(v_p,k − v_M,k)² — similar al HHI, mide la desviación del fondo respecto al mercado en el espacio temático. Diferencia clave vs. ICI: stocks de la misma industria pueden tener distintas exposiciones temáticas (ej. una farmacéutica y una aseguradora de salud están en industrias distintas pero ambas se exponen al tema 'envejecimiento'). La correlación entre TCI e ICI es solo 0.31 — capturan dimensiones distintas de concentración activa.",
+    "latex": r"TCI_p = \sum_{k=1}^{100}(v_{p,k} - v_{M,k})^2 \quad \text{donde} \quad v_{p,k} = \sum_{i \in P} w_i \cdot T_{i,k}",
+    "intuition": "Imagina que el mercado es una ciudad con 100 vecindarios temáticos (IA, Envejecimiento, Clima, etc.). ICI mide si tu portafolio vive principalmente en un barrio de la ciudad según la clasificación GICS (mismo edificio = mismo sector). TCI mide si tu portafolio vive en pocos vecindarios del mapa temático — independientemente del edificio. Puedes tener un portafolio diversificado por sector pero concentrado temáticamente (todos tus stocks se benefician del mismo megatrend, aunque sean de industrias distintas).",
+    "mcq": {
+        "question": "Bai et al. usan la sección 'Risk Factors' (Item 1A) del 10-K para extraer temas en lugar de las declaraciones de marketing del fondo. ¿Cuál es la ventaja más importante de esta elección metodológica?",
+        "options": [
+            "A) Los Risk Factors son más cortos y fáciles de procesar con LDA que el full 10-K",
+            "B) Permite medir thematic exposure bottom-up desde las propias divulgaciones de las empresas — forward-looking, estandarizado, y sin depender de las etiquetas de marketing que el gestor del fondo se auto-asigna",
+            "C) La SEC requiere que las empresas declaren su exposición temática específicamente en Item 1A",
+            "D) Item 1A es la sección más corta del 10-K y tiene menos ruido estadístico para LDA",
+        ],
+        "answer": "B",
+        "explanation": "La elección de Item 1A tiene 3 ventajas que los autores detallan: (1) Forward-looking — Reg S-K exige que las empresas divulguen los factores más significativos para su performance futura, no solo la historia. (2) Estandarizado — el formato homogéneo hace que LDA extraiga temas comparables entre empresas. (3) Incentivos de integridad — el riesgo de litigación por omisiones fuerza divulgaciones exhaustivas. La alternativa (usar el label de marketing del fondo) tiene el problema de que 'AI fund' puede tener exposición real muy diferente de otro 'AI fund' — el TCI construido bottom-up mide la exposición real, no la declarada.",
+    },
+    "true_false": {
+        "statement": "Bai et al. encuentran que fondos en el decil superior de TCI outperforman al decil inferior por 4.26% anualizado en 4-factor alpha, y este outperformance se explica principalmente por la habilidad de timing temático (overweighting temas que luego suben más).",
+        "answer": False,
+        "explanation": "El alpha es correcto (+4.26% anualizado, decil 10 vs. decil 1) pero la fuente del alpha NO es timing temático. Los autores construyen explícitamente una variable de 'theme-timing' y verifican que su coeficiente es pequeño e insignificante, mientras el coeficiente de TCI permanece positivo y significativo. La fuente del alpha es STOCK SELECTION dentro de los temas — los gestores de alto TCI pueden identificar qué empresas específicas se beneficiarán más (o sufrirán menos) de cada tema, no simplemente cuándo apostar por qué tema.",
+    },
+    "fill_blank": {
+        "template": "La persistencia del TCI sigue un proceso AR(1) con coeficiente de 0.881 trimestral — equivalente a una half-life de _______ trimestres, lo que indica que el investing temático refleja estrategias deliberadas y no asignaciones aleatorias.",
+        "answers": ["5.5", "aproximadamente 5.5", "5 a 6"],
+    },
+    "connections": ["Kacperczyk, Sialm & Zheng (2005) — ICI", "Lee & Liu (2026) — temas como factores faltantes", "LDA — Latent Dirichlet Allocation", "Item 1A 10-K — Risk Factors como fuente de información"],
+},
+
+{
+    "id": "th_tci_002",
+    "domain": "Thematic Investing",
+    "topic": "TCI — Expertise Temático y Formación Académica del Gestor",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Bai, J., Tang, Y., Wan, C. & Yuksel, Z. — 'Thematic Concentration and Mutual Fund Performance', Northeastern / U. Florida / SDSU / URI",
+    "front": "¿Qué demuestra Bai et al. sobre la relación entre la carrera universitaria de un gestor de fondos y su capacidad de generar alpha temático, y qué mecanismo explica este vínculo?",
+    "back": "Hallazgo central: el componente de TCI relacionado con la carrera universitaria del gestor predice alpha SIGNIFICATIVAMENTE más que el componente no relacionado. Evidencia: (1) DID test en cambios de gestor — cuando un gestor con carrera X reemplaza a uno con carrera Y, el TCI en temas relacionados con X SUBE y el de temas de Y BAJA (causalidad). (2) El buy-minus-sell spread en stocks de temas relacionados con la carrera del gestor es significativamente mayor. (3) Esos trades predicen mejor las earnings surprises futuras. Mecanismo teórico (van Nieuwerburgh & Veldkamp 2009): una ventaja informacional inicial en un campo → especialización adicional → portfolios concentrados en ese campo → alpha sostenido. La formación universitaria provee el punto de partida para ese ciclo de aprendizaje.",
+    "mcq": {
+        "question": "Un fondo tiene un gestor con ingeniería en bioquímica. Según el framework de Bai et al., ¿en qué tipo de inversión temática tiene mayor probabilidad de generar alpha consistente?",
+        "options": [
+            "A) En cualquier tema tecnológico porque ingeniería provee pensamiento cuantitativo general",
+            "B) En temas de biofarma, biotecnología y medicina personalizada — donde su formación específica le permite evaluar mejor el potencial de compuestos, trials clínicos y barreras regulatorias que el mercado sub-estima",
+            "C) En temas de sostenibilidad porque la bioquímica se relaciona con química ambiental",
+            "D) En temas de IA porque la bioquímica incluye algoritmos de plegado de proteínas (AlphaFold)",
+        ],
+        "answer": "B",
+        "explanation": "Bai et al. miden la similitud semántica entre los keywords del tema y las descripciones de cursos del major universitario. Bioquímica tiene mayor similitud semántica con temas de biofarma/biotech/medicina personalizada que con cualquier otro dominio. La ventaja viene de poder interpretar correctamente si un candidato a medicamento en Phase 2 tiene probabilidades reales de llegar a Phase 3, si una plataforma de edición genética tiene protección IP real, o si una biotech está quemando caja de forma sostenible. Esta evaluación requiere conocimiento técnico específico que el mercado no puede replicar fácilmente con análisis financiero estándar.",
+    },
+    "true_false": {
+        "statement": "Bai et al. demuestran que los fondos de alto TCI obtienen su ventaja principalmente de COMPRAR stocks infravalorados (buy side outperforms), no de EVITAR stocks sobrevalorados (sell side underperforms).",
+        "answer": True,
+        "explanation": "El análisis de trades muestra que la superior performance de high-TCI fondos es 'mainly driven by their buy trades' (Panel A, Table 8). Los stocks comprados por fondos D10 (decil top TCI) outperforman en 1.091% quarterly DGTW-adjusted. Esto es consistente con la literatura previa (Chan & Lakonishok 1993; Chen et al. 2000) de que en portfolio management, el stock selection skill se manifiesta principalmente en la identificación de undervalued opportunities, no en la identificación de shorts. Para un portafolio long-only (como un fondo de AFP), esto es la noticia relevante: el TCI alto predice mejor selección en el lado de compras.",
+    },
+    "fill_blank": {
+        "template": "Bai et al. documentan que los trades de fondos high-TCI en stocks relacionados con sus temas sobrerepresentados predicen positivamente los _______ del siguiente trimestre, evidenciando que su ventaja informacional se origina en mejores estimaciones de los fundamentos de las empresas.",
+        "answers": ["earnings surprises", "sorpresas de earnings", "sorpresas de resultados", "earnings announcements"],
+    },
+    "connections": ["Van Nieuwerburgh & Veldkamp (2009) — information advantage y especialización", "Active share vs. TCI — dimensiones distintas de concentración", "Alpha sources — timing vs. selection", "Human capital en asset management"],
+},
+
+{
+    "id": "th_tci_003",
+    "domain": "Thematic Investing",
+    "topic": "TCI — Implicancias para Due Diligence de Fondos Temáticos",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Bai, J., Tang, Y., Wan, C. & Yuksel, Z. — 'Thematic Concentration and Mutual Fund Performance', Northeastern / U. Florida / SDSU / URI",
+    "front": "¿Qué criterios de evaluación de fondos temáticos se derivan del framework de Bai et al. para un investment desk que quiera seleccionar gestores activos temáticos con mayor probabilidad de alpha?",
+    "back": "3 criterios derivados del paper: (1) Concentración temática genuina (TCI alto): verificar que el fondo tiene exposición real al tema vía holdings, no solo en el nombre. High-TCI fondos outperforman en 4.26% vs. low-TCI. No confiar en labels de marketing. (2) Expertise del gestor en el tema: investigar la formación específica del PM — un gestor de biotech sin formación técnica en biología/química tendrá menor edge. El componente de TCI relacionado con el major universitario tiene mayor poder predictivo. (3) Stock selection vs. timing: evaluar si el fondo acierta en sus compras específicas, no si 'adivina' cuándo el tema sube. La fuente del alpha es selección dentro del tema, no market timing temático. Señal adicional: alta persistencia del TCI (half-life ~5.5 trimestres) indica estrategia deliberada.",
+    "mcq": {
+        "question": "Dos fondos ambos se llaman 'AI Innovation Fund'. El Fondo A tiene TCI bajo (baja concentración temática real en AI medida bottom-up desde 10-Ks). El Fondo B tiene TCI alto (alta concentración real). Según Bai et al., ¿qué predicción es correcta?",
+        "options": [
+            "A) El Fondo A es más conservador y mejor para inversores institucionales que el Fondo B",
+            "B) El Fondo B tiene significativamente mayor probabilidad de generar 4-factor alpha positivo; el Fondo A es esencialmente un beta play con maquillaje temático",
+            "C) Ambos fondos son equivalentes porque el label 'AI' garantiza exposición similar",
+            "D) El Fondo A tendrá menor tracking error y por eso es preferible para una AFP con restricciones de riesgo",
+        ],
+        "answer": "B",
+        "explanation": "Este escenario ilustra directamente el hallazgo de Bai et al.: el label de marketing NO garantiza concentración temática real. El paper muestra que el TCI construido bottom-up desde 10-Ks predice alpha mientras que la auto-denominación del fondo no predice nada. Lee & Liu (2026) complementan esto mostrando que AIQ ETF (supuesto fondo AI) tiene solo 0.33% de su 10% tracking error atribuible al tema AI — el resto es beta y sector. Para un investment desk, el due diligence debe incluir análisis de holdings real y estimación de TCI, no confiar en el nombre del fondo.",
+    },
+    "fill_blank": {
+        "template": "El TCI de Bai et al. captura una dimensión de concentración activa distinta del ICI (industria), con una correlación entre ambas medidas de solo _______ — demostrando que un fondo puede ser temáticamente concentrado sin estar sectorialmente concentrado.",
+        "answers": ["0.31", "menor a 0.31", "por debajo de 0.31"],
+    },
+    "connections": ["Lee & Liu (2026) — ETFs temáticos vs. portafolios narrativos", "Active share — Cremers & Petajisto (2009)", "Manager selection — educational background", "Morningstar (2025) — survival and success rates <10%"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# THEMATIC INVESTING — Kumar, Doole, Garg, Bhalodia & Ghate (2019)
+# Indexing Change: Understanding MSCI Thematic Indexes
+# MSCI Research Insights — November 2019
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "th_msci_001",
+    "domain": "Thematic Investing",
+    "topic": "Construcción de Índices Temáticos — El Framework MSCI",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Kumar, N., Doole, S., Garg, K., Bhalodia, V. & Ghate, D. (2019) — 'Indexing Change: Understanding MSCI Thematic Indexes', MSCI Research Insights, November 2019",
+    "front": "¿Cuáles son los 5 pasos del framework MSCI para construir un índice temático, y qué es el 'relevance score' que lo distingue de un índice sectorial?",
+    "back": "5 pasos: (1) Objetivo del índice → generar seedwords que capturan el tema. (2) NLP (tf-idf + cosine similarity) para construir un keyword dictionary expandido. (3) Matching de keywords contra business segments (directo) y business descriptions (indirecto) de cada empresa del MSCI ACWI IMI. (4) Cálculo del Relevance Score = revenue atribuible al tema / revenue total. Umbral: ≥25% para elegibilidad. (5) Weighting = relevance score × float-adjusted market cap, capped a 5% por emisor. El relevance score es lo que lo distingue de un índice sectorial: captura el % de los ingresos de una empresa genuinamente expuestos al tema — no su clasificación GICS. Una empresa puede estar en IT pero tener relevance score 0 en robotics; otra puede estar en Industrials y tener score 75%.",
+    "latex": r"\text{Relevance Score} = \frac{\text{Revenue atribuible al tema}}{\text{Revenue total}} \times 100\%",
+    "mcq": {
+        "question": "El framework MSCI usa dos rutas de inclusión: 'direct' (via business segment names) e 'indirect' (via business descriptions). ¿Qué diferencia clave existe entre ambas en términos de cómo se calcula el relevance score?",
+        "options": [
+            "A) La ruta directa asigna el 100% del revenue del segmento; la indirecta aplica un discount factor entre 0 y 1 según la densidad de keyword hits en el texto",
+            "B) La ruta directa se basa en SIC codes y la indirecta en NLP — pero ambas producen el mismo relevance score",
+            "C) La ruta directa da mayor peso a empresas grandes y la indirecta a small caps para balancear la exposición temática",
+            "D) La ruta indirecta se usa solo para empresas que no reportan sus segmentos de negocio por regulación",
+        ],
+        "answer": "A",
+        "explanation": "El paper detalla explícitamente la diferencia: para la ruta directa (segmentos de negocio con keyword match), el 100% del revenue de ese segmento se atribuye al tema. Para la ruta indirecta (descripción general del negocio), el revenue se escala hacia abajo mediante un discount factor entre 0 y 1 proporcional a la densidad de keyword hits en el texto — a mayor dispersión del match, menor el factor. El Exhibit 4 del paper ilustra esto: una empresa automotriz tiene 'Clean Mobility' como segmento (directo, 100% del revenue = 5,276M) y otros segmentos como 'Automotive Seating' que entran por la ruta indirecta (discount factor 0.63 → solo 5,396M de 8,503M).",
+    },
+    "true_false": {
+        "statement": "El framework MSCI utiliza preferentemente la clasificación GICS (Global Industry Classification Standard) como base para seleccionar constituyentes de sus índices temáticos, añadiendo un filtro de keyword matching sobre ese universo sectorial.",
+        "answer": False,
+        "explanation": "Al contrario — el framework MSCI fue diseñado explícitamente para ser independiente de GICS. Los autores señalan: 'the extensive use of an established and rigid classification scheme reflecting current industrial activity to represent a thematic opportunity set can seem fundamentally inconsistent with that [unconstrained] objective for some investors.' Los filtros GICS se usan solo esporádicamente y de forma muy limitada ('sparingly') cuando el balance señal/ruido en ciertas sub-industrias es claro. La inclusión se basa en keyword matching bottom-up desde filings y business descriptions — no desde la taxonomía sectorial.",
+    },
+    "fill_blank": {
+        "template": "MSCI aplica un 'relevance score tilt' para ponderar los constituyentes: el peso = relevance score × float-adjusted market cap, normalizado y con cap de _______ por emisor. Este approach balancea entre la investibility (favorecida por cap-weighting) y la pureza temática (favorecida por score-weighting).",
+        "answers": ["5%", "5 por ciento", "el 5%"],
+    },
+    "connections": ["Bai et al. — TCI y concentración temática genuina", "Lee & Liu (2026) — narrativas y exposición temática", "False positives — control en índices temáticos", "Thematic attribution — Brinson analysis"],
+},
+
+{
+    "id": "th_msci_002",
+    "domain": "Thematic Investing",
+    "topic": "Thematic Attribution y Exposición Inadvertida — Herramienta para Investment Desk",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Kumar, N., Doole, S., Garg, K., Bhalodia, V. & Ghate, D. (2019) — 'Indexing Change: Understanding MSCI Thematic Indexes', MSCI Research Insights, November 2019",
+    "front": "¿Cómo puede un investment desk usar el framework de relevance scores de MSCI para diagnosticar la exposición temática de su portafolio actual y medir si ya tiene exposición temática inadvertida?",
+    "back": "El relevance score calculado para todas las empresas del MSCI ACWI IMI permite 3 aplicaciones analíticas: (1) Thematic exposure profile: calcular el weighted-average relevance score de cualquier portafolio para cada uno de los 9 temas MSCI → saber qué exposición temática ya tiene inadvertidamente. (2) Active thematic positioning: comparar el perfil temático del portafolio vs. benchmark → identificar over/underweight temáticos activos. (3) Thematic performance attribution (Brinson-style): descomponer el excess return vs. benchmark en allocation effect (apostar por el grupo temático correcto) vs. selection effect (elegir las mejores empresas dentro del tema). El Exhibit 18 es especialmente relevante: muestra que ETFs que se llaman 'robotics-AI' tienen exposiciones temáticas MUY distintas entre sí — algunos con exposición cercana al umbral de 25%, otros cercanos al índice MSCI. Para una AFP sin exposición temática explícita, este análisis revelaría cuánta exposición ya tiene a través de sus posiciones de equity existentes.",
+    "mcq": {
+        "question": "El análisis de MSCI (Exhibit 16) muestra que el MSCI Growth Index tiene significativamente mayor exposición a temas como Digital Economy y Disruptive Technology que el MSCI Value Index. ¿Qué insight ofrece esto para entender el underperformance del factor value desde 2010?",
+        "options": [
+            "A) Los índices Value están mal construidos porque deberían incluir más empresas tecnológicas",
+            "B) El underperformance value puede reinterpretarse como overperformance temático de Growth: las empresas Growth tenían mayor exposición a los megatrends dominantes (digital, AI) — lo que antes se llamaba 'factor Growth' era en parte 'exposición a temas estructurales ganadoras'",
+            "C) El análisis temático es redundante con el análisis factor — Growth = Thematic es una tautología",
+            "D) El análisis temático solo aplica a empresas de tecnología y no añade insight para otros sectores",
+        ],
+        "answer": "B",
+        "explanation": "Este es uno de los insights más poderosos del paper: el marco temático ofrece una NUEVA LENTE para entender fenómenos que el factor model no explica bien. La 'anomalía' del value factor (underperformance persistente post-2010) puede reinterpretarse: las empresas de alto book-to-market (value) tendían a estar menos expuestas a megatrends de Digital Economy, AI y Disruptive Tech. El 'factor Growth' estaba parcialmente capturando exposición a temas estructurales de largo plazo — no solo características contables de crecimiento histórico. Para un desk que gestiona con factor tilts, esto implica que la exposición temática es una dimensión ortogonal que su modelo factor puede estar omitiendo.",
+    },
+    "true_false": {
+        "statement": "El análisis de Brinson attribution temático de MSCI para el índice Robotics demuestra que la mayor parte del outperformance (8.9% anual vs. ACWI IMI) se debe al stock selection dentro de los grupos de relevance score, no a la sobre-ponderación de las empresas más puras del tema.",
+        "answer": False,
+        "explanation": "Al contrario: el análisis (Exhibit 20) muestra que la mayor parte del outperformance proviene de la OVER-ALLOCATION al grupo de pure plays (relevance score 75-100%) vs. los grupos de menor pureza — no de stock selection dentro de cada grupo. El effect de selección fue ligeramente negativo. Esto implica que la pureza temática (tener empresas con alta concentración de ingresos en el tema) es el principal driver de retornos en un índice temático bien construido — más que el stock picking dentro de cada nivel de exposición.",
+    },
+    "fill_blank": {
+        "template": "El framework de MSCI permite diagnosticar 'exposición temática _______ ' en un portafolio — es decir, exposición temática real que el portafolio ya tiene aunque no haya sido diseñado con un objetivo temático explícito.",
+        "answers": ["inadvertida", "inadvertent", "no intencional", "implícita"],
+    },
+    "graph_type": "ai_value_chain",
+    "connections": ["Bai et al. — TCI como medida de concentración temática genuina", "Lee & Liu (2026) — exposición temática pura vs. ETFs", "Value vs. Growth — interpretación temática", "Brinson attribution — aplicación temática"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# THEMATIC INVESTING — Drut, B. (CPRAM / 2024)
+# From Megatrends to Thematic Allocation
+# CPR Asset Management — February 2024
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "th_cpram_001",
+    "domain": "Thematic Investing",
+    "topic": "De Megatrend a Temática de Inversión — La Cadena Conceptual",
+    "difficulty": "Foundational",
+    "mode_tags": ["bus", "home"],
+    "source": "Drut, B. (2024) — 'From Megatrends to Thematic Allocation', CPRAM (CPR Asset Management), February 2024",
+    "front": "¿Cómo se articula la cadena conceptual Megatrend → Investment Thematic según CPRAM (2024), y qué hace que una temática de inversión sea distinta del megatrend que la origina?",
+    "back": "Cadena conceptual: un Megatrend (fuerza estructural amplia: cambio climático, envejecimiento, digitalización) genera la necesidad de una transición o solución. Esa transición se puede materializar de MÚLTIPLES FORMAS, cada una constituyendo una Investment Thematic distinta. Ejemplo: Cambio climático (megatrend) → Transición energética (necesidad) → Energías renovables / Hidrógeno / Redes inteligentes / Eficiencia energética (4 themáticas distintas). Las themáticas se definen por: (1) ser tendencias económicas poderosas que trascienden clasificaciones financieras tradicionales, (2) tener potencial de desarrollo basado en megatrends ya identificables, y (3) poder convertirse en 'investment universe' con empresas que capturan el crecimiento. El 'pure player' es una empresa cuyo negocio es casi 100% la temática; otros tienen exposición parcial — la purity score (de Robeco/Somefun et al.) captura esta gradación.",
+    "mcq": {
+        "question": "Según CPRAM (2024), ¿por qué el 'productivity paradox' histórico (las TIC no generaron las ganancias de productividad esperadas inmediatamente) es relevante para un inversor temático moderno?",
+        "options": [
+            "A) Porque demuestra que la tecnología nunca mejora la productividad a largo plazo",
+            "B) Porque muestra que innovaciones de alto potencial pueden tardar décadas en reflejarse en el mercado — la velocidad de adopción depende de factores humanos, de mercado y de política, no solo de la calidad técnica de la innovación",
+            "C) Porque implica que los fondos temáticos de tecnología han históricamente underperformado",
+            "D) Porque la baja productividad post-TIC sugiere que la IA también tendrá impacto limitado en productividad",
+        ],
+        "answer": "B",
+        "explanation": "CPRAM cita específicamente el 'productivity paradox' (Acemoglu et al. 2014; Andrews et al. 2016) para ilustrar que incluso innovaciones genuinamente transformadoras pueden tener rendimientos de inversión lentos o negativos en el corto/medio plazo por barreras de difusión: habilidades de los empleados, barreras de entrada, capacidad de financiamiento, infraestructura necesaria, subsidios. Para un investor temático, esto es crucial: la calidad del tema no garantiza la velocidad de materialización en precios. Es por eso que el seguimiento de la política fiscal (subsidios, inversión pública) es esencial — pueden ser el acelerador clave de una temática que técnicamente es sólida pero cuya adopción está bloqueada.",
+    },
+    "true_false": {
+        "statement": "CPRAM (2024) argumenta que dado que los megatrends son seculares y de largo plazo, los fondos temáticos son inmunes a los ciclos de política monetaria y los inversores pueden ignorar el entorno de tasas de interés.",
+        "answer": False,
+        "explanation": "CPRAM es explícito en lo contrario — lista 5 razones por las que el entorno macro de corto plazo importa para temáticos: (1) Las políticas fiscales pueden acelerar o frenar la adopción de una temática. (2) En fondos con pocos pure players, el performance puede ser afectado por múltiples factores no relacionados con el megatrend. (3) Desarrollos geopolíticos impactan las cadenas de valor temáticas (ej. restricciones comerciales en semiconductores). (4) El growth bias natural de los temáticos los hace doblemente sensibles a tightening monetario (duración larga). (5) Los resultados trimestrales de empresas jóvenes en themáticas pueden generar volatilidad de corto plazo. La recomendación es mantener el horizonte largo PERO siendo consciente del timing de entrada.",
+    },
+    "fill_blank": {
+        "template": "CPRAM advierte que incluso dentro de una temática ganadora habrá 'Teslas' y 'Lordstown Motors' — ganadores y perdedores. Por eso la gestión _______ es crucial: la selección de las empresas correctas dentro del tema, no solo apostar por la temática en sí.",
+        "answers": ["activa", "active", "activa de stocks"],
+    },
+    "connections": ["Productivity paradox — Solow Paradox", "Hype Cycle de Gartner — adopción tecnológica", "CPRAM — sesgos naturales de thematic investing", "Pure players vs. diversified companies en temáticos"],
+},
+
+{
+    "id": "th_cpram_002",
+    "domain": "Thematic Investing",
+    "topic": "Sesgos Naturales y Riesgos en Inversión Temática — Framework para Desk",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Drut, B. (2024) — 'From Megatrends to Thematic Allocation', CPRAM (CPR Asset Management), February 2024",
+    "front": "¿Cuáles son los 5 sesgos y riesgos naturales que CPRAM identifica como inherentes a la inversión temática, y cómo deben integrarse en un proceso de inversión institucional que quiera incluir temáticos?",
+    "back": "5 sesgos/riesgos naturales: (1) SESGO GROWTH — los temáticos invierten en empresas con alto potencial futuro, estructuralmente growth. Implicación: mayor sensibilidad a tasas de interés y múltiplos de valoración. (2) SMALL-CAP BIAS — buscar los 'Teslas del mañana' implica identificar empresas pre-escala, a menudo pequeñas y con pérdidas. Riesgo: las que fallan desaparecen. (3) RETORNOS TARDÍOS — barreras de adopción (tecnológicas, regulatorias, humanas) retrasan la materialización del performance incluso en temáticas correctas. (4) GEOPOLÍTICA — cadenas de valor temáticas son globales y vulnerables (ej. semiconductores en reshoring). (5) TIMING MONETARIO — ciclos de tightening son sistemáticamente más adversos para temáticos que para el mercado general. Integración en proceso institucional: las asignaciones temáticas deben complementarse con análisis top-down macro, monitoring de política fiscal, y gestión activa del timing de entrada/salida del ciclo.",
+    "mcq": {
+        "question": "Una AFP decide asignar a fondos temáticos de transición energética en enero de 2022, justo antes del ciclo de tightening agresivo de la Fed. Según CPRAM (2024) y Morningstar (2025), ¿cuál sería el resultado más probable y por qué?",
+        "options": [
+            "A) Performance positivo porque la transición energética es un megatrend secular que supera el ciclo monetario",
+            "B) Underperformance significativo: el growth bias de los temáticos energéticos los hace doblemente vulnerables al tightening (duration larga), y Morningstar documenta que los fondos de Energy Transition cayeron más del 40% desde ese pico",
+            "C) Performance neutral porque la transición energética tiene baja correlación con la política monetaria",
+            "D) Outperformance porque el tightening monetario reduce la competencia de proyectos de energy no renovables",
+        ],
+        "answer": "B",
+        "explanation": "Este caso real es exactamente el ilustrado por Morningstar (2025): Energy Transition AUM cayó >40% desde su pico hasta el trough. El ciclo de tightening 2022-2023 fue particularmente destructivo para estos fondos por: (1) su growth bias estructural (duración larga → impacto mayor del alza de tasas), (2) empresas de energías renovables en etapas tempranas con pérdidas prolongadas cuyo valor presente es muy sensible a la tasa de descuento, y (3) reducción de subsidios gubernamentales en algunos mercados. CPRAM es explícito: 'Phases of monetary tightening may therefore often penalise thematic funds.' El error de timing de entrada costó años de underperformance incluso en una temática estructuralmente correcta.",
+    },
+    "true_false": {
+        "statement": "CPRAM (2024) recomienda que los inversores en fondos temáticos reduzcan su exposición cuando el performance de corto plazo es negativo, ya que indica que el megatrend ya no es relevante.",
+        "answer": False,
+        "explanation": "La recomendación explícita de CPRAM es la opuesta: 'But we believe it is worth staying the course and keeping one's exposure to long-term thematics, as they offer meaningful megatrend-driven growth potential.' La lógica: underperformance de corto plazo frecuentemente refleja barreras temporales de adopción, ciclos de tasas adversos, o volatilidad en resultados de empresas jóvenes — NO el fin del megatrend subyacente. Reducir posición en ese momento cristaliza pérdidas y pierde la recuperación. La clave es distinguir entre: (a) underperformance por timing/ciclo = mantener, y (b) deterioro del fundamentals del megatrend = revisar.",
+    },
+    "fill_blank": {
+        "template": "CPRAM advierte que el sesgo _______ de los fondos temáticos los hace casi el doble de sensibles a tasas de interés que el mercado general, ya que gran parte de los earnings de sus empresas está concentrado en períodos futuros.",
+        "answers": ["growth", "de crecimiento", "hacia growth"],
+    },
+    "graph_type": "theme_adoption_s_curve",
+    "connections": ["Morningstar (2025) — Energy Transition outflows -40%", "Robeco (2025) — tightening como headwind temático", "CPRAM — pure players y gestión activa", "Growth bias y duration de portfolios temáticos"],
+},
+
+{
+    "id": "th_cpram_003",
+    "domain": "Thematic Investing",
+    "topic": "El Rol de los Temáticos en la Asset Allocation — Framework para AFP",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Drut, B. (2024) — 'From Megatrends to Thematic Allocation', CPRAM (CPR Asset Management), February 2024; Somefun et al. (2022) — FAJ; MSCI (2019)",
+    "front": "¿Cómo sintetizarías el rol de los fondos temáticos en el proceso de asset allocation de una AFP que actualmente no los incluye, construyendo un framework de 5 pasos para su introducción?",
+    "back": "Framework de 5 pasos para introducir temáticos en un investment desk de AFP: (1) DIAGNÓSTICO DE EXPOSICIÓN ACTUAL: Usar el framework de MSCI relevance scores para medir qué exposición temática ya tiene inadvertidamente el portafolio de equity actual — puede ser que ya tengas exposición AI via tech holdings. (2) SELECCIÓN DE TEMAS: Aplicar los 4 criterios de Somefun et al. (magnitud económica, durabilidad secular, monetizabilidad, valuación no priced-in) + verificar que los temas tienen volatilidad temática genuina (no solo beta y sector). (3) SELECCIÓN DE VEHÍCULO: Preferir fondos con TCI alto (Bai et al.) sobre labels de marketing. Evaluar: ¿es un active fund con PM experto en el tema? ¿o un ETF replicable con smart beta? (4) SIZING: Usar el framework de Methling & von Nitzsch — optimización tri-criterio (retorno, riesgo, proporción temática) o heurística naïve competitiva (50/50 core-satellite). (5) MONITORING: Seguir el macro relevante para el tema (política fiscal, tasas, geopolítica per CPRAM), el TCI efectivo del fondo (no solo el nombre), y el relevance score del portafolio en el tema elegido.",
+    "mcq": {
+        "question": "En el paso 2 del framework (selección de temas), Somefun et al. (2022) exigen que el tema genere 'volatilidad temática genuina'. ¿Por qué un tema con R² alto en la regresión vs. factores convencionales es problemático incluso si el megatrend es real?",
+        "options": [
+            "A) Alto R² significa que el tema es fácilmente replicable con una combinación de ETFs sectoriales estándar — no añade dimensión nueva de diversificación ni alpha potencial sobre lo que ya se puede hacer con smart beta",
+            "B) Alto R² indica que el tema tiene alta correlación con el mercado global y por tanto mayor riesgo sistemático",
+            "C) Alto R² sugiere que el tema no es lo suficientemente innovador para ser considerado un megatrend",
+            "D) Alto R² significa que el tema tiene mucha cobertura de analistas y por tanto no hay asimetría de información explotable",
+        ],
+        "answer": "A",
+        "explanation": "Este es el corolario del hallazgo de Lee & Liu (2026) y Somefun et al. (2022): si el R² del tema vs. factores convencionales es muy alto (ej. 65%+ como el tema AI en 2025 para el índice AIQ), entonces la exposición temática es esencialmente una combinación de semiconductor + software industry factors + beta de mercado. Eso es replicable con un ETF sectorial de IT sin necesidad de un 'fondo temático AI' costoso. El valor añadido de los temáticos viene precisamente de la volatilidad temática ortogonalizada — la parte del riesgo que NO se puede replicar con factores convencionales. Ese es el componente que potencialmente justifica el fee premium y la complejidad de implementación.",
+    },
+    "true_false": {
+        "statement": "Para una AFP que gestiona fondos conservadores (Fondo 1) y agresivos (Fondo 3), el sizing óptimo de la asignación temática debe ser idéntico en ambos fondos porque los megatrends son seculares e independientes del perfil de riesgo del fondo.",
+        "answer": False,
+        "explanation": "Somefun et al. (2022) muestran empíricamente que la asignación temática óptima VARÍA según el perfil de riesgo: en su portafolio C (core + diversificación + temáticos), el peso del satélite temático y la mezcla de temas cambia entre perfiles conservador, moderado y agresivo. Fondos conservadores como el Fondo 1 de AFP naturalmente tienen menor capacidad para absorber la volatilidad adicional (tracking error) del componente temático — el riesgo temático debe calibrarse contra el presupuesto de riesgo activo del fondo. Además, el growth bias de los temáticos (Morningstar 2025) los hace más adecuados para fondos con mayor tolerancia a ciclos de tasas adversos — nuevamente, mayor relevancia para Fondo 3 que para Fondo 1.",
+    },
+    "fill_blank": {
+        "template": "El paso 1 del framework de introducción de temáticos en una AFP es el diagnóstico de _______ temática existente — identificar qué exposición ya tienen los portafolios actuales a los megatrends via sus holdings de equity, antes de decidir añadir fondos temáticos explícitos.",
+        "answers": ["exposición", "exposure", "exposición temática inadvertida"],
+    },
+    "connections": ["Somefun et al. (2022) — criterios de selección de temas", "Methling & von Nitzsch (2020) — tri-dimensional optimization", "Bai et al. — TCI para due diligence", "MSCI (2019) — relevance scores para análisis de portafolio"],
+},
+
 ]
 
 
