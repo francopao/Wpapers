@@ -3147,6 +3147,347 @@ print(f"Coeficientes: {lasso.coef_[selected].round(4)}")
     "connections": ["HSBC Albert & Guillemet (2025) — risk units modulan el tamaño del tilt", "Brunick & Harlow (2025) — views subjetivos calibrados cuantitativamente", "Rebalancing premium — buy low sell high sistemático", "Dimson, Marsh & Staunton (2013) — evidencia global de fracaso de timing"],
 },
 
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Cloutier, Djatej & Kiefer (2017)
+# "A Tactical Asset Allocation Strategy That Exploits Variations in VIX"
+# Investment Management and Financial Innovations, Vol. 14, Issue 1
+# DOI: 10.21511/imfi.14(1).2017.03
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_vix_001",
+    "domain": "Asset Allocation",
+    "topic": "VIX como Señal TAA — Correlación con Clases de Activos",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Cloutier, R., Djatej, A. & Kiefer, D. (2017) — 'A Tactical Asset Allocation Strategy That Exploits Variations in VIX', Investment Management and Financial Innovations 14(1):27-34. DOI: 10.21511/imfi.14(1).2017.03",
+    "front": "¿Qué es el VIX, cómo correlaciona con los retornos de las distintas clases de activos según Cloutier et al. (2017), y cuáles son las clases que se comportan como REFUGIO (correlación positiva con VIX) vs. las que colapsan en alta volatilidad?",
+    "back": "El VIX (CBOE Volatility Index) mide la volatilidad implícita a 30 días del S&P 500 extraída de precios de opciones. Se movió en dirección opuesta al S&P 500 el 80% del tiempo (2002-2014), con correlación de −0.53. Valores por debajo de 20: mercado complaciente. VIX>30: alta ansiedad e incertidumbre. Clases REFUGIO (retorno positivo o neutro con VIX>30): GNMAs (+2.69%), bonos cortos (+1.35%), EM bonds (+2.30%), Managed Futures (+1.93%), US Large Cap Equities (+0.34%). Clases que COLAPSAN con VIX>30: Long/Short Equities (−13.25%), REITs (−8.14%), EAFE Small Cap (−10.12%), Commodities (−10.71%), High Yield Bonds (−6.70%), Infrastructure (−5.50%). Insight clave: managed futures y GNMAs son los mejores hedges durante alta volatilidad — se benefician de disrupciones que destruyen el resto.",
+    "mcq": {
+        "question": "Según Cloutier et al. (2017), los Global Macro Strategies presentan una relación peculiar con el VIX: retorno positivo cuando VIX<20 pero negativo cuando VIX>30. ¿Por qué hace esto las Global Macro interesantes como señal TAA?",
+        "options": [
+            "A) Porque siempre generan alpha independiente del nivel del VIX",
+            "B) Porque son un activo cíclico que se puede rotar según el régimen de volatilidad — sobreponderando en VIX bajo (mercados alcistas direccionales) y reduciéndolos en VIX alto (cuando su exposición larga se convierte en drag)",
+            "C) Porque su correlación positiva con el VIX alto indica que protegen mejor que los bonos durante crisis",
+            "D) Porque el Global Macro Index usa solo posiciones en renta fija que benefician de huidas al refugio",
+        ],
+        "answer": "B",
+        "explanation": "Global Macro (retorno +1.34% con VIX<20, −2.92% con VIX>30; diferencia: −4.26%) muestra que en mercados de baja volatilidad (risk-on) sus posiciones direccionales generan retorno, pero cuando el VIX supera 30, se vuelve un activo que duele. El framework de Cloutier no intenta predecir el VIX futuro — usa el nivel actual como señal de régimen y rota el portafolio consecuentemente. En VIX bajo se puede sobreponderar Global Macro para capturar retornos alcistas; en VIX alto se reduce en favor de Managed Futures o GNMAs.",
+    },
+    "true_false": {
+        "statement": "Cloutier et al. (2017) encuentran que el VIX weighted portfolio superó al neutral portfolio en los 13 años estudiados (2002-2014), incluyendo el año 2009 de fuerte rebote del mercado.",
+        "answer": False,
+        "explanation": "2009 es el único año donde el VIX weighted portfolio underperformó al neutral (Table 4: diferencia −0.751% en retorno medio). La razón es lógica: 2009 fue el año del gran rebote post-crisis de 2008. El VIX se mantuvo elevado durante gran parte del año, señalando 'riesgo alto', por lo que el portafolio táctico mantuvo más activos defensivos y menos exposición a activos de riesgo que se recuperaron violentamente. Este es el clásico costo del timing conservador: protege en las caídas pero captura menos del rebote.",
+    },
+    "fill_blank": {
+        "template": "Cloutier et al. usan _______ como puntos de disparo para rebalanceo: VIX<20 indica complacencia y favorece activos de riesgo; VIX>30 indica alta ansiedad y favorece activos refugio. Estos valores se eligieron porque representan aproximadamente ±1 desviación estándar del _______ del VIX.",
+        "answers": ["20 y 30, mean", "trigger points de 20 y 30, promedio", "VIX 20 y 30, media"],
+    },
+    "numerical_problem": {
+        "question": "El Sharpe ratio del VIX weighted portfolio sobre 2002-2014 fue 0.70209 vs. 0.64602 del neutral. ¿Cuál fue la mejora porcentual en Sharpe ratio, y qué dice esto sobre el trade-off riesgo-retorno?",
+        "steps": [
+            "Mejora = (0.70209 − 0.64602) / 0.64602 × 100",
+            "= 0.05607 / 0.64602 × 100 ≈ 8.68%",
+            "El VIX portfolio también tuvo menor σ promedio (−0.00118 diferencial en std dev)",
+            "Conclusión: +38bps de retorno con menor riesgo → doble mejora",
+        ],
+        "answer": "+8.68% de mejora en Sharpe ratio. Mejor retorno Y menor riesgo simultáneamente.",
+        "bus_hint": "(0.702−0.646)/0.646 ≈ 0.056/0.646 ≈ 8.7% mejora en Sharpe",
+    },
+    "connections": ["Managed Futures como hedge en crisis", "VIX — CBOE Volatility Index", "French, Schwert & Stambaugh (1987) — risk premium correlaciona con vol", "Munenzon (2010) — retornos por régimen VIX"],
+},
+
+{
+    "id": "aa_vix_002",
+    "domain": "Asset Allocation",
+    "topic": "VIX TAA — Estrategia Práctica: Reglas, Límites y Resultados",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Cloutier, R., Djatej, A. & Kiefer, D. (2017) — Investment Management and Financial Innovations 14(1):27-34",
+    "front": "¿Cuáles son las 4 reglas de diseño que Cloutier et al. impusieron a su estrategia VIX-TAA, y cómo balancearon la restricción de 'no grandes apuestas' con la fiducia institucional?",
+    "back": "4 reglas de diseño: (1) TRANSPARENCIA — el proceso debe ser claramente definido y replicable, sin black boxes. (2) DIVERSIFICACIÓN BASE — el portafolio neutral ya debe estar bien diversificado antes de añadir el overlay táctico. (3) SOPORTE EMPÍRICO — los datos deben respaldar la racionalidad económica de cada ajuste de peso. (4) RETORNOS POSITIVOS HISTÓRICOS EN DISTINTOS ENTORNOS — cada clase de activo seleccionada para rotación debe tener un track record razonable en ambos regímenes. Balance con fiducia institucional: solo se rotaron 7 de los 18 activos, con ajustes de pesos pequeños. Ejemplo: Managed Futures pasa de 3% a 10% (VIX>30) y a 0% (VIX<20). High Yield pasa de 4.2% a 7.2% (VIX<20) y a 1.2% (VIX>30). Los 11 activos restantes (incluyendo Russell 1000 con 21.5%, EM bonds con 6.5%) permanecen inalterados en todo el ciclo.",
+    "mcq": {
+        "question": "La estrategia TAA de Cloutier et al. usa rebalanceo DIARIO basado en el cierre del VIX del día anterior. ¿Qué ventaja y qué limitación principal tiene este approach comparado con un rebalanceo mensual?",
+        "options": [
+            "A) Ventaja: mayor precisión en capturar picos de VIX. Limitación: los autores no analizaron costos de transacción, que serían sustancialmente mayores con rebalanceo diario",
+            "B) Ventaja: elimina la posibilidad de datos obsoletos. Limitación: el VIX como señal diaria tiene mayor ruido y genera señales falsas más frecuentes",
+            "C) Ventaja y limitación son iguales — el rebalanceo diario es equivalente al mensual para una cartera de ETFs",
+            "D) Ventaja: captura todas las crisis. Limitación: los reguladores de AFP no permiten rebalanceos con frecuencia diaria",
+        ],
+        "answer": "A",
+        "explanation": "El paper explícitamente reconoce su propia limitación: 'This paper leaves the examination of transactions costs and tax liabilities for future research.' Con rebalanceo diario, cada vez que el VIX cruza 20 o 30, se ejecutan transacciones en hasta 7 clases de activos. En un portafolio de $1B, esto generaría millones en costos de transacción anuales — que bien podrían consumir los +38bps de alpha bruto documentados. La estrategia es más apropiada para portafolios institucionales con costos de transacción ultra-bajos o para señal mensual con menor precisión pero costos controlados.",
+    },
+    "true_false": {
+        "statement": "Según Cloutier et al. (2017), Managed Futures (SG Trend) se comportan como activos PRO-CÍCLICOS — retorno alto cuando el mercado sube (VIX bajo) y retorno bajo cuando el mercado cae (VIX alto).",
+        "answer": False,
+        "explanation": "Managed Futures (SG CTA Trend Sub-Index) son activos CONTRA-CÍCLICOS en este contexto: retorno +1.87% con VIX<20 y +1.93% con VIX>30 — prácticamente sin diferencia (−0.07%). Esto confirma su propiedad única: generan retorno CONSISTENTE independientemente del régimen de volatilidad. No son perfectamente anti-correlacionados con el mercado pero sí son los más resilientes durante crisis porque las estrategias CTA trend-following se benefician de tendencias sostenidas tanto en mercados alcistas como bajistas.",
+    },
+    "graph_type": "correlation_matrix_regimes",
+    "connections": ["AQR (2014) — timing y diversificación perdida", "Managed futures — CTA trend following", "Ang & Bekaert (2002) — correlaciones en regímenes", "HSBC TAA (2025) — risk factor como señal"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Guidolin (2018)
+# Long-Run Portfolio Choice: Tactical vs. Strategic Asset Allocation
+# Bocconi University — Theory of Finance, Part I (Lecture 5)
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_dyn_001",
+    "domain": "Asset Allocation",
+    "topic": "Programación Dinámica — Buy-and-Hold No Es Óptimo",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Guidolin, M. (2018) — 'Long-Run Portfolio Choice: Tactical vs. Strategic Asset Allocation', Bocconi University — Theory of Finance Part I, Lecture 5, Fall 2018",
+    "front": "¿Por qué la programación dinámica demuestra que el Buy-and-Hold NO es óptimo para un inversor de largo plazo, y cuál es la implicación contraintuitiva sobre la diferencia entre invertir a largo y a corto plazo?",
+    "back": "Demostración formal: el problema dinámico de largo plazo con horizonte T y B puntos de rebalanceo se descompone, por la propiedad de homogeneidad de riqueza de la utilidad CRRA, en una serie de problemas de un período. Resultado 1: Buy-and-Hold trata el largo horizonte como un único problema estático — está anidado dentro de la clase de estrategias dinámicas pero es DOMINADO por la estrategia que rebalancea en cada período. Resultado 2 (contraintuitivo): bajo retornos IID, el peso óptimo del largo plazo ES IDÉNTICO al del corto plazo (portafolio miope). 'If returns are not predictable, all investors are short-term.' Paradoja aparente: el inversor de largo plazo y el de corto plazo invierten igual cuando no hay predictibilidad. La diferencia solo emerge cuando los retornos SON predecibles — entonces el inversor de largo plazo añade una cartera de cobertura (hedging portfolio) al portafolio miope.",
+    "latex": r"\max_{\{x_t\}} E_t\left[\frac{W_T^{1-\gamma}}{1-\gamma}\right] = \max_{x_t} E_t\left[\frac{W_{t+1}^{1-\gamma}}{1-\gamma}\right] + \text{hedging demand} \quad \text{(bajo predictibilidad)}",
+    "intuition": "Un inversor que va a retirarse en 20 años invierte igual que uno que se retira en 1 año — si los mercados son impredecibles. La diferencia no está en el horizonte sino en la REACCIÓN a las noticias. El largo plazo no te da ventaja inherente; solo te da más oportunidades de rebalancear y explotar la predictibilidad si existe.",
+    "mcq": {
+        "question": "Guidolin (2018) usa el principio de Bellman para resolver el problema dinámico. ¿Qué establece este principio y cómo transforma el problema de T períodos?",
+        "options": [
+            "A) El principio de Bellman establece que la estrategia óptima se puede encontrar resolviendo todos los períodos simultáneamente hacia adelante",
+            "B) El problema de T períodos se resuelve HACIA ATRÁS: comenzando desde el período terminal T y derivando la estrategia óptima en cada período anterior condicionado en la estrategia futura óptima ya conocida",
+            "C) Bellman establece que la estrategia óptima a largo plazo siempre coincide con la estrategia de un período",
+            "D) El principio de Bellman solo aplica cuando los retornos son IID y la función de utilidad es lineal",
+        ],
+        "answer": "B",
+        "explanation": "El principio de optimalidad de Bellman establece: 'Si la secuencia de decisiones {x*₀,...,x*ₜ} es óptima, entonces para cualquier sub-problema que comience en t, la sub-secuencia {x*ₜ,...,x*ₜ} también es óptima.' Esto permite resolver hacia ATRÁS (backward induction): en el último período, el problema es trivialmente myopic. En el penúltimo período, la solución óptima se encuentra conociendo la política óptima del último período, etc. Este encadenamiento convierte el problema de T decisiones en T problemas de un período conectados por la función de valor.",
+    },
+    "true_false": {
+        "statement": "Bajo retornos IID (no predecibles), el horizonte de inversión es irrelevante — un inversor con horizonte de 20 años debería mantener el mismo portafolio que uno con horizonte de 1 año.",
+        "answer": True,
+        "explanation": "Guidolin lo establece explícitamente: 'In every period asset returns are drawn from the same distribution...If returns are not predictable, then the long-horizon weight is identical to the myopic portfolio weight: there is no difference between long-horizon investing and short-horizon investing, all investors are short term.' La única diferencia emerge cuando hay predictibilidad: el inversor de largo plazo añade una cartera de cobertura contra cambios en el conjunto de oportunidades de inversión (ej., cambios en las tasas esperadas). El horizonte importa solo si hay algo que cubrir.",
+    },
+    "fill_blank": {
+        "template": "Guidolin (2018) demuestra que bajo utilidad CRRA con coeficiente de aversión al riesgo γ, el peso óptimo en el activo de riesgo es x* = E[R]/( _______ × σ²), donde la riqueza Wₜ no aparece en la fórmula — propiedad de _______ de la utilidad de poder.",
+        "answers": ["γ, homogeneidad de riqueza", "gamma, wealth homogeneity", "γ, scale invariance"],
+    },
+    "connections": ["Campbell & Viceira (1999) — hedging demands grandes", "Markowitz — myopic portfolio como caso especial", "Rebalancing premium — Guidolin (2018)", "Bellman (1957) — dynamic programming"],
+},
+
+{
+    "id": "aa_dyn_002",
+    "domain": "Asset Allocation",
+    "topic": "Rebalanceo como Estrategia Short-Volatilidad y Rebalancing Premium",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Guidolin, M. (2018) — Bocconi University — Theory of Finance Part I, Lecture 5",
+    "front": "¿Por qué el rebalanceo periódico es matemáticamente equivalente a una posición SHORT en opciones, y qué es el 'rebalancing premium' que genera?",
+    "back": "Demostración con árbol binomial (2 períodos, acción puede doblar o reducirse a la mitad, bono paga 10%): (1) Portafolio buy-and-hold 60/40: payoffs LINEALES en el precio final de la acción. (2) Portafolio rebalanceado 60/40 al final del período 1: payoffs CÓNCAVOS (convexos inversos). (3) Para replicar los payoffs del portafolio rebalanceado exactamente, se necesita: buy-and-hold + short call (strike ~$3.676) + short put (strike ~$0.466). La short volatilidad es el componente activo. Implicación: el rebalanceo vende convexidad — cuando los mercados caen mucho compra más acciones (como un short put), y cuando suben mucho vende acciones (como un short call). El rebalancing premium ≈ 1% anual para US equities, equivalente al 'short vol premium' capturado. Condición para que funcione: los activos deben exhibir mean-reversion (no tendencias permanentes). Falla en mercados permanentemente en tendencia (bubbles o destrucción permanente de capital).",
+    "latex": r"W_T^{rebalanced} = W_T^{buy\text{-}hold} - C_{call}(\text{K}_{high}) - P_{put}(\text{K}_{low}) + \text{risk-free}",
+    "intuition": "Rebalancear es como ser el vendedor de seguros del mercado: cuando el mercado cae (tu asegurado sufre), compras más — cobras la prima de riesgo de volatilidad. Cuando el mercado sube, vendes — similar a vender el upside. A largo plazo, esta 'prima del seguro' compone y genera ~1% adicional anual. Pero si el mercado nunca revierte (burbuja perpetua), el vendedor de seguros pierde.",
+    "mcq": {
+        "question": "Guidolin establece que el rebalancing premium requiere que los activos exhiban mean-reversion (stationarity). ¿Qué ocurre con la estrategia si un activo del portafolio experimenta destrucción permanente de capital?",
+        "options": [
+            "A) El rebalancing premium aumenta porque hay más volatilidad para explotar con short vol",
+            "B) El rebalanceo destruye riqueza — la estrategia sigue comprando el activo en declive permanente, acumulando pérdidas sin la reversión que daría la prima",
+            "C) La estrategia automáticamente elimina el activo en declive cuando cae por debajo de un umbral mínimo",
+            "D) El rebalancing premium se vuelve negativo pero compensa con los otros activos del portafolio",
+        ],
+        "answer": "B",
+        "explanation": "Guidolin lo llama la 'paradoja del rebalanceo': 'Rebalancing leads to buying more assets that eventually disappear — this is wealth destruction.' El ejemplo clásico: rebalancear entre S&P 500 y una acción individual que quiebra. Cada vez que la acción cae, el modelo compra más esperando la reversión — pero si quiebra definitivamente, habrás convertido las pérdidas en pérdidas amplificadas. SOLUCIÓN: rebalancear sobre clases de activos DIVERSIFICADAS ('global equities, global sovereign bonds, real estate'), no stocks individuales. La diversificación reduce la probabilidad de destrucción permanente.",
+    },
+    "true_false": {
+        "statement": "Guidolin (2018) demuestra que el rebalancing premium aumenta cuanto menor es la volatilidad de los activos, porque así hay más 'señal' para capturar.",
+        "answer": False,
+        "explanation": "Lo opuesto: el rebalancing premium ES MAYOR cuanto MAYOR es la volatilidad de los activos. Matemáticamente, la diferencia entre la media geométrica y aritmética (el término de Jensen que captura el rebalancing premium) es aproximadamente σ²/2. Para US stocks: rebalancing premium ≈ σ²/2 ≈ (20%)²/2 = 2% en teoría, pero en práctica se materializa como ~1% anual por friction de rebalanceo imperfecto. A mayor volatilidad, mayor el término de Jensen, mayor el premium de rebalanceo. Esto explica por qué el rebalanceo es especialmente valioso durante períodos volátiles con mean-reversion subsiguiente.",
+    },
+    "fill_blank": {
+        "template": "El rebalancing premium matemáticamente emerge de la diferencia entre media _______ y media aritmética, que es proporcional a σ²/2. Para horizontes múltiples, la riqueza bajo rebalanceo crece como el producto de retornos geométricos, mientras que bajo buy-and-hold crece como el producto de retornos aritméticos — creando los 'Jensen's terms' o términos de _______.",
+        "answers": ["geométrica, compounding", "geometric, Jensen", "geométrica, Jensen"],
+    },
+    "graph_type": "risk_parity_contributions",
+    "connections": ["Kelly criterion — growth-optimal investing", "Erb & Harvey (2006) — volatility pumping", "Ang (2014) — rebalancing en portafolios de largo plazo", "Brunick & Harlow (2025) — short volatility en overlay de opciones"],
+},
+
+{
+    "id": "aa_dyn_003",
+    "domain": "Asset Allocation",
+    "topic": "TAA bajo Predictibilidad — Hedging Demands y Oportunidades Dinámicas",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Guidolin, M. (2018) — Bocconi University — Theory of Finance Part I, Lecture 5",
+    "front": "¿Qué es la 'hedging demand' en el contexto del portafolio dinámico de largo plazo, de qué dos determinantes depende, y por qué Campbell & Viceira (1999) encuentran que puede ser el doble de la demanda total por acciones?",
+    "back": "Cuando los retornos son PREDECIBLES (investment opportunity set varía en el tiempo), el portafolio óptimo de largo plazo = portafolio miope + cartera de cobertura (hedging portfolio). La hedging demand cubre contra cambios adversos en el conjunto de oportunidades de inversión (caída en los retornos esperados futuros). Dos determinantes: (1) TOLERANCIA AL RIESGO (1/γ): más aversión al riesgo → más cobertura. El inversor log-utility (γ=1) tiene hedging demand = 0 porque maximiza la suma de log-retornos de un período — la cobertura es innecesaria. (2) PROPIEDADES DE LOS ACTIVOS: cuánto cubre cada activo las variaciones en las oportunidades. Un activo que paga bien cuando los retornos esperados futuros caen (ej. bonos de larga duración durante recesiones con bajadas de tasas) tiene alta demanda de cobertura. Campbell & Viceira (1999): la demanda de cobertura puede ser ≥2x la demanda miope para inversores con alta aversión al riesgo y horizontes de 10+ años — dominando la asignación total.",
+    "mcq": {
+        "question": "Para un inversor con utilidad logarítmica (γ=1), la hedging demand es exactamente 0. ¿Por qué esto es intuitivo matemáticamente?",
+        "options": [
+            "A) Porque log(1+r) es una función lineal de los retornos — no hay no-linealidades que cubrir",
+            "B) Porque el log-inversor maximiza la suma de log-retornos de un período (E[log W_T] = Σ E[log(1+rp,t+1)]), y cada término se maximiza independientemente — el futuro no afecta las decisiones del período actual",
+            "C) Porque la utilidad logarítmica implica aversión al riesgo infinita — el inversor no toma ningún riesgo y por tanto no necesita cobertura",
+            "D) Porque γ=1 es un punto de singularidad matemática donde el portafolio collapsa a solo activos sin riesgo",
+        ],
+        "answer": "B",
+        "explanation": "Con U(W)=log(W), E[log(Wₜ)] = Σₜ E[log(1+rp,t+1)]. Esta suma se maximiza término a término, ya que cada log-retorno de un período es independiente bajo la expectativa del período actual. Por tanto, maximizar el portafolio de largo plazo es idéntico a maximizar el portafolio de corto plazo en cada período — no hay término de cobertura. Para γ>1 (mayor aversión), hay interacción entre períodos vía el valor indirecto de la riqueza futura, generando hedging demands. El log-inversor es el 'myopic investor' por excelencia.",
+    },
+    "true_false": {
+        "statement": "Guidolin (2018) concluye que existe consenso académico sobre el tamaño de la hedging demand — Campbell & Viceira (1999) y otros papers llegan a las mismas estimaciones cuantitativas.",
+        "answer": False,
+        "explanation": "Guidolin es explícito sobre el debate: 'There has been a debate in the academic literature on how large these hedging demands really are. Campbell and Viceira (1999) estimate hedging demands to be very large that are easily double the average total demand for stocks; others estimate small hedging because predictability would be weak.' Las estimaciones divergen porque dependen críticamente del modelo de predictibilidad asumido. Si se usa un modelo que muestra fuerte predictibilidad (ej. dividend yield predice retornos futuros), las hedging demands son grandes. Con modelos donde la predictibilidad es estadísticamente débil o inestable, las hedging demands se hacen pequeñas. Este debate es esencial para la práctica del TAA.",
+    },
+    "fill_blank": {
+        "template": "Los activos que tienen alta hedging demand para un inversor de largo plazo son aquellos que pagan BIEN cuando las _______ de inversión se deterioran — como bonos de larga duración que suben cuando las expectativas de retorno de la renta variable bajan, o puts protectores que generan payoff en caídas de mercado.",
+        "answers": ["oportunidades", "perspectivas", "investment opportunities", "condiciones de inversión"],
+    },
+    "connections": ["Campbell & Viceira (1999) — large hedging demands", "Epstein-Zin utility — separación entre EIS y aversión al riesgo", "Intertemporal CAPM — Merton (1973)", "AQR (2014) — timing y value de la predictibilidad"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Oliveira, Sandfelder, Fujita, Dong & Cucuringu
+# Tactical Asset Allocation with Macroeconomic Regime Detection
+# U. São Paulo / Oxford / UCLA — Received March 2025
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_mac_001",
+    "domain": "Asset Allocation",
+    "topic": "TAA con ML — Modified K-Means para Detección de Regímenes Macroeconómicos",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Oliveira, D.C., Sandfelder, D., Fujita, A., Dong, X. & Cucuringu, M. (2025) — 'Tactical Asset Allocation with Macroeconomic Regime Detection', U. São Paulo / Oxford / UCLA. Received 14 March 2025",
+    "front": "¿Por qué Oliveira et al. usan datos MACROECONÓMICOS (FRED-MD, 127 variables) en lugar de retornos de activos para detectar regímenes, y cómo funciona el algoritmo modified k-means en 2 etapas?",
+    "back": "Motivación para datos macro: Los retornos de activos son ruidosos por naturaleza — shocks microestructurales, sentiment, y liquidez contaminan la señal. Los datos macroeconómicos (desempleo, inflación, producción industrial, crédito, etc.) son más estables y representan el estado FUNDAMENTAL de la economía. Problema clásico: los modelos HMM/clustering sobre retornos 'ven' solo síntomas, no causas. Algoritmo de 2 etapas: (1) KMeans[ℓ₂] con k=2 — separa meses OUTLIERS (los que están muy lejos del centro de la nube de datos en distancia euclidiana) del resto. Los outliers forman el Régimen 0 (dificultad económica). (2) KMeans[Cosine] sobre los meses TÍPICOS — usa similitud coseno (magnitud-agnóstico) para separar los meses normales en r regímenes adicionales (r determinado por el 'elbow method'). Resultado: 6 regímenes (0=dificultad, 1=recuperación, 2=expansión, 3=stagflación, 4=pre-recesión, 5=boom reflacionario).",
+    "mcq": {
+        "question": "¿Por qué Oliveira et al. usan distancia COSENO en lugar de distancia euclidiana (ℓ₂) para la segunda etapa de clustering de meses típicos?",
+        "options": [
+            "A) La distancia coseno es computacionalmente más eficiente para 127 dimensiones",
+            "B) Después de la primera etapa con ℓ₂ (que filtra outliers por magnitud), los meses típicos tienen magnitudes similares — la distinción relevante entre ellos es la DIRECCIÓN de sus vectores macroeconómicos (qué variables suben vs. cuáles bajan), no la magnitud. La similitud coseno captura esto mejor.",
+            "C) La distancia coseno garantiza convergencia matemática mientras que ℓ₂ puede no converger en alta dimensión",
+            "D) Los autores usan coseno por convención en la literatura de NLP de donde toman el método",
+        ],
+        "answer": "B",
+        "explanation": "El paper lo justifica explícitamente: 'The ℓ₂ clustering used to define set B ensures that the state vectors of months within B have magnitudes of similar sizes. To further parse these periods requires switching to a distance metric that is magnitude agnostic.' Una vez que todos los meses tienen magnitudes comparables (resultado de la primera etapa), lo que los diferencia es su 'dirección' — si el vector macro apunta hacia 'más crecimiento, menos inflación' (expansión) o 'menos crecimiento, más inflación' (stagflación). La similitud coseno mide exactamente el ángulo entre vectores, capturando esta distinción direccional.",
+    },
+    "true_false": {
+        "statement": "El modified k-means de Oliveira et al. asigna cada mes a un único régimen determinístico, igual que el k-means estándar.",
+        "answer": False,
+        "explanation": "Una innovación clave del paper es generar distribuciones de probabilidad sobre regímenes, no asignaciones determinísticas. Para cada mes t, se calculan las distancias al centroide de cada cluster y se convierten en probabilidades: P(Cᵢ) = (1 − dᵢ/Σdⱼ) / Σ(1 − dₘ/Σdⱼ). Esto permite que un mes sea '60% Expansión + 30% Pre-Recesión + 10% Stagflación' — capturando la incertidumbre en los puntos de transición entre regímenes. Esta probabilización es esencial para pronosticar el régimen FUTURO multiplicando la distribución actual por la matriz de transición (como un proceso de Markov).",
+    },
+    "fill_blank": {
+        "template": "Para pronosticar el régimen del período siguiente, Oliveira et al. combinan la distribución de probabilidad del régimen actual (p̃ₜ) con la matriz de _______ de regímenes Eₜ según la fórmula p̃ₜ₊₁ = p̃ₜ · Eₜ — que es idéntico al proceso de iterar un _______ de Markov.",
+        "answers": ["transición, cadena", "transition, Markov chain", "transición, proceso"],
+    },
+    "graph_type": "correlation_matrix_regimes",
+    "connections": ["Hamilton (1989) — HMM para regímenes", "FRED-MD — McCracken & Ng (2016)", "Fuzzy c-means — Bezdek (1981)", "Black-Litterman — vistas como priors sobre regímenes"],
+},
+
+{
+    "id": "aa_mac_002",
+    "domain": "Asset Allocation",
+    "topic": "TAA Regímenes Macroeconómicos — 6 Regímenes, Resultados y Long-Only Domina",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Oliveira, D.C. et al. (2025) — 'TAA with Macroeconomic Regime Detection', U. São Paulo / Oxford / UCLA",
+    "front": "¿Cuáles son las características macroeconómicas de cada uno de los 6 regímenes identificados, y cuál es el hallazgo contraintuitivo sobre estrategias long-only vs. long-short?",
+    "back": "6 REGÍMENES: (0) Dificultad Económica — máximo desempleo, mínimo ingreso/sentimiento/tasa Fed, más estable y propenso a transicionar a stagflación. (1) Recuperación — inflación controlada, equity rezagado por incertidumbre, alto sentimiento. (2) Expansión — prosperity fuerte, equity sólido, inflación moderada. (3) Presión Stagflacionaria — inflación alta, tasas subiendo, equity débil. (4) Pre-Recesión — inflación enfriando, actividad lenta, unemployment subiendo levemente. (5) Boom Reflacionario — política monetaria laxa, equity fuerte, inflación alta, QE asociado. HALLAZGO CONTRAINTUITIVO: Las estrategias LONG-ONLY superan consistentemente a las long-short en todos los modelos probados (naive, ridge, BL, MVO). Mejor resultado: ridge long-only l=3 con Sharpe=1.505, Sortino=3.170, MaxDD=−4.386%. Vs. SPY (benchmark): Sharpe=0.818, MaxDD=−33.5%. Las estrategias long-short (que añaden shorts sobre activos con view negativo) tienen mayor complejidad pero introducen más ruido que señal.",
+    "mcq": {
+        "question": "El modelo ridge long-only (l=3) de Oliveira et al. logra MaxDD de solo −4.386% vs. −33.492% del SPY. ¿Cuál es la explicación principal de este drástico menor drawdown con retornos superiores?",
+        "options": [
+            "A) El ridge regression predice perfectamente los crashes del mercado con anticipación suficiente para salir",
+            "B) El portafolio long-only con l=3 solo invierte en los 3 ETFs con las mejores perspectivas régimen-condicionales, evitando activos en regímenes adversos — la protección viene de omitir exposición a activos en libre caída, no de posiciones cortas activas",
+            "C) El modelo usa volatility scaling al 10% que mecánicamente reduce las pérdidas a una fracción del benchmark",
+            "D) El paper compara el ridge con el SPY en diferentes períodos históricos donde el SPY tuvo peor performance",
+        ],
+        "answer": "B",
+        "explanation": "Hay dos mecanismos: (1) Selección long-only régimen-condicional — el modelo identifica qué ETFs tendrán mejor Sharpe ratio en el régimen más probable del próximo período y solo invierte en los l=3 mejores. En régimen de dificultad económica, esto naturalmente evita la renta variable y favorece activos de refugio. (2) Volatility scaling al 10% anualizado — se menciona que todos los resultados usan '10% volatility scaling', que normaliza la volatilidad del portafolio al 10%. Esto no elimina los drawdowns estructurales pero sí controla el tamaño de posición. La combinación de selección inteligente + sizing es lo que produce el MaxDD drásticamente menor.",
+    },
+    "true_false": {
+        "statement": "Oliveira et al. encuentran que los portafolios con más activos seleccionados (l=4) consistentemente superan a los portafolios más concentrados (l=2), porque la mayor diversificación mejora el ratio Sharpe.",
+        "answer": False,
+        "explanation": "El paper encuentra lo opuesto: 'lower-dimensional models (l=2 or l=3) consistently outperform higher-dimensional ones (l=4).' El resultado es que modelos más simples y concentrados capturan mejor las dinámicas fundamentales del régimen. Con l=4, se añaden activos con señales más débiles que introducen ruido — diluyendo el alpha de las posiciones de alta convicción. Este hallazgo es consistente con la literatura más amplia sobre 'less is more' en selección de portafolios régimen-condicional.",
+    },
+    "numerical_problem": {
+        "question": "El modelo ridge_lo_3 tiene Sharpe=1.505, mientras SPY tiene Sharpe=0.818. Si la volatilidad de ambos es 10% (por el volatility scaling), ¿cuáles son los retornos implícitos (excess over cash) de cada estrategia, asumiendo RF=0% por simplicidad?",
+        "steps": [
+            "Sharpe = (Retorno − RF) / Volatilidad",
+            "Retorno ridge_lo_3 = Sharpe × Vol = 1.505 × 10% = 15.05%",
+            "Retorno SPY = 0.818 × 10% = 8.18%",
+            "Alpha absoluto = 15.05% − 8.18% = 6.87% anual sobre riesgo equiparable",
+        ],
+        "answer": "Ridge: ~15.05% | SPY: ~8.18% | Alpha: ~6.87% anual con misma volatilidad",
+        "bus_hint": "Retorno = Sharpe × 10% | Ridge: 1.5×10=15% | SPY: 0.8×10=8% | Alpha≈7%",
+    },
+    "connections": ["Hamilton HMM (1989) — referencia base", "Black-Litterman — views régimen como priors", "Ridge regression — regularización para regímenes con pocos datos", "Ang & Bekaert (2004) — regímenes afectan asset allocation"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# ASSET ALLOCATION — Brzenk (2018) S&P Dow Jones Indices
+# Constructing a Systematic Asset Allocation Strategy:
+# The S&P Dynamic Tactical Allocation Index (DTAQ)
+# S&P DJI Research — November 2018
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "aa_dtq_001",
+    "domain": "Asset Allocation",
+    "topic": "S&P DTAQ — Arquitectura: Señales de Tendencia y Volatilidad",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Brzenk, P. CFA (2018) — 'Constructing a Systematic Asset Allocation Strategy: The S&P Dynamic Tactical Allocation Index', S&P Dow Jones Indices Research, November 2018",
+    "front": "¿Cuál es la arquitectura de señales del S&P DTAQ y cómo la combinación de trend + volatility determina el nivel de asignación de cada clase de activo?",
+    "back": "Arquitectura: Base allocation (risk-on): 85% equities (US/DM/EM) + 15% alternatives (Real Estate/Commodities/Gold). Fixed income = 0% en el base case. Cada mes, cada clase de activo se clasifica via 2 señales: SEÑAL DE TENDENCIA (SMA 125 días): Trend = Ptₜ/SMAₜ − 1. Positivo = precio por encima del promedio de 6 meses → tendencia alcista. Negativo = debajo del promedio → tendencia bajista. SEÑAL DE VOLATILIDAD: High Vol = VOLₜ,20D / VOLₜ,125D > 150%. La volatilidad corta (20 días) es >150% de la larga (125 días) → período de distress. Matriz de asignación (Exhibit 3): Tendencia Positiva + Vol Normal = 100% del target weight. Tendencia Positiva + Vol Alta = 100% (no se penaliza). Tendencia Negativa + Vol Normal = 50% → resto a renta fija. Tendencia Negativa + Vol Alta = 0% → todo a renta fija. Resultado: protección dinámica sin pronósticos económicos — puramente basado en precio y volatilidad del propio activo.",
+    "latex": r"\text{Trend}_t = \frac{P_t}{SMA_{125d}} - 1, \quad \text{HighVol} = \mathbb{1}\left[\frac{VOL_{20d}}{VOL_{125d}} > 1.5\right]",
+    "intuition": "Es como un semáforo automático para cada activo: verde (100%) si el precio va bien y la volatilidad es normal. Amarillo (50%) si el precio baja pero con calma. Rojo (0%) si el precio baja Y hay pánico en la volatilidad. El sistema nunca 'opina' sobre el futuro — solo observa el pasado reciente y ajusta la posición según las condiciones actuales.",
+    "mcq": {
+        "question": "¿Por qué el umbral de 150% (volat. corta / volat. larga) se usa como definición de 'alta volatilidad' en lugar de un nivel absoluto?",
+        "options": [
+            "A) Porque 150% es el umbral regulatorio de Basel III para volatilidad de portafolios institucionales",
+            "B) Porque 150% de la volatilidad de largo plazo representa aproximadamente 1 desviación estándar por encima del promedio histórico de la volatilidad de corto plazo — reduciendo falsos positivos sin ser conservador en exceso",
+            "C) Porque la relación entre volatilidad corta y larga es constante en el tiempo, haciendo que cualquier valor sobre 150% sea anomalía estadística",
+            "D) Porque 150% corresponde al nivel del VIX de 30 que Cloutier et al. (2017) usaron como trigger point",
+        ],
+        "answer": "B",
+        "explanation": "El paper explica: 'The level of 150% acts as the threshold based on an approximately statistically significant distance away from average volatility. This serves two purposes: 1) it reduces readings of false positives and short-term spikes, and 2) it is not overly conservative in labeling a period as high volatility.' El uso de una medida RELATIVA (ratio) en lugar de absoluta resuelve un problema práctico: la volatilidad 'normal' varía entre clases de activos (commodities > bonds > equities). Un umbral relativo es aplicable uniformemente a todos los activos sin calibración específica por clase.",
+    },
+    "true_false": {
+        "statement": "En la S&P DTAQ, si la tendencia de un activo es positiva pero su volatilidad es alta (corta > 150% de larga), la asignación se reduce al 50% para proteger al portafolio de una reversión inminente.",
+        "answer": False,
+        "explanation": "Esta es una de las características más contraintuitivas del diseño del DTAQ. Según Exhibit 3: Tendencia Positiva + Alta Volatilidad = 100% del peso objetivo. La lógica: si el precio está por encima de su media móvil de 6 meses (tendencia positiva), el activo sigue en tendencia alcista — el hecho de que la volatilidad sea alta puede reflejar aceleración del movimiento alcista, no señal de reversión. Solo se reduce la asignación cuando la TENDENCIA es negativa (precio cayendo). La volatilidad alta solo importa DENTRO de una tendencia bajista para determinar si la reducción es parcial (50%) o total (0%).",
+    },
+    "fill_blank": {
+        "template": "La tendencia en el S&P DTAQ se mide como la relación entre el precio actual y el _______ previo de 125 días. Un resultado positivo indica que el activo se cotiza por encima de su promedio reciente y mantiene exposición _______ al target weight.",
+        "answers": ["promedio móvil simple, completa", "SMA, plena", "Simple Moving Average, del 100%"],
+    },
+    "graph_type": "theme_adoption_s_curve",
+    "connections": ["Cloutier et al. (2017) — VIX como señal TAA", "Momentum factor — señales de precio", "Volatility scaling — 20D/125D ratio", "S&P DTAQ — trend following + mean reversion"],
+},
+
+{
+    "id": "aa_dtq_002",
+    "domain": "Asset Allocation",
+    "topic": "S&P DTAQ — Estrategias Intra-Equity: Contrarian, Momentum y Size",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Brzenk, P. CFA (2018) — 'Constructing a Systematic Asset Allocation Strategy: The S&P Dynamic Tactical Allocation Index', S&P DJI Research, November 2018",
+    "front": "¿Cómo estructura el S&P DTAQ la exposición a equity US usando 3 sub-estrategias (Contrarian, Momentum, Size), y qué racional empírico sustenta cada una?",
+    "back": "Dentro del 85% de equity, la porción US se divide en 3 estrategias: (1/3) SIZE: S&P 500 Equal Weight Index — captura la anomalía de small/mid-cap dentro del S&P 500 (igualar pesos favorece compañías más pequeñas dentro del índice). Racional: efecto tamaño de Fama-French. (2/3 total, 44.44% peso en US equity) MOMENTUM: S&P 500 Momentum Index — sobrepondera sectores del S&P 500 con mejor desempeño reciente. Racional: momentum como factor persistente. (22.22% peso) CONTRARIAN: sobrepondera sectores del S&P 500 con PEOR desempeño reciente — basado en mean-reversion. Racional: reversión al promedio en el corto plazo. El diseño crea diversificación de FACTORES dentro de la exposición a equity US: momentum captura continuación, contrarian captura reversión, size captura el efecto tamaño. Esta tri-estrategia evita apostar a un solo factor.",
+    "mcq": {
+        "question": "¿Por qué el DTAQ mantiene simultáneamente exposición a MOMENTUM y CONTRARIAN en el equity US si estos dos factores son teóricamente opuestos?",
+        "options": [
+            "A) Porque el DTAQ calcula cuál estrategia es mejor cada mes y alterna entre ellas",
+            "B) Porque el momentum y la reversión funcionan en horizontes DISTINTOS — momentum en 6-12 meses, reversión en plazos más cortos — y tener ambos crea una estrategia más robusta que captura distintos fenómenos de fijación de precios sin hacer una apuesta única sobre cuál prevalece",
+            "C) Porque la regulación de S&P Dow Jones requiere que todos los índices incluyan representación de múltiples factores",
+            "D) Porque momentum y contrarian están perfectamente negativamente correlacionados, creando un portafolio de varianza cero",
+        ],
+        "answer": "B",
+        "explanation": "La convivencia de momentum (seguir tendencias de mediano plazo, 6-12 meses) y contrarian (apostar a la reversión de corto plazo) es una forma de diversificación de estrategias. Asness, Moskowitz & Pedersen (2013) documentaron que valor y momentum, aunque teóricamente opuestos, juntos mejoran el perfil riesgo-retorno porque tienen correlación negativa en la práctica. Análogamente, momentum sectorial y reversión sectorial capturan distintos ineficiencias del mercado. El tamaño de cada sub-estrategia (44.44% momentum vs. 22.22% contrarian) refleja la evidencia de que el momentum históricamente ha tenido mayor persistencia que la reversión de corto plazo.",
+    },
+    "true_false": {
+        "statement": "El S&P DTAQ ajusta los pesos entre las sub-estrategias de US equity (Contrarian, Momentum, Size) mensualmente basado en cuál ha tenido mejor desempeño en el período reciente.",
+        "answer": False,
+        "explanation": "Los pesos entre las 3 sub-estrategias son FIJOS: 44.44% Momentum, 22.22% Contrarian, 33.33% Size. Lo que cambia mensualmente son las POSICIONES dentro de cada sub-estrategia (qué sectores sobreponderan el momentum o el contrarian), no la asignación entre estrategias. Lo que cambia a nivel de la asignación táctica es si la exposición total al equity US se mantiene al 100% de su target (tendencia positiva) o se reduce al 50% o 0% (tendencia negativa), con el resto yendo a renta fija. Es una distinción importante: el sistema ajusta CUÁNTO equity US, no CÓMO se gestiona ese equity US.",
+    },
+    "fill_blank": {
+        "template": "La estrategia contrarian dentro del S&P DTAQ se basa en el principio de _______ — que los sectores del S&P 500 que tuvieron el PEOR desempeño reciente tenderán a recuperarse. La estrategia momentum se basa en el principio opuesto: los sectores con MEJOR desempeño reciente continuarán haciéndolo.",
+        "answers": ["reversión a la media", "mean reversion", "reversión al promedio"],
+    },
+    "connections": ["Momentum factor — Jegadeesh & Titman", "Contrarian — De Bondt & Thaler", "Size factor — Fama & French", "AQR (2014) — momentum como complemento al valor"],
+},
+
 ]
 
 
