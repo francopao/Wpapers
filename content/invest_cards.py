@@ -1585,6 +1585,308 @@ print(f"Coeficientes: {lasso.coef_[selected].round(4)}")
     "connections": ["Mark-to-market accounting — IFRS 9/13", "Ideal vs. historical cost accounting", "Penman — Financial Statement Analysis and Security Valuation", "Fair value hierarchy — Level 1/2/3"],
 },
 
+### PARTE 3
+
+# ════════════════════════════════════════════════════════════════
+# THEMATIC INVESTING — Robeco (2025)
+# What Makes Thematic Investing a Strong Alternative
+# in Volatile Markets — June 2025
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "th_rob_001",
+    "domain": "Thematic Investing",
+    "topic": "Temas vs. Sectores — Diferenciación Fundamental",
+    "difficulty": "Foundational",
+    "mode_tags": ["bus", "home"],
+    "source": "Robeco (2025) — 'What Makes Thematic Investing a Strong Alternative in Volatile Markets', June 2025",
+    "front": "¿En qué se diferencia fundamentalmente la inversión temática de la inversión sectorial, y por qué esa diferencia importa para la construcción de portafolios?",
+    "back": "La inversión temática es class-agnostic: ignora sectores, regiones y benchmarks. Un tema transversa múltiples sectores (ej. Sustainable Water incluye empresas japonesas de plomería, fabricantes de tuberías de EE.UU. y empresas francesas de filtración PFAS — tres sectores distintos, sin correlación entre sí, unidas por el tema). La inversión sectorial está confinada a una clasificación GICS/SIC. La implicancia para portafolios: los temáticos ofrecen fuentes de diversificación genuinamente estructurales, sin las correlaciones intra-sectoriales típicas de un ETF sectorial, y sin la dilución de los mega-caps que dominan los índices globales.",
+    "intuition": "Un fondo sectorial de 'salud' es como comprar todo el hospital — desde farmacéuticas hasta camillas. Un fondo temático de 'envejecimiento poblacional' es como invertir en todo lo que los ancianos necesitarán: medicina, finanzas, turismo, dispositivos de asistencia. El primer fondo te da el edificio; el segundo te da el fenómeno.",
+    "mcq": {
+        "question": "Robeco documenta que en la estrategia Sustainable Water, compañías japonesas de plomería, fabricantes de tuberías de EE.UU. y empresas francesas de filtración coexisten en el portafolio. ¿Qué característica del temático lo hace esto posible y deseable?",
+        "options": [
+            "A) El temático ignora la correlación entre activos para maximizar el número de posiciones",
+            "B) Al ser class-agnostic, selecciona empresas por su exposición al tema, no por sector ni región — generando diversificación desde drivers fundamentales distintos dentro del mismo tema",
+            "C) Los temáticos usan MSCI World como benchmark pero con un overlay de filtro sectorial",
+            "D) Las estrategias de Robeco tienen mandato específico de geografía diversificada por regulación UCITS",
+        ],
+        "answer": "B",
+        "explanation": "El valor de la diversificación temática viene de que las compañías, aunque comparten un tema, tienen drivers de negocio, geografías, clientes y cadenas de suministro completamente independientes. Una empresa japonesa de plomería comercial no correlaciona con una francesa de filtración de microcontaminantes. La diversificación es real — no cosmética como ocurre dentro de un sector donde todas las empresas responden a los mismos factores macro.",
+    },
+    "true_false": {
+        "statement": "Según Robeco (2025), el active share alto de las estrategias temáticas es una señal de preocupación porque indica desalineación con los benchmarks de mercado.",
+        "answer": False,
+        "explanation": "Robeco argumenta lo opuesto: un alto active share y tracking error son señales positivas de que la estrategia permanece fiel a su filosofía de inversión. Las desviaciones deliberadas del benchmark son la fuente del alpha diferenciado. Un active share bajo indicaría que la estrategia ha 'capitulado' al benchmark, perdiendo su razón de ser. El problema actual (2025) es que la concentración en Magnificent Seven amplifica mecánicamente el tracking error de temas subponderados en Big Tech.",
+    },
+    "fill_blank": {
+        "template": "Robeco define una 'purity temática' como el % de ingresos de una empresa vinculados a un tema específico. Morgan Stanley encuentra que un incremento del 1% en ingresos temáticos genera aproximadamente un _______% de aumento en la valoración de la acción versus el mercado.",
+        "answers": ["1.2", "1.2%", "1,2"],
+    },
+    "connections": ["Somefun et al. (2022) — Lasso y riesgo temático", "Blitz (2021) — crítica a índices temáticos", "Factor investing — class-agnostic tilts", "Gartner Hype Cycle — adopción tecnológica"],
+},
+
+{
+    "id": "th_rob_002",
+    "domain": "Thematic Investing",
+    "topic": "Ciclos de Vida de Temas y el Hype Cycle de Gartner",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Robeco (2025) — 'What Makes Thematic Investing a Strong Alternative in Volatile Markets', June 2025",
+    "front": "¿Cómo aplica Robeco el Hype Cycle de Gartner para gestionar el timing de inversión en temas emergentes, y qué implica esto para el riesgo de comprar un tema 'popular'?",
+    "back": "El Hype Cycle tiene 5 fases: Technology Trigger → Peak of Expectations → Trough of Disillusionment → Slope of Enlightenment → Plateau of Productivity. El error más costoso es comprar en el Peak (valuaciones máximas, adopción aún especulativa). Robeco usa un 'basket approach' en fases iniciales — posiciones pequeñas en múltiples compañías o en 'picks and shovels' (proveedores de insumos esenciales). En el Trough, cuando inversores venden por decepción, Robeco concentra en las empresas con ventajas competitivas reales. El error inverso: shunear temas maduros (Plateau) que ya demuestran revenue sostenido y márgenes estables — ahí los incumbents bien posicionados ofrecen compounding con menor riesgo.",
+    "mcq": {
+        "question": "En 2021, hubo $5.1T en M&A con valuaciones especulativas altísimas. En 2022 esos activos se derrumbaron. ¿En qué fase del Hype Cycle estaban esas adquisiciones, según la taxonomía de Robeco?",
+        "options": [
+            "A) Slope of Enlightenment — los modelos de negocio ya estaban validados con revenue real",
+            "B) Peak of Expectations — valuaciones infladas por expectativas de crecimiento no realizadas, pre-adoption a escala",
+            "C) Plateau of Productivity — compañías maduras con moats establecidos pero en precio",
+            "D) Technology Trigger — demasiado temprano para que el mercado valore correctamente",
+        ],
+        "answer": "B",
+        "explanation": "Robeco cita explícitamente el boom de 2021 como ejemplo del Peak: 'high assumptions about future cash flows in acquisition prices. In 2022, with stock prices falling, considerable market value in those acquisitions vaporized.' El patrón es clásico del Hype Cycle: especulación máxima → decepción ante realidad operativa inferior a las expectativas → desplome. La estrategia correcta era infraponderar en el Peak y construir posición en el Trough subsiguiente.",
+    },
+    "true_false": {
+        "statement": "Robeco recomienda evitar completamente empresas maduras (incumbents) en favor de compañías de alto crecimiento en fase temprana de adopción temática, porque ofrecen mayor alpha potencial.",
+        "answer": False,
+        "explanation": "Robeco combina explícitamente ambas: 'Our aim is to optimize risk-return potential, selecting companies high on innovation and growth as well as mature players with lower expansion potential but with solid recurring revenues and returns.' Los incumbents ricos en caja con deep moats y pricing power contribuyen resiliencia y compounding defensivo durante volatilidad. El portafolio temático ideal es un mix dinámico según la fase de vida del trend.",
+    },
+    "fill_blank": {
+        "template": "El 'picks and shovels' approach en inversión temática consiste en invertir en compañías que proveen _______ esenciales para el desarrollo del tema, sin ser necesariamente el producto final — reduciendo el riesgo de seleccionar el 'ganador' en una tecnología emergente con múltiples competidores.",
+        "answers": ["insumos", "inputs", "materiales e insumos", "infraestructura"],
+    },
+    "graph_type": "theme_adoption_s_curve",
+    "connections": ["Amara's Law — over/underestimate tech", "Moore's Law — compute scaling", "AI capex cycle 2024-2025", "Gartner Hype Cycle aplicado a GenAI"],
+},
+
+{
+    "id": "th_rob_003",
+    "domain": "Thematic Investing",
+    "topic": "Gestión Activa vs. Pasiva en Temáticos — El Debate",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Robeco (2025) — 'What Makes Thematic Investing a Strong Alternative in Volatile Markets', June 2025",
+    "front": "¿Por qué la gestión activa domina los temáticos (€648B activo vs. €195B pasivo) y cuáles son las limitaciones específicas de los ETFs temáticos pasivos según Robeco?",
+    "back": "La gestión activa domina 3:1 en temáticos (Broadridge, March 2025). Limitaciones del pasivo temático: (1) Construcción algorítmica por screening de ingresos o keywords — demasiado rígida para capturar innovadores de nicho que emergen como el tema evoluciona. (2) Rebalanceo fijo (trimestral o anual) — no puede reducir posiciones en deterioro ni ampliar en momentum positivo. (3) Baja diversificación = alta exposición a caídas cuando el tema pierde favor. (4) Sin gestión de riesgo activo: no puede rotar entre clusters (energy efficiency, energy management, energy distribution) según la evolución del megatrend. (5) ETFs temáticos frecuentemente cobran primas similares a activos sin el valor añadido de la selección.",
+    "mcq": {
+        "question": "Robeco observa que los ETFs temáticos pasivos tienen baja diversificación. ¿Cuál es la consecuencia más crítica en un entorno de mercado adverso para el tema?",
+        "options": [
+            "A) Mayores costos de transacción por el rebalanceo frecuente automático",
+            "B) Sin capacidad de rotar hacia clusters defensivos del mismo tema o reducir posiciones en deterioro, el ETF sufre caídas concentradas sin 'lugar donde esconderse'",
+            "C) El ETF no puede cumplir sus obligaciones regulatorias de liquidez diaria",
+            "D) Las restricciones de tracking error máximo fuerzan ventas en momentos inadecuados",
+        ],
+        "answer": "B",
+        "explanation": "Robeco describe el punto crítico: 'Limited flexibility also extends to portfolio trading. Position sizes can only be changed according to scheduled rebalancing...This severely limits the passive investor's ability to buy more upside when positive momentum accelerates or reduce the damage of stocks in decline.' En mercados adversos para un tema, el gestor activo puede subponderar clusters en headwinds y ampliar exposición a los más resilientes del mismo tema. El ETF pasivo soporta el golpe completo sin ajustar.",
+    },
+    "fill_blank": {
+        "template": "Robeco describe que los ETFs temáticos pasivos aplican screening por _______ o keywords, lo cual puede ser insuficiente para capturar compañías innovadoras cuya exposición al tema es real pero no está aún reflejada en sus métricas financieras históricas.",
+        "answers": ["ingresos", "revenues", "revenue", "ingresos reportados"],
+    },
+    "connections": ["Somefun et al. (2022) — Lasso vs. screening simple", "Blitz (2021) — quality biases en ETFs temáticos", "Active share como medida de diferenciación", "Factor investing pasivo vs. activo"],
+},
+
+{
+    "id": "th_rob_004",
+    "domain": "Thematic Investing",
+    "topic": "Temáticos en Mercados Fragmentados — Trump Tariffs y Desincronización",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Robeco (2025) — 'What Makes Thematic Investing a Strong Alternative in Volatile Markets', June 2025",
+    "front": "¿Por qué Robeco argumenta que la fragmentación geopolítica y los aranceles de Trump (2025) son un catalizador POSITIVO para los temáticos, específicamente para temas de infraestructura, economía circular y biodiversidad?",
+    "back": "La lógica: reshoring y near-shoring requieren masiva inversión en infraestructura local (agua, energía, smart materials, movilidad) — exactamente los temas de Robeco con exposición diversificada geográficamente. Las empresas globales grandes se vuelven más cautelosas y recortan R&D — esto crea espacio para midcaps locales ágiles (tema de Consumer Trends emergentes). La fragmentación premia a 'campeones locales' con fuertes vínculos culturales vs. conglomerados internacionales vulnerables a disrupciones de supply chain. La concentración del S&P en Magnificent Seven alcanzó el 38% (récord histórico vs. promedio centenario de 24%) — su reversión beneficiará a temas fuera de US Big Tech.",
+    "mcq": {
+        "question": "El S&P 500 registró una concentración en los top-10 del 38% en 2024, versus un promedio histórico centenario del 24%. ¿Qué implicación directa identifica Robeco para los fondos temáticos que estaban subponderados en Big Tech?",
+        "options": [
+            "A) Los fondos temáticos deben incrementar su exposición a Magnificent Seven para reducir tracking error",
+            "B) La reversión inevitable de esa concentración hacia su media histórica reducirá el tracking error de temas subponderados en Big Tech y mejorará su performance relativa",
+            "C) La concentración refleja el fair value de las plataformas de IA y es estructuralmente permanente",
+            "D) Los temáticos deben migrar a estrategias pasivas para capturar el momentum de Big Tech",
+        ],
+        "answer": "B",
+        "explanation": "Robeco señala explícitamente: 'High concentration levels in markets is itself an extreme and unsustainable deviation that will correct as hyped valuations revert to their historic averages. When this happens, we expect tracking errors to fall to reasonable ranges and relative performance to rise.' La concentración histórica del 38% está a ~14pp por encima del promedio centenario de 24% — reversión a media estadísticamente predecible que beneficia estrategias con diversificación genuina.",
+    },
+    "true_false": {
+        "statement": "Robeco argumenta que los aranceles de Trump son positivos para las empresas multinacionales del S&P 500 porque les dan protección competitiva en el mercado doméstico.",
+        "answer": False,
+        "explanation": "Al contrario: Robeco señala que 'the US's tariff hikes should hit not help US firms. It's expected to raise the cost of inputs for domestic companies and finished goods imported back into US markets by US companies manufacturing abroad. That puts all US companies' margins (and valuations) at risk.' Los aranceles afectan negativamente incluso a empresas americanas que fabrican en el exterior (la mayoría de las multinacionales del S&P 500), elevando costos de insumos y comprimiendo márgenes.",
+    },
+    "graph_type": "sector_rotation_cycle",
+    "connections": ["Magnificent Seven — concentración de mercado", "Reshoring — infraestructura y supply chains", "Mean reversion — concentración histórica del S&P", "Midcap vs. megacap — fragmentación comercial"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# THEMATIC INVESTING — Dombrovska & Dvorņikova (2021)
+# Measuring Thematic Investor Appetite and Its Effects
+# on Asset Pricing — SSE Riga Student Research Papers
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "th_app_001",
+    "domain": "Thematic Investing",
+    "topic": "Thematic Appetite — Medición y Drivers",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Dombrovska, R. & Dvorņikova, M. (2021) — 'Measuring Thematic Investor Appetite and Its Effects on Asset Pricing', SSE Riga. May 2021. ISSN 1691-4643",
+    "front": "¿Qué es el 'thematic appetite' según Dombrovska & Dvorņikova (2021), cómo lo miden, y cuál es su hallazgo principal sobre los drivers de sus cambios?",
+    "back": "Thematic appetite = preferencias de inversores por ciertos temas de inversión en un momento dado. Lo miden usando ETF fund flows de ETFs listados en EE.UU. (2004-2019) — proxy de sentimiento con ventaja sobre el índice Baker-Wurgler (que solo captura bull/bear) porque descompone la actitud inversora tema por tema. Hallazgo principal: los cambios en el thematic appetite están conducidos principalmente de forma NEGATIVA por el performance pasado del tema — es decir, los inversores son contrarian en temas (compran temas que bajaron). Esto contradice el positive feedback trading a nivel de acciones individuales y se alinea con la evidencia de que los traders institucionales contrarian son racionales correctores del mercado.",
+    "mcq": {
+        "question": "Dombrovska & Dvorņikova (2021) encuentran que el thematic appetite es principalmente conducido de forma NEGATIVA por el performance pasado. ¿Qué fenómeno de finanzas conductuales explica mejor este patrón a nivel temático?",
+        "options": [
+            "A) Momentum: los inversores compran temas ganadores porque esperan continuación",
+            "B) Negative feedback trading contrarian: inversores institucionales compran temas con bajo performance pasado esperando reversión — corrección racional del mercado",
+            "C) Disposition effect: los inversores retienen temas perdedores evitando cristalizar pérdidas",
+            "D) Herding: los inversores siguen a otros hacia temas populares con performance reciente alto",
+        ],
+        "answer": "B",
+        "explanation": "El hallazgo contradice el positive feedback trading que Barberis & Shleifer (2003) documentaron a nivel de stocks individuales. A nivel temático, el patrón dominante es contrarian — posiblemente porque los ETF temáticos atraen más inversores sofisticados que usan reversión a la media, versus el retail que sigue momentum en acciones individuales. Frijns et al. (2016) encuentran que más de la mitad de los inversores con feedback trading siguen negative feedback, correccional del mercado.",
+    },
+    "true_false": {
+        "statement": "Según Dombrovska & Dvorņikova (2021), un aumento positivo en el thematic appetite genera un efecto transitorio de +1pp en los retornos del tema que desaparece en el siguiente mes.",
+        "answer": False,
+        "explanation": "El efecto es persistente: un positive shift en thematic appetite causa un cambio positivo ESTRUCTURAL de largo plazo en el performance del fondo — en promedio +1pp en retornos que mantiene el efecto acumulativo por MÁS de 12 meses. Esto sugiere que los flujos hacia temas no son solo presión de precio transitoria (price pressure hypothesis) sino que señalizan fundamentos o crean efectos de demanda sostenidos sobre activos temáticos relativamente inelásticos.",
+    },
+    "fill_blank": {
+        "template": "Dombrovska & Dvorņikova usan ETF fund flows como proxy de thematic appetite porque, a diferencia del índice de sentimiento Baker-Wurgler que solo captura dos estados (______ o ______), los flujos permiten distinguir la actitud inversora de forma granular por tema.",
+        "answers": ["bullish, bearish", "alcista, bajista", "bull, bear"],
+    },
+    "connections": ["Barberis & Shleifer (2003) — thematic/style investing", "Gabaix & Koijen (2020) — fund flows y price inelasticity", "ETF fund flows como señal de sentimiento", "Positive vs. negative feedback trading"],
+},
+
+{
+    "id": "th_app_002",
+    "domain": "Thematic Investing",
+    "topic": "Thematic Appetite — Impacto en Asset Pricing y Price Inelasticity",
+    "difficulty": "Advanced",
+    "mode_tags": ["home"],
+    "source": "Dombrovska, R. & Dvorņikova, M. (2021) — 'Measuring Thematic Investor Appetite and Its Effects on Asset Pricing', SSE Riga",
+    "front": "¿Por qué Gabaix & Koijen (2020) concluyen que los flujos de fondos explican casi la mitad de las fluctuaciones del mercado, y qué implicación tiene esto para entender el impacto del thematic appetite en precios de activos?",
+    "back": "Gabaix & Koijen (2020) demuestran que los mercados de capitales son price-inelastic: los hogares no invierten directamente sino a través de institucionales (fondos mutuos, ETFs) que tienen restricciones de inversión. Esto amplifica el efecto precio de cualquier flujo de capital. Implicación para temáticos: cuando el thematic appetite sube para un tema (más flujos a ETFs temáticos), el mercado de las acciones subyacentes es suficientemente inelástico para que esos flujos muevan los precios de forma sostenida — no simplemente transitoria. Esto valida el hallazgo de Dombrovska & Dvorņikova de que el efecto de +1pp dura 12+ meses. La 'fashion cycle' de temas tiene poder real de precio.",
+    "latex": r"\text{Price impact} \propto \frac{\Delta \text{flows}}{\text{market elasticity}} \quad \text{con elasticidad baja} \rightarrow \text{impacto amplificado}",
+    "fill_blank": {
+        "template": "Gabaix & Koijen (2020) documentan que los mercados de capitales son 'price-_______', lo que significa que los flujos de fondos institucionales tienen impacto de precio sustancial y sostenido, sin requerir nueva información fundamental.",
+        "answers": ["inelásticos", "inelastic", "price-inelastic"],
+    },
+    "true_false": {
+        "statement": "Teo & Woo (2004) encuentran que cuando un tema pierde popularidad y sufre outflows, los precios de los stocks en ese tema convergen inmediatamente a sus valores fundamentales sin sobreshot.",
+        "answer": False,
+        "explanation": "Al contrario: Teo & Woo (2004) documentan reversals a nivel temático — stocks en temas con worst past performance y net inflows entregan retornos anormales positivos en el futuro. El proceso de corrección no es instantáneo. Además, Shiller (2003) señala que si el feedback process no se interrumpe, las expectativas sobre precio futuro crean precios actuales insostenibles que eventualmente forman una burbuja que revienta. La convergencia a fundamentales es gradual y con momentum en el intermedio.",
+    },
+    "connections": ["Price pressure hypothesis", "Feedback-trader hypothesis", "Information-response hypothesis", "Pastor, Stambaugh & Taylor (2020) — thematic performance y flows"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# THEMATIC INVESTING — Gianinazzi (2018)
+# Megatrend: l'effettivo potenziale attraverso l'utilizzo
+# dei fondi tematici — SUPSI Lugano
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "th_meg_001",
+    "domain": "Thematic Investing",
+    "topic": "Megatrends como Fondos Temáticos — Diversificación en Portafolio",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Gianinazzi, D. (2018) — 'Megatrend: l'effettivo potenziale attraverso l'utilizzo dei fondi tematici', SUPSI — Scuola universitaria professionale della Svizzera italiana, Manno, 24 settembre 2018",
+    "front": "¿Qué metodología usa Gianinazzi (2018) para evaluar si añadir fondos temáticos mejora un portafolio pasivo, y cuáles son los 3 megatrends que analiza?",
+    "back": "Gianinazzi aplica el framework de Markowitz (Media-Varianza) para calcular la frontera eficiente de portafolios que combinan un fondo pasivo suizo (UBS ETF SMI) con fondos temáticos. Los 3 megatrends: (1) Envejecimiento poblacional → Golden Age Fund (Lombard Odier), (2) Escasez de agua potable → BNP Paribas Aqua, (3) Ciberseguridad → Global Security Equity (Credit Suisse). El criterio de análisis es la combinación óptima según correlación entre los fondos: baja correlación = mayor beneficio de diversificación. La pregunta de investigación: ¿la combinación fondo temático + ETF pasivo genera un perfil riesgo-retorno más eficiente que el ETF solo?",
+    "mcq": {
+        "question": "En el framework de Gianinazzi (2018), ¿cuál es la condición más importante para que un fondo temático mejore la frontera eficiente de un portafolio pasivo?",
+        "options": [
+            "A) Que el fondo temático tenga mayor retorno histórico que el ETF pasivo",
+            "B) Que la correlación entre el fondo temático y el ETF pasivo sea suficientemente baja para generar diversificación real",
+            "C) Que el fondo temático tenga menor volatilidad que el ETF pasivo",
+            "D) Que el megatrend del fondo sea reconocido por al menos 3 instituciones financieras relevantes",
+        ],
+        "answer": "B",
+        "explanation": "Markowitz demuestra que la reducción de varianza del portafolio depende de la correlación (ρ) entre activos. Con ρ=1 no hay beneficio de diversificación. Con ρ<1, el portafolio combinado tiene menor riesgo que el promedio ponderado de las varianzas individuales. Gianinazzi evalúa exactamente esto: si el fondo temático tiene baja correlación con el SMI ETF, la combinación desplaza la frontera eficiente hacia arriba-izquierda (más retorno por unidad de riesgo). No basta con mayor retorno — podría añadir más riesgo proporcionalmente.",
+    },
+    "true_false": {
+        "statement": "Gianinazzi (2018) concluye que los 3 fondos temáticos analizados (envejecimiento, agua, ciberseguridad) tienen correlación perfecta entre sí, por lo que deben tratarse como sustitutos perfectos en el portafolio.",
+        "answer": False,
+        "explanation": "Los 3 megatrends son estructuralmente independientes: el envejecimiento poblacional tiene drivers demográficos, el agua tiene drivers geopolíticos/climáticos, y la ciberseguridad tiene drivers tecnológicos/regulatorios. Sus correlaciones entre sí son bajas, lo que es precisamente uno de los beneficios de invertir en múltiples megatrends distintos dentro de una cartera temática. Esta es la lógica del 'multi-thematic' que permite Robeco (Preserving Earth, Changing Sociodemographics, Transforming Technologies).",
+    },
+    "fill_blank": {
+        "template": "Gianinazzi (2018) basa su análisis en la teoría de selección de portafolio de Harry Markowitz (1951), específicamente en el concepto de _______ de varianza mínima, que identifica la combinación óptima de activos para minimizar el riesgo para un nivel dado de retorno esperado.",
+        "answers": ["frontera", "frontera eficiente", "efficient frontier", "varianza mínima"],
+    },
+    "graph_type": "efficient_frontier_bl",
+    "connections": ["Markowitz (1952) — Portfolio Selection", "Correlación y diversificación temática", "Gianinazzi — UBS SMI ETF como benchmark", "Multi-thematic portfolios — Robeco"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# THEMATIC INVESTING — Ajith & Tuli (2025/2026)
+# The Launch Effect of Thematic Indices: Do Themes Move Markets?
+# Rajagiri Management Journal — India
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "th_idx_001",
+    "domain": "Thematic Investing",
+    "topic": "Lanzamiento de Índices Temáticos — Efectos en Precios (India)",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Ajith, A. & Tuli, A. (2025/2026) — 'The Launch Effect of Thematic Indices: Do Themes Move Markets?', Rajagiri Management Journal, DOI: 10.1108/RAMJ-08-2025-0148",
+    "front": "¿Qué encuentran Ajith & Tuli sobre las reacciones contrarias del mercado indio al lanzamiento del Nifty CM Index vs. el BSE CAPINS Index en 2024, y qué mecanismo teórico explica cada resultado?",
+    "back": "Nifty CM (lanzado 9-Sep-2024): reacción NEGATIVA → 'buy the rumour, sell the news'. El mercado ya había anticipado el lanzamiento; al anunciarse oficialmente, inversores tomaron ganancias o expresaron preocupaciones sobre mayor escrutinio regulatorio. BSE CAPINS (lanzado 9-Oct-2024): reacción POSITIVA → entusiasmo inversor genuino el día del lanzamiento, por cobertura más amplia (capital markets + insurance) y menor anticipación previa. Los mecanismos teóricos: Price Pressure Hypothesis (efectos transitorios por demanda artificial), Liquidity Hypothesis (inclusión mejora liquidez y reduce bid-ask spread persistentemente), Information Signalling Hypothesis (el lanzamiento señala credibilidad del sector — más permanente). Los resultados contrastantes muestran que tema, diseño del índice y expectativas previas modulan cuál mecanismo domina.",
+    "mcq": {
+        "question": "El lanzamiento del Nifty CM generó retornos anormales NEGATIVOS en ventana de 3 días, a pesar de la expansión del mercado de capitales indio. ¿Cuál hipótesis teórica explica mejor este resultado?",
+        "options": [
+            "A) Liquidity Hypothesis: la inclusión en el índice reduce la liquidez porque institucionales deben concentrar posiciones",
+            "B) 'Buy the rumour, sell the news': el mercado ya había incorporado el lanzamiento anticipado, generando toma de ganancias + preocupaciones de mayor regulación al hacerse oficial",
+            "C) Information Signalling: el lanzamiento señaliza que el sector capital markets está sobrevaluado",
+            "D) Price Pressure Hypothesis: la demanda creada por el lanzamiento empuja los precios temporalmente por encima y luego revierten",
+        ],
+        "answer": "B",
+        "explanation": "Ajith & Tuli identifican el 'buy the rumour, sell the news' como la explicación principal. El mercado de capitales indio es sofisticado y activo en rumores institucionales — cuando el lanzamiento se confirma oficialmente, quienes compraron anticipadamente venden. Las preocupaciones adicionales de mayor regulatory scrutiny (más supervisión del sector ahora que hay un índice formal que lo monitorea) refuerzan el sentimiento negativo inmediato.",
+    },
+    "true_false": {
+        "statement": "Según Ajith & Tuli (2025/2026), la semi-strong form del EMH predice que el lanzamiento de un índice temático debería generar retornos anormales significativos y persistentes durante al menos 30 días.",
+        "answer": False,
+        "explanation": "La semi-strong EMH predice lo opuesto: los precios se ajustan RÁPIDAMENTE a información pública. Si el lanzamiento de un índice es información pública, no debería generar retornos anormales persistentes — el mercado ya lo habría incorporado. Ajith & Tuli usan ventana de 3 días (−1, +1) precisamente porque la EMH semi-fuerte implica ajuste inmediato. Sus hallazgos de retornos anormales en esa ventana corta son en sí mismos evidencia de que el mercado no era perfectamente eficiente respecto al timing del lanzamiento.",
+    },
+    "fill_blank": {
+        "template": "Ajith & Tuli emplean la metodología de _______ de eventos con el Market Model (Nifty 50 como benchmark) y ventana de estimación de 120 días, siguiendo la metodología estándar de MacKinlay (1997).",
+        "answers": ["estudio", "event study", "análisis de eventos"],
+    },
+    "connections": ["EMH — semi-strong form", "Event study methodology — MacKinlay (1997)", "Price pressure vs. information signalling hypothesis", "Index inclusion effects — Shleifer (1986)"],
+},
+
+{
+    "id": "th_idx_002",
+    "domain": "Thematic Investing",
+    "topic": "Efectos de Inclusión en Índices Temáticos — Literatura Global",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Ajith, A. & Tuli, A. (2025/2026) — 'The Launch Effect of Thematic Indices: Do Themes Move Markets?', Rajagiri Management Journal",
+    "front": "¿Qué patrón emerge de la literatura comparada sobre inclusión en índices temáticos (ESG, Shariah, Capital Markets) en mercados emergentes vs. desarrollados respecto a la persistencia de los retornos anormales?",
+    "back": "Mercados desarrollados (EE.UU.): retornos positivos pero generalmente transitorios en inclusiones al S&P 500 (Harris & Gurel: +3% que revierte en 2 semanas). India: evidencia mixta y generalmente débil — BSE GREENEX (2012) generó retornos negativos en 70% de firmas incluidas; S&P BSE 100 ESG no generó retornos positivos significativos. Malaysia (Shariah, 1999): inicial negativa, luego +21.7% MCAR a día 135 con +110% de volumen — recuperación gradual por nuevo pool de inversores Shariah. Indonesia (ISSI, 2011): positivo y persistente. La conclusión: los efectos dependen de (1) la madurez del mercado, (2) el nivel de anticipación previo, (3) si el lanzamiento crea un nuevo pool de inversores elegibles (como Shariah), y (4) la credibilidad del diseño del índice.",
+    "mcq": {
+        "question": "El Shariah Index de Malaysia (Sadeghi, 2008) mostró retorno negativo inicial pero +21.7% MCAR y +110% de volumen a largo plazo. ¿Cuál mecanismo explica esta dinámica específica?",
+        "options": [
+            "A) Price Pressure: el impacto inicial negativo crea un punto de entrada barato que atrae especuladores",
+            "B) Liquidity Hypothesis de largo plazo: el índice Shariah crea un nuevo pool de inversores específicos (institucionales islámicos) que gradualmente incrementan la demanda de las acciones incluidas",
+            "C) Information Signalling: el mercado tardó 135 días en analizar la información del lanzamiento",
+            "D) Mean reversion: los retornos negativos iniciales simplemente revirtieron a su media histórica",
+        ],
+        "answer": "B",
+        "explanation": "La clave del caso Shariah es la creación de un NUEVO pool de inversores elegibles que no podían invertir antes del índice (fondos islámicos con mandato Shariah-compliant). Al lanzarse el índice, esos fondos gradualmente reasignan capital hacia las acciones incluidas — proceso que tarda meses, no días. El +110% en volumen a día 135 confirma este flujo sostenido de nueva demanda institucional. Esta es la Liquidity Hypothesis en su expresión más robusta: inclusión en un índice temático relevante crea acceso a una base de inversores nueva.",
+    },
+    "true_false": {
+        "statement": "Goyal & Soni (2025) encuentran que la inclusión en el S&P BSE 100 ESG India genera retornos anormales positivos significativos, confirmando que los inversores indios valoran positivamente la señal ESG.",
+        "answer": False,
+        "explanation": "Goyal & Soni (2025) encuentran lo opuesto: NO hay retornos anormales positivos significativos para firmas añadidas al S&P BSE 100 ESG India. Esto sugiere que el mercado indio aún no 'premia' la señal ESG — posiblemente por menor base de inversores ESG-mandated, o porque el mercado no interpreta la inclusión como señal de credibilidad. Contrasta con Barontini & Gioja (2025) para MSCI ESG indices europeos que sí encuentran retornos positivos persistentes.",
+    },
+    "fill_blank": {
+        "template": "Harris & Gurel (1986) documentan que la inclusión en el S&P 500 genera un alza inicial de ~3% que _______ en aproximadamente dos semanas, apoyando la Price Pressure Hypothesis sobre la temporalidad de los efectos de demanda mecánica.",
+        "answers": ["revierte", "se revierte", "desaparece", "reverses"],
+    },
+    "connections": ["Shleifer (1986) — downward sloping demand curves", "ESG investing — señalización vs. retornos", "Emerging markets — eficiencia de mercado", "Thematic index design — Blitz (2021)"],
+},
+
 ]
 
 
