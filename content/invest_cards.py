@@ -1282,7 +1282,308 @@ print(f"Coeficientes: {lasso.coef_[selected].round(4)}")
         "answers": ["intangibles", "activos intangibles", "intangible assets"],
     },
     "connections": ["Lev & Gu (2016) — The End of Accounting", "Non-GAAP earnings — auge post-2000", "Intangibles y relevancia del accounting", "Income statement vs. balance sheet (FASB debate)"],
-}
+},
+
+# 06/06/2026
+# ════════════════════════════════════════════════════════════════
+# EQUITY INVESTING — Oh & Penman (2024)
+# A Proposal for Goodwill Accounting
+# KAIST / Columbia Business School — January 2024
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "eq_gw_001",
+    "domain": "Equity Investing",
+    "topic": "Valoración M&A — Descomposición del Precio de Adquisición",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Oh, H.I. & Penman, S. (2024) — 'A Proposal for Goodwill Accounting', KAIST / Columbia Business School, January 2024",
+    "front": "¿Cuáles son los 4 componentes en que Oh & Penman (2024) descomponen el precio de adquisición en M&A, y cuál es la fórmula central?",
+    "back": "Precio de adquisición = (1) Book value del target (Bt) + (2) Fair value de earnings adquiridos [(OIt − r·NOAt)/r] + (3) Value of Growth acquired (valor del crecimiento esperado del target standalone) + (4) Value of Combination (sinergias). El goodwill es la suma de (3) y (4): todo lo que excede el book value y los earnings actuales del target. Esta descomposición es objetiva — usa datos auditados disponibles al anuncio — versus el 'plug' subjetivo del GAAP.",
+    "latex": r"P_{acq} = B_t + \frac{OI_t - r \cdot NOA_t}{r} + V_{growth} + V_{combo}",
+    "intuition": "Comprar una empresa es como comprar una casa: el book value es el terreno (activos físicos), los earnings capitalizados son la renta que ya genera, el value of growth es el potencial de revalorización del barrio, y las sinergias son lo que tú específicamente puedes hacer con ella que otros no. El GAAP actual mezcla todo en un solo número — 'goodwill' — sin decirte qué parte es qué.",
+    "mcq": {
+        "question": "Procter & Gamble pagó $57B por Gillette. Book value = $3.6B, fair value de earnings = $19.3B, value of growth = $25.4B. ¿Cuánto implican las sinergias pagadas?",
+        "options": [
+            "A) $0B — el precio se explica completamente con book value, earnings y crecimiento",
+            "B) $8.7B — la diferencia entre el precio y el valor standalone de Gillette",
+            "C) $14.1B — la diferencia entre precio y book value",
+            "D) $25.4B — todo el crecimiento es en realidad sinergia",
+        ],
+        "answer": "B",
+        "explanation": "Standalone value de Gillette = 3.6 + 19.3 + 25.4 = $48.3B (que era el precio de mercado previo). PG pagó $57B → sinergias implícitas = 57 − 48.3 = $8.7B. Esta es la única parte verdaderamente 'incremental' que PG puede capturar que otros compradores no podrían — y debería justificarse explícitamente en el due diligence.",
+    },
+    "numerical_problem": {
+        "question": "Una empresa target tiene NOA = $500M, OI = $60M, y el required return es r = 10%. ¿Cuánto vale el componente 'fair value of earnings' según Oh & Penman (2024)?",
+        "steps": [
+            "Fair value of earnings = (OI − r·NOA) / r",
+            "= (60 − 0.10×500) / 0.10",
+            "= (60 − 50) / 0.10",
+            "= 10 / 0.10 = $100M",
+        ],
+        "answer": "$100M de valor adicionado por los earnings sobre el book value",
+        "bus_hint": "RI = OI − r·NOA = 60 − 50 = 10 → capitalizado a 10% = 10/0.10 = 100",
+    },
+    "true_false": {
+        "statement": "En el framework de Oh & Penman (2024), el goodwill GAAP actual y el goodwill propuesto son prácticamente iguales en todos los casos, con diferencias menores al 5%.",
+        "answer": False,
+        "explanation": "La tabla empírica del paper muestra diferencias enormes. Por ejemplo, Anadarko/Western Gas: GAAP goodwill = $104M vs. propuesto = $3,051M. Danaher/Beckman: GAAP = $3,746M vs. propuesto = $1,307M. Las diferencias surgen porque el GAAP asigna valor a activos individuales identificados (fair value adjustments) mientras que el modelo propuesto lo captura por la capacidad de generación de earnings conjunta. Para 8 de 12 ejemplos, el propuesto es mayor — sugiriendo que el GAAP subestima el valor de los earnings conjuntos.",
+    },
+    "fill_blank": {
+        "template": "Oh & Penman critican el goodwill GAAP como un '_______ ' al precio de compra, sin identificar qué está siendo comprado — haciendo que la impairment posterior sea ambigua porque no se sabe qué ha sido deteriorado.",
+        "answers": ["plug", "residuo", "saldo de cierre", "número residual"],
+    },
+    "connections": ["Residual Income Model — Ohlson (1995)", "Shaffer (2024) — multiples en M&A", "Goodwill impairment — ASC 350", "Penman & Zhang (2020) — contabilidad conservadora y riesgo"],
+},
+
+{
+    "id": "eq_gw_002",
+    "domain": "Equity Investing",
+    "topic": "Valoración M&A — Goodwill e Incertidumbre Contable",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Oh, H.I. & Penman, S. (2024) — 'A Proposal for Goodwill Accounting', KAIST / Columbia Business School",
+    "front": "¿Por qué Oh & Penman (2024) argumentan que el 'value of combination' (sinergias) de una adquisición tipo Merck/Prometheus Biosciences debería posiblemente NO capitalizarse en balance, y qué principio contable subyace?",
+    "back": "Principio de contabilización bajo incertidumbre: un activo solo debe capitalizarse si existe 'probable future economic benefit'. En Prometheus Biosciences: revenue = $6.8M vs. R&D expense = $112.8M — la empresa reporta pérdidas operativas de $145.8M. El R&D interno no fue capitalizado por el target (por FASB/IASB bajo R&D expensing rule) porque la probabilidad de éxito no está demostrada. ¿Por qué debería el adquirente capitalizar ese mismo R&D implícito en el goodwill? El paper aplica el mismo principio de consistencia: si el activo no era capitalizable en el target, tampoco debería serlo en el adquirente como parte del goodwill — a menos que haya evidencia concreta (Phase 3 success, patente otorgada) que cambie la probabilidad.",
+    "mcq": {
+        "question": "Un CEO adquiere una biotech pre-revenue por $10B. Según el framework de Oh & Penman (2024) aplicando el principio de contabilización bajo incertidumbre, ¿cuál sería la acción más apropiada?",
+        "options": [
+            "A) Capitalizar los $10B como goodwill porque el precio de mercado refleja el valor",
+            "B) Solo capitalizar el book value del target (~$0.7B) y expensear el resto porque el value of growth y sinergias son inciertos sin evidencia auditada de viabilidad",
+            "C) Usar el fair value de todos los activos identificados (patentes, IP) según GAAP/IFRS como base",
+            "D) Amortizar los $10B en 40 años como era práctica pre-SFAS 142",
+        ],
+        "answer": "B",
+        "explanation": "Si el R&D del target no fue capitalizable bajo incertidumbre (FASB ASC 730), aplicar el mismo principio al adquirente implica no capitalizar el valor especulativo. El due diligence documenta cuánto del precio está en activos probados (book value + earnings realizados) vs. cuánto en apuestas futuras (growth + synergies). Ese segundo bloque puede no pasar el threshold de capitalización — igual que no pasa en el target. El paper señala: 'Why should in-process R&D be recorded on the acquirer's books when it is not booked in the target's accounts?'",
+    },
+    "true_false": {
+        "statement": "Oh & Penman (2024) encuentran empíricamente que el goodwill propuesto predice mejor los futuros goodwill impairments bajo GAAP que el propio goodwill GAAP, controlando por múltiples factores.",
+        "answer": True,
+        "explanation": "En la muestra de 290 transacciones (2001-2015) con 69 impairments en los 3 años post-adquisición, el goodwill propuesto es estadísticamente significativo para predecir impairments. Crucialmente, dado el goodwill propuesto, el goodwill GAAP pierde poder predictivo — sugiriendo que el número propuesto captura mejor la sobrevaluación real de la adquisición que el 'plug' GAAP.",
+    },
+    "fill_blank": {
+        "template": "Oh & Penman argumentan que el componente de 'value of combination' (sinergias) tiene una correlación _______ con el value of growth y el valor del book value + earnings, sugiriendo escepticismo sobre si las sinergias proclamadas en acquisitions realmente existen.",
+        "answers": ["negativa", "negative", "inversa"],
+    },
+    "connections": ["R&D expensing — FASB ASC 730", "Goodwill impairment predictability", "Penman (2021) — contabilidad bajo incertidumbre", "Warren Buffett — crítica a sinergias optimistas"],
+},
+
+{
+    "id": "eq_gw_003",
+    "domain": "Equity Investing",
+    "topic": "Valoración M&A — Goodwill como Herramienta de Due Diligence",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Oh, H.I. & Penman, S. (2024) — 'A Proposal for Goodwill Accounting', KAIST / Columbia Business School",
+    "front": "¿Cómo la descomposición del precio de adquisición de Oh & Penman (2024) puede usarse ANTES del closing para evaluar si un deal tiene sentido económico?",
+    "back": "La descomposición es calculable en tiempo real con datos auditados del target (balance + P&L) al momento del anuncio — antes de que el GAAP publique números post-adquisición. Preguntas que habilita: (1) ¿Estamos pagando demasiado por el crecimiento del target? (crítico en mercados 'hot' como 2021 donde $5.1T en deals con alto múltiplo). (2) ¿El value of combination (sinergias) está justificado dado el negocio combinado? (3) ¿El ratio revenue/R&D del target indica valor realizable o especulativo? El paper calcula los componentes para Microsoft/Activision ($68.7B): Book value $17.6B + earnings $24.4B + growth $4.0B + synergies $22.7B — exponiendo que MSFT pagó $22.7B en sinergias, la mayor parte del goodwill, para una empresa con growth modesto.",
+    "mcq": {
+        "question": "En el deal MSFT/Activision ($68.7B), el value of growth adquirido fue solo $4.0B mientras que las sinergias fueron $22.7B. ¿Qué implicación tiene esto para evaluar el deal?",
+        "options": [
+            "A) El deal es malo porque hay poco crecimiento orgánico en Activision",
+            "B) MSFT está pagando principalmente por sinergias — que son el componente más incierto y más difícil de justificar — requiriendo un riguroso business case de integración",
+            "C) Un alto componente de sinergias es señal positiva de que el deal creará valor para MSFT",
+            "D) El GAAP reconocerá las sinergias como activos identificables, reduciendo el goodwill final",
+        ],
+        "answer": "B",
+        "explanation": "Las sinergias son el componente MÁS incierto y el MÁS frecuentemente ilusorio (Buffett 1997). Si la mayoría del precio está en sinergias ($22.7B de $26.7B de goodwill total), el deal depende de que MSFT pueda materializar integraciones con Xbox, Game Pass, etc. que no están probadas. El framework de Oh & Penman permite cuantificar exactamente cuánto del precio depende de promesas vs. valor demostrado.",
+    },
+    "fill_blank": {
+        "template": "La descomposición de Oh & Penman permite calcular el precio de adquisición con datos _______ al momento del anuncio, sin requerir las estimaciones de fair value de activos individuales que solo aparecen meses después en los estados financieros post-adquisición.",
+        "answers": ["auditados", "públicos", "observables", "públicos y auditados"],
+    },
+    "graph_type": "pe_ratio_vs_growth",
+    "connections": ["Purchase price allocation (PPA)", "Earnout structures en M&A", "Due diligence cuantitativo", "Microsoft/Activision deal analysis"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# EQUITY INVESTING — Aggelopoulos (2017)
+# Understanding Bank Valuation: ECF and Residual Income
+# Open Journal of Accounting, 6, 1-10
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "eq_bkv_001",
+    "domain": "Equity Investing",
+    "topic": "Valoración de Bancos — ECF vs. Residual Income: Equivalencia",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Aggelopoulos, E. (2017) — 'Understanding Bank Valuation: ECF and RI', Open Journal of Accounting 6:1-10. DOI: 10.4236/ojacct.2017.61001",
+    "front": "¿Por qué en bancos se usa Equity Cash Flow (ECF) en lugar del Enterprise DCF estándar, y por qué ambos (ECF y Residual Income) producen el mismo valor según Aggelopoulos (2017)?",
+    "back": "En bancos, la deuda (depósitos, fondos interbancarios) es un insumo operativo — no solo financiamiento. Separar 'operating cash flows' de 'financing cash flows' es imposible: el margen de intermediación ES el negocio. Por eso no se usa WACC ni EBITDA. Se usa ECF (dividendos + cambios en capital regulatorio = cash flow al accionista) descontado a ke (costo de equity vía CAPM). La equivalencia ECF = RI: ambos descontan el mismo flujo económico al accionista — ECF lo hace directamente en caja, RI lo hace como Equity(t-1) + PV(Net Income − ke·Equity(t-1)) = mismo resultado. En el ejemplo del paper: ambos producen Equity Value = 1,267 unidades monetarias.",
+    "latex": r"V_{equity} = BV_0 + \sum_{t=1}^{T} \frac{NI_t - k_e \cdot BV_{t-1}}{(1+k_e)^t} + \frac{TV_{RI}}{(1+k_e)^T}",
+    "intuition": "Valorar un banco con Enterprise DCF es como calcular el valor de un restaurante sin contar los ingresos por comida — solo la cocina. Los depósitos y el margen de interés son el negocio del banco, no su 'deuda'. El ECF mira directamente cuánto cash llega al accionista (dividendos reales o potenciales), y el Residual Income dice lo mismo en lenguaje contable: cuánto genera el banco por encima de lo que el accionista mínimamente exige.",
+    "mcq": {
+        "question": "En el ejemplo de Aggelopoulos (2017), el banco tiene equity inicial de 329 unidades. Con ECF descontado al 10% (ke CAPM), el equity value calculado es 1,267. ¿Qué implica un equity value ~4x el book value?",
+        "options": [
+            "A) El banco está sobrevalorado y debería cotizar near book value (P/B ≈ 1x)",
+            "B) El banco genera residual income positivo sostenido — ROE > ke en cada período — creando valor sobre el capital invertido",
+            "C) Los supuestos de la tasa de descuento son incorrectos porque el ke debería ser mayor para bancos",
+            "D) El modelo comete un error al no incluir el valor de los depósitos como pasivos de mercado",
+        ],
+        "answer": "B",
+        "explanation": "Un P/B > 1x implica ROE > ke: el banco gana más sobre su capital que lo que el accionista exige. En el ejemplo: Net Income ≈ 112 sobre equity inicial 329 → ROE ≈ 34% vs ke = 10%. El residual income es 112 − 0.10×329 = 79 por período — positivo y creciente. La diferencia entre equity value (1,267) y book value (329) = 938 = valor presente de todos los residual incomes futuros. Este es el 'franchise value' del banco.",
+    },
+    "true_false": {
+        "statement": "Según Aggelopoulos (2017), para valorar bancos se puede usar el método Enterprise DCF con WACC porque los depósitos son financiamiento regular, similar a la deuda corporativa.",
+        "answer": False,
+        "explanation": "Incorrecto — es uno de los errores más comunes en bank valuation. Los depósitos son simultáneamente 'deuda' y 'activo operativo' del banco: generan margen de interés (NIM) y son la materia prima del negocio bancario. Separar el valor operativo del financiero es imposible. Por eso el método correcto es ECF (o RI) aplicado directamente al equity, no Enterprise DCF con WACC. Damodaran (2009) también lo señala explícitamente.",
+    },
+    "numerical_problem": {
+        "question": "Un banco tiene Equity (inicio de año) = 329, Net Income = 112, ke = 10%. ¿Cuál es el Residual Income del año?",
+        "steps": [
+            "RI = Net Income − ke × Equity(inicio de año)",
+            "= 112 − 0.10 × 329",
+            "= 112 − 32.9 ≈ 79",
+        ],
+        "answer": "Residual Income ≈ 79 unidades monetarias",
+        "bus_hint": "RI = 112 − 10%×329 = 112 − 33 ≈ 79",
+    },
+    "fill_blank": {
+        "template": "En la valoración de bancos, el Equity Cash Flow se calcula como dividendos pagados (o potenciales) más/menos cambios en el _______ requerido, que en bancos está determinado por las reglas de capital de Basilea (Tier 1 sobre RWA).",
+        "answers": ["capital regulatorio", "capital mínimo", "Tier 1 capital", "capital Basilea"],
+    },
+    "connections": ["Damodaran — Financial firm valuation", "P/Book ratio en banca", "CAPM para bancos — beta sectorial", "NIM (Net Interest Margin) como driver de valor"],
+},
+
+{
+    "id": "eq_bkv_002",
+    "domain": "Equity Investing",
+    "topic": "Valoración de Bancos — Capital Regulatorio y Terminal Value",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Aggelopoulos, E. (2017) — 'Understanding Bank Valuation: ECF and RI', Open Journal of Accounting 6:1-10",
+    "front": "¿Por qué el capital regulatorio de Basilea (Tier 1 / RWA) es el determinante central del equity proyectado en un modelo de valoración bancaria, y cómo afecta esto al ECF?",
+    "back": "En un banco, el equity no crece libremente — está atado a los Risk-Weighted Assets (RWA) × mínimo de capital (8% Basilea + buffer). El modelo de Aggelopoulos usa 10% de RWA como equity requerido en cada año. Esto crea un 'equity constraint': si el banco necesita más capital para crecer (RWA sube), el ECF se reduce porque el exceso de utilidades debe retenerse en lugar de distribuirse. El ECF = Net Income − cambio en equity requerido = dividendos potenciales. Esta restricción es específica de bancos y no existe en corporaciones industriales, donde la política de dividendos es discrecional.",
+    "mcq": {
+        "question": "En el modelo del paper, si los préstamos del banco crecen al 3% anual y el ratio préstamos/RWA es 75%, ¿cuál es el efecto principal sobre el ECF en años de alto crecimiento de loans?",
+        "options": [
+            "A) El ECF sube porque los préstamos generan más Net Interest Income",
+            "B) El ECF puede caer porque el mayor RWA requiere más capital retenido, reduciendo los dividendos potenciales a pesar de mayor utilidad",
+            "C) El ECF no se ve afectado porque el capital regulatorio es fijo en el tiempo",
+            "D) El ECF sube siempre que el NIM (Net Interest Margin) sea positivo",
+        ],
+        "answer": "B",
+        "explanation": "Este es el trade-off central en bank valuation: crecer requiere más capital regulatorio (10% de RWA en el modelo). Si el banco gana 112 de Net Income pero necesita retener 9 adicionales para capitalizar el crecimiento de préstamos, el ECF disponible es 103 — no 112. El growth 'consume' equity. Es por esto que bancos con alto crecimiento de crédito no necesariamente generan más ECF, y por qué el modelo de Aggelopoulos produce ECF que crece más lento que el Net Income en los primeros años.",
+    },
+    "true_false": {
+        "statement": "En la valoración de bancos con el modelo ECF, el terminal value se calcula dividiendo el Net Income del año terminal entre el costo de equity — análogo al Gordon Growth Model con g=0.",
+        "answer": True,
+        "explanation": "Correcto: TV = NI_terminal / ke (con g=0 implícito). En el ejemplo: TV = 142 / 0.10 = 1,420 unidades. Esto equivale a asumir que el banco genera el mismo nivel de utilidad neta a perpetuidad sin crecimiento adicional — un supuesto conservador pero comúnmente usado para el período post-analítico. Para el modelo de RI, el TV se calcula análogamente: TV_RI = RI_terminal / ke = 101 / 0.10 = 1,010, y el valor total incluye el book value inicial + PV(RI) + PV(TV_RI).",
+    },
+    "fill_blank": {
+        "template": "El Equity Cash Flow de un banco se puede calcular también como dividendos pagados más/menos _______ de capital (recompras de acciones son outflows, emisiones son inflows), siendo este el método de verificación alternativo de Koller, Goedhart & Wessels (2005).",
+        "answers": ["cambios en el", "variaciones en", "movimientos de"],
+    },
+    "connections": ["Basilea III — capital requirements", "Gordon Growth Model — terminal value", "ROE vs. ke como driver de P/Book", "Stress testing bancario — ECF bajo escenarios"],
+},
+
+
+# ════════════════════════════════════════════════════════════════
+# EQUITY INVESTING — Penman (1997)
+# A Synthesis of Equity Valuation Techniques and the
+# Terminal Value Calculation for the Dividend Discount Model
+# UC Berkeley — Review of Accounting Studies 2:303-323
+# ════════════════════════════════════════════════════════════════
+
+{
+    "id": "eq_tv_001",
+    "domain": "Equity Investing",
+    "topic": "Valoración — DDM, DCF y Residual Income: Equivalencia y Terminal Value",
+    "difficulty": "Advanced",
+    "mode_tags": ["bus", "home"],
+    "source": "Penman, S.H. (1997) — 'A Synthesis of Equity Valuation Techniques and the Terminal Value Calculation for the DDM', UC Berkeley. Review of Accounting Studies 2:303-323",
+    "front": "¿Cuál es el hallazgo central de Penman (1997) sobre la relación entre DDM, DCF y Residual Income (RI), y qué implica para el analista que elige entre estos modelos?",
+    "back": "Con horizonte infinito, todos los modelos (DDM, DCF, RI) convergen al mismo valor — son matemáticamente equivalentes bajo clean-surplus accounting. La diferencia real está en el horizonte finito: cuando se trunca la proyección a T años, se introduce un error que depende del modelo usado y del accounting del terminal year. El insight clave: los modelos alternativos al DDM (DCF, RI) no son superiores per se — son formas de CALCULAR EL TERMINAL VALUE implícito del DDM. El RI model produce menor error de terminal value que el DCF cuando los activos operativos tendrán valor más allá del horizonte — porque el RI descontará ese valor vía el book value residual, mientras que el DCF asume liquidación.",
+    "latex": r"P_t = B_t + \sum_{\tau=1}^{T} \frac{X^a_{t+\tau}}{(1+r)^\tau} + \underbrace{\frac{P_{t+T} - B_{t+T}}{(1+r)^T}}_{\text{error terminal}}",
+    "intuition": "Es como navegar a una isla: el DDM dice 'sigue el barco hasta la isla' pero el barco (los dividendos) zigzaguea. El DCF dice 'sigue el viento' (free cash flow) — más directo pero depende de que no haya viento cruzado después del horizonte. El RI dice 'sigue el mapa' (el book value acumulado) — más robusto porque el mapa persiste más allá del horizonte visible. Todos llegan a la misma isla si navegas suficientemente lejos, pero con horizontes finitos el mapa (RI) comete menos error.",
+    "mcq": {
+        "question": "Penman (1997) muestra que el error de terminal value en el modelo DCF es igual a la ____ proyectada de los activos operativos al horizonte T. ¿Cuál es la implicación práctica?",
+        "options": [
+            "A) Valor de mercado de los activos operativos — el DCF es perfecto si el mercado es eficiente",
+            "B) Valor presente de los activos operativos (OA_T) al horizonte — el DCF comete gran error cuando hay activos operativos sustanciales en T (no liquidados)",
+            "C) Valor de la deuda neta al horizonte — por eso el DCF funciona mejor para empresas sin deuda",
+            "D) Suma de los dividendos esperados post-horizonte — equivalente al error del DDM",
+        ],
+        "answer": "B",
+        "explanation": "El error del DCF = PV(OA_{t+T}): el DCF implícitamente asume que todos los activos operativos se habrán liquidado en activos financieros (net debt = 0) al horizonte T. Para una empresa manufacturera con plantas y equipos vigentes en año T, este error es enorme. El RI model tiene error = PV(P_{t+T} − B_{t+T}) — el premium de mercado sobre book value al horizonte, que es pequeño si B_{t+T} es una buena aproximación del valor. Por eso el RI es más robusto para empresas con activos de larga vida.",
+    },
+    "true_false": {
+        "statement": "Según Penman (1997), el modelo DCF es preferible al Residual Income para valorar empresas de capital intensivo (manufactura, infraestructura) con activos de larga vida, porque el DCF no depende de los principios de accrual accounting.",
+        "answer": False,
+        "explanation": "Al contrario: el DCF tiene mayor error de terminal value para empresas con activos operativos sustanciales al horizonte, precisamente porque asume implícitamente que esos activos se han liquidado. El RI model comete menor error porque usa el book value contable como 'ancla' — y si la accounting es conservadora, el premium P_{t+T}−B_{t+T} es capturado por los residual incomes futuros. Penman (1997) es explícito: para empresas de capital intensivo, el RI es más robusto que el DCF.",
+    },
+    "fill_blank": {
+        "template": "Penman (1997) demuestra que el Residual Income model y el DDM son equivalentes, y que la diferencia entre usar RI vs. DDM es simplemente una diferente especificación del _______ del modelo de descuento de dividendos.",
+        "answers": ["terminal value", "valor terminal", "continuing value", "valor residual"],
+    },
+    "connections": ["Ohlson (1995) — RI model", "Feltham & Ohlson (1995) — accrual accounting en valuación", "DCF vs. RI para terminal value", "Penman & Sougiannis (1998) — comparación empírica de modelos"],
+},
+
+{
+    "id": "eq_tv_002",
+    "domain": "Equity Investing",
+    "topic": "Valoración — Terminal Value: Errores Comunes y el Rol del Accounting",
+    "difficulty": "Intermediate",
+    "mode_tags": ["bus", "home"],
+    "source": "Penman, S.H. (1997) — 'A Synthesis of Equity Valuation Techniques', UC Berkeley / Review of Accounting Studies",
+    "front": "¿Por qué Penman (1997) afirma que el problema del terminal value es fundamentalmente un problema de ACCOUNTING, no de finanzas, y qué implica esto para el analista?",
+    "back": "El error de terminal value surge de truncar el horizonte de proyección. Ese error depende de qué tan bien el accounting 'captura' el valor acumulado hasta T: si el balance sheet (Bt+T) refleja fielmente el valor económico de los activos al horizonte, el error P_{t+T} − B_{t+T} es pequeño y no se necesita una TV sofisticada. El problema es que diferentes principios contables (conservatismo, capitalización vs. expensing de intangibles) crean gaps diferentes entre P y B. Por tanto, la elección de accounting para el pro-forma (ej. capitalizar R&D o no, usar IFRS vs. GAAP) determina directamente la precisión del terminal value. No es un problema de modelos financieros sino de cómo se miden los activos.",
+    "mcq": {
+        "question": "Si un analista proyecta el pro-forma con accounting conservador (expensea R&D, no capitaliza brand investments), ¿cuál es el efecto sobre el error del terminal value según Penman (1997)?",
+        "options": [
+            "A) El error aumenta porque el book value es menor que el valor económico, creando un gap mayor P_{T}−B_{T}",
+            "B) El error disminuye porque el conservatismo captura el riesgo correctamente",
+            "C) No hay efecto — el terminal value error depende solo de la tasa de descuento",
+            "D) El error disminuye porque el DCF compensa automáticamente los bajos book values",
+        ],
+        "answer": "A",
+        "explanation": "Con accounting conservador, B_{t+T} subestima el valor económico → P_{t+T} > B_{t+T} es más grande → el error de terminal value es mayor. Esto parece paradójico pero es la esencia del paper: el conservatismo accounting 'desplaza' valor hacia los residual incomes futuros (que el analista sí proyecta), pero si el horizonte T es corto, ese valor no alcanza a ser capturado. Solución: alargar el horizonte de proyección explícita para reducir el error, o usar una TV que reconozca el premium P−B residual.",
+    },
+    "true_false": {
+        "statement": "Penman (1997) demuestra que el Residual Income model produce valuaciones idénticas al DCF cuando se aplican durante horizontes infinitos con clean-surplus accounting.",
+        "answer": True,
+        "explanation": "Sí — es el resultado fundamental del paper. Con T → ∞ y clean-surplus (Xt = Bt − Bt-1 + dt, sin violaciones), ambos modelos convergen al mismo Pt. La divergencia ocurre SOLO para horizontes finitos, donde el error de terminal value difiere según qué activos quedan sin liquidar al horizonte T. Este resultado es la base para entender por qué practitioners usan indistintamente DCF y RI — son el mismo modelo con diferente 'packaging' del terminal value.",
+    },
+    "numerical_problem": {
+        "question": "Una empresa tiene Book Value = $100, residual income perpetuo esperado = $10/año, ke = 10%. ¿Cuál es el Equity Value bajo el RI model sin crecimiento?",
+        "steps": [
+            "Equity Value = BV + PV(RI a perpetuidad)",
+            "PV(RI) = RI / ke = 10 / 0.10 = $100",
+            "Equity Value = 100 + 100 = $200",
+            "P/B = 200/100 = 2x (ROE = 20% > ke = 10%)",
+        ],
+        "answer": "$200 (P/B = 2x)",
+        "bus_hint": "BV = 100 | RI/ke = 10/0.10 = 100 | Total = 200 | P/B = 2x porque ROE (20%) > ke (10%)",
+    },
+    "fill_blank": {
+        "template": "Penman (1997) demuestra que el terminal value en el DDM puede calcularse como el _______ esperado al horizonte T dividido entre la tasa de descuento — que es equivalente a capitalizar el residual income como perpetuidad cuando no hay crecimiento adicional.",
+        "answers": ["residual income", "abnormal earnings", "earnings residuales", "RI"],
+    },
+    "connections": ["Gordon Growth Model — TV simplificado", "Ohlson (1995) — pricing model", "Penman & Sougiannis (1998) — comparación empírica RI vs DCF", "Clean Surplus Relation (CSR)"],
+},
+
+{
+    "id": "eq_tv_003",
+    "domain": "Equity Investing",
+    "topic": "Valoración — Cuando No Se Necesita Terminal Value",
+    "difficulty": "Advanced",
+    "mode_tags": ["home"],
+    "source": "Penman, S.H. (1997) — 'A Synthesis of Equity Valuation Techniques', UC Berkeley / Review of Accounting Studies",
+    "front": "¿Bajo qué condición de accounting el RI model NO requiere terminal value (TV = 0), y por qué esto es prácticamente imposible pero teóricamente importante?",
+    "back": "El RI model requiere TV = 0 si y solo si el residual income esperado post-horizonte es CERO, es decir, P_{t+T} = B_{t+T}: el book value equivale exactamente al precio de mercado al horizonte. Esto ocurre solo si el accounting es 'ideal' — todos los activos están al fair value continuamente (mark-to-market completo). Teóricamente importante porque: (1) identifica que el TV es una corrección de los errores de accounting del pro-forma, no una pieza separada del modelo. (2) muestra que el TV necesario es más pequeño cuando el accounting es más informativo (mejor aproximación del valor económico). (3) implica que mejorar el pro-forma accounting reduce más el error que sofisticar la fórmula del TV.",
+    "fill_blank": {
+        "template": "El error de terminal value en el RI model es _______ cuando el book value proyectado al horizonte T equivale exactamente al precio de mercado esperado en ese período.",
+        "answers": ["cero", "zero", "nulo", "inexistente"],
+    },
+    "true_false": {
+        "statement": "Penman (1997) muestra que el modelo de 'capitalized earnings' (Vt = Bt + capitalized residual income) converge al mismo valor que el DDM solo si se usa un capitalization factor específico que depende del horizonte T.",
+        "answer": True,
+        "explanation": "El modelo de capitalized earnings usa el factor (ρ^T − 1)^−1 × suma_ponderada(RI) — no el simple 1/ke. Este factor difiere de 1/ke para horizontes finitos, y converge a 1/ke solo cuando T → ∞. Para T finito, usar 1/ke como si fuera una perpetuidad introduce un error sistemático. Penman (1997) formaliza exactamente cómo esta diferencia mapea al terminal value del DDM — demostrando que el modelo de capitalized earnings es una forma particular de especificar ese terminal value.",
+    },
+    "connections": ["Mark-to-market accounting — IFRS 9/13", "Ideal vs. historical cost accounting", "Penman — Financial Statement Analysis and Security Valuation", "Fair value hierarchy — Level 1/2/3"],
+},
 
 ]
 
