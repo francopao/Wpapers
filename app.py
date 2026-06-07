@@ -1012,7 +1012,7 @@ elif st.session_state.page == "Idea":
     st.markdown(f"**{len(filtered)} cartas encontradas**")
 
     states = store.all_states()
-    for card in filtered:
+    for _idea_idx, card in enumerate(filtered):
         state = states.get(card["id"], CardState(card_id=card["id"]))
         m_pct = int(engine.mastery_score(state) * 100)
         m_col = mastery_color(m_pct)
@@ -1037,7 +1037,7 @@ elif st.session_state.page == "Idea":
 
             col_study, col_note = st.columns(2)
             with col_study:
-                if st.button("📖 Estudiar esta carta", key=f"idea_{card['id']}",
+                if st.button("📖 Estudiar esta carta", key=f"idea_{_idea_idx}_{card['id']}",
                              use_container_width=True):
                     st.session_state.queue   = [card]
                     st.session_state.q_idx   = 0
@@ -1078,7 +1078,7 @@ elif st.session_state.page == "Library":
     st.markdown(f"**{len(filtered)} cartas**")
     states = store.all_states()
 
-    for card in filtered:
+    for _lib_idx, card in enumerate(filtered):
         state = states.get(card["id"], CardState(card_id=card["id"]))
         m_pct = int(engine.mastery_score(state) * 100)
         m_col = mastery_color(m_pct)
@@ -1104,7 +1104,7 @@ elif st.session_state.page == "Library":
                   </div>
                 </div>
                 """, unsafe_allow_html=True)
-                if st.button("Estudiar", key=f"lib_{card['id']}", use_container_width=True):
+                if st.button("Estudiar", key=f"lib_{_lib_idx}_{card['id']}", use_container_width=True):
                     st.session_state.queue   = [card]
                     st.session_state.q_idx   = 0
                     st.session_state.q_type  = "Flashcard"
